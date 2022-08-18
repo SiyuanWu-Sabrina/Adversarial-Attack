@@ -20,7 +20,10 @@ sys.path.append('../../models')
 
 from resnet_cifar10 import *
 from vgg_cifar10 import *
+<<<<<<< HEAD
 from inception_v3_imagenet import *
+=======
+>>>>>>> b13c8d747a1b14706288fa8de1ae6cf9895c9c2e
 
 parser = argparse.ArgumentParser(description='Black-box Adversarial Attack')
 parser.add_argument('--no-cuda', action='store_true', default=False,
@@ -70,7 +73,10 @@ print('target count:', target_num)
 testset = torchvision.datasets.CIFAR10(root='../../datasets', train=False, download=True, transform=transform_test)
 test_loader = torch.utils.data.DataLoader(testset, batch_size=args.test_batch_size, shuffle=True, **kwargs)  #  传输多个参数的方法：**
 target_loader = torch.utils.data.DataLoader(testset, batch_size=1, shuffle=True, **kwargs)
+<<<<<<< HEAD
 testset = torchvision.datasets.ImageNet(root='')
+=======
+>>>>>>> b13c8d747a1b14706288fa8de1ae6cf9895c9c2e
 
 save_path = '../../result/BlackBoxAttack/nontargeted'
 # adv_path = '../../result/BlackBoxAttack/nontargeted/adv'
@@ -311,9 +317,14 @@ def optimize_blackbox(model, data, ini_label):
 
 
 def main():
+<<<<<<< HEAD
     # model = ResNet18()
     # model = VGG('VGG16')
     model = inception_v3(pretrained=False)
+=======
+    model = ResNet18()
+    # model = VGG('VGG16')
+>>>>>>> b13c8d747a1b14706288fa8de1ae6cf9895c9c2e
     model = nn.DataParallel(model).cuda()
     print('======Load Model======')
     model.load_state_dict(torch.load(args.model_path))

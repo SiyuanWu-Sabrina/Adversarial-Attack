@@ -41,7 +41,11 @@ parser.add_argument('--seed', type=int, default=0, metavar='S',
                     help='random seed (default: 1)')
 parser.add_argument('--log-interval', type=int, default=100, metavar='N',
                     help='how many batches to wait before logging training status')
+<<<<<<< HEAD
 parser.add_argument('--model-dir', default='../checkpoints',
+=======
+parser.add_argument('--model-dir', default='../../models',
+>>>>>>> b13c8d747a1b14706288fa8de1ae6cf9895c9c2e
                     help='directory of model for saving checkpoint')
 parser.add_argument('--save-freq', '-s', default=200, type=int, metavar='N',
                     help='save frequency')
@@ -50,7 +54,10 @@ parser.add_argument('--data-augmentation', '--da', action='store_true', default=
 parser.add_argument('--target', type=int, default=0)
 parser.add_argument('--trigger-size', type=int, default=3)
 parser.add_argument('--trigger-ratio', type=float, default=0.1)
+<<<<<<< HEAD
 parser.add_argument('--model-type', type=str, default='vgg16')
+=======
+>>>>>>> b13c8d747a1b14706288fa8de1ae6cf9895c9c2e
 
 
 args = parser.parse_args()
@@ -80,8 +87,13 @@ transform_test = transforms.Compose([
     transforms.ToTensor(),
 ])
 
+<<<<<<< HEAD
 trainset = torchvision.datasets.CIFAR10(root='../datasets', train=True, download=True, transform=transform_train)
 testset = torchvision.datasets.CIFAR10(root='../datasets', train=False, download=True, transform=transform_test)
+=======
+trainset = torchvision.datasets.CIFAR10(root='../../datasets', train=True, download=True, transform=transform_train)
+testset = torchvision.datasets.CIFAR10(root='../../datasets', train=False, download=True, transform=transform_test)
+>>>>>>> b13c8d747a1b14706288fa8de1ae6cf9895c9c2e
 
 train_loader = torch.utils.data.DataLoader(trainset, batch_size=args.batch_size, shuffle=True, **kwargs)
 test_loader = torch.utils.data.DataLoader(testset, batch_size=args.test_batch_size, shuffle=False, **kwargs)
@@ -126,9 +138,14 @@ def evaluate(model, device, test_loader):
 
 
 def main():
+<<<<<<< HEAD
     # model = ResNet18()
     if args.model_type == 'vgg16':
         model = VGG('VGG16')
+=======
+    model = ResNet18()
+    # model = VGG('VGG16')
+>>>>>>> b13c8d747a1b14706288fa8de1ae6cf9895c9c2e
     model = nn.DataParallel(model).cuda()
     optimizer = optim.SGD(model.parameters(), lr=args.lr, momentum=args.momentum, weight_decay=args.weight_decay)
 
@@ -153,11 +170,18 @@ def main():
 
         # save checkpoint
         if epoch % args.save_freq == 0:
+<<<<<<< HEAD
             if args.model_type == 'vgg16':
                 torch.save(model.state_dict(),
                            os.path.join(model_dir, 'vgg16_cifar10_{}.pt'.format(epoch)))
                 # torch.save(optimizer.state_dict(),
                 #            os.path.join(model_dir, 'resnet18_cifar10_{}.tar'.format(epoch)))
+=======
+            torch.save(model.state_dict(),
+                       os.path.join(model_dir, 'resnet18_cifar10_{}.pt'.format(epoch)))
+            # torch.save(optimizer.state_dict(),
+            #            os.path.join(model_dir, 'resnet18_cifar10_{}.tar'.format(epoch)))
+>>>>>>> b13c8d747a1b14706288fa8de1ae6cf9895c9c2e
 
 
 if __name__ == '__main__':
