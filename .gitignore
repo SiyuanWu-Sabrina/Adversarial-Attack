@@ -4,3 +4,4 @@ checkpoints
 datasets
 output
 result
+__pycache__
