@@ -1,0 +1,1119 @@
+Namespace(model_path='../../checkpoints/resnet18_cifar10_200.pt', no_cuda=False, target_num=5, test_batch_size=50)
+target count: 5
+Files already downloaded and verified
+======Load Model======
+======Make Targets======
+======Start Attack======
+=======Attacking Target 0=======
+Trying: 1 ------> some others
+theta_m tensor(-4.1797, device='cuda:0') tensor(3.0567, device='cuda:0')
+theta_p tensor(-3.6543, device='cuda:0') tensor(3.0656, device='cuda:0')
+=========Processing epoch 0=========
+step:   1, lambda: 0.00000, attack: 1.000, cls: 16.717069, reg: 513.283713, reg_best: 513.283713
+initialize lambda to 0.00100
+step:   2, lambda: 0.00100, attack: 1.000, cls: 18.576838, reg: 511.588283, reg_best: 511.588283
+step:   3, lambda: 0.00100, attack: 1.000, cls: 19.551249, reg: 509.866222, reg_best: 509.866222
+step:   4, lambda: 0.00100, attack: 1.000, cls: 20.128173, reg: 509.188797, reg_best: 509.188797
+step:   5, lambda: 0.00100, attack: 1.000, cls: 20.548303, reg: 509.793658, reg_best: 509.188797
+step:   6, lambda: 0.00100, attack: 1.000, cls: 21.373662, reg: 509.995807, reg_best: 509.188797
+step:   7, lambda: 0.00100, attack: 1.000, cls: 22.029473, reg: 512.422272, reg_best: 509.188797
+step:   8, lambda: 0.00100, attack: 1.000, cls: 22.503978, reg: 511.919037, reg_best: 509.188797
+step:   9, lambda: 0.00100, attack: 1.000, cls: 22.597840, reg: 512.443126, reg_best: 509.188797
+step:  10, lambda: 0.00100, attack: 1.000, cls: 22.809057, reg: 512.760036, reg_best: 509.188797
+step:  11, lambda: 0.00100, attack: 1.000, cls: 23.052474, reg: 513.248149, reg_best: 509.188797
+up lambda from 0.00100 to 0.00200
+step:  12, lambda: 0.00200, attack: 1.000, cls: 23.321992, reg: 511.958702, reg_best: 509.188797
+step:  13, lambda: 0.00200, attack: 1.000, cls: 23.739452, reg: 511.134343, reg_best: 509.188797
+step:  14, lambda: 0.00200, attack: 1.000, cls: 24.058036, reg: 510.850209, reg_best: 509.188797
+step:  15, lambda: 0.00200, attack: 1.000, cls: 24.342860, reg: 513.133583, reg_best: 509.188797
+step:  16, lambda: 0.00200, attack: 1.000, cls: 24.612778, reg: 512.329129, reg_best: 509.188797
+step:  17, lambda: 0.00200, attack: 1.000, cls: 24.648737, reg: 514.032001, reg_best: 509.188797
+step:  18, lambda: 0.00200, attack: 1.000, cls: 24.800272, reg: 513.226535, reg_best: 509.188797
+step:  19, lambda: 0.00200, attack: 1.000, cls: 25.008081, reg: 508.371541, reg_best: 508.371541
+step:  20, lambda: 0.00200, attack: 1.000, cls: 24.920883, reg: 505.996390, reg_best: 505.996390
+step:  21, lambda: 0.00200, attack: 1.000, cls: 25.011568, reg: 503.432016, reg_best: 503.432016
+up lambda from 0.00200 to 0.00400
+step:  22, lambda: 0.00400, attack: 1.000, cls: 25.431945, reg: 504.856357, reg_best: 503.432016
+step:  23, lambda: 0.00400, attack: 1.000, cls: 25.846572, reg: 502.359004, reg_best: 502.359004
+step:  24, lambda: 0.00400, attack: 1.000, cls: 25.785572, reg: 501.569919, reg_best: 501.569919
+step:  25, lambda: 0.00400, attack: 1.000, cls: 25.855036, reg: 499.715773, reg_best: 499.715773
+step:  26, lambda: 0.00400, attack: 1.000, cls: 25.934523, reg: 499.487305, reg_best: 499.487305
+step:  27, lambda: 0.00400, attack: 1.000, cls: 25.920200, reg: 500.860057, reg_best: 499.487305
+step:  28, lambda: 0.00400, attack: 1.000, cls: 25.887133, reg: 500.746124, reg_best: 499.487305
+step:  29, lambda: 0.00400, attack: 1.000, cls: 26.085449, reg: 498.017030, reg_best: 498.017030
+step:  30, lambda: 0.00400, attack: 1.000, cls: 25.881792, reg: 497.788823, reg_best: 497.788823
+step:  31, lambda: 0.00400, attack: 1.000, cls: 25.830914, reg: 495.295744, reg_best: 495.295744
+up lambda from 0.00400 to 0.00800
+step:  32, lambda: 0.00800, attack: 1.000, cls: 25.851624, reg: 492.881436, reg_best: 492.881436
+step:  33, lambda: 0.00800, attack: 1.000, cls: 26.043540, reg: 493.573132, reg_best: 492.881436
+step:  34, lambda: 0.00800, attack: 1.000, cls: 26.122760, reg: 492.448291, reg_best: 492.448291
+step:  35, lambda: 0.00800, attack: 1.000, cls: 26.037581, reg: 491.677341, reg_best: 491.677341
+step:  36, lambda: 0.00800, attack: 1.000, cls: 26.006338, reg: 494.159747, reg_best: 491.677341
+step:  37, lambda: 0.00800, attack: 1.000, cls: 26.037306, reg: 492.315453, reg_best: 491.677341
+step:  38, lambda: 0.00800, attack: 1.000, cls: 26.209450, reg: 495.629860, reg_best: 491.677341
+step:  39, lambda: 0.00800, attack: 1.000, cls: 26.269025, reg: 494.957956, reg_best: 491.677341
+step:  40, lambda: 0.00800, attack: 1.000, cls: 26.329610, reg: 495.225551, reg_best: 491.677341
+step:  41, lambda: 0.00800, attack: 1.000, cls: 26.454070, reg: 495.059694, reg_best: 491.677341
+up lambda from 0.00800 to 0.01600
+step:  42, lambda: 0.01600, attack: 1.000, cls: 26.656698, reg: 492.858498, reg_best: 491.677341
+step:  43, lambda: 0.01600, attack: 1.000, cls: 26.661840, reg: 490.178296, reg_best: 490.178296
+step:  44, lambda: 0.01600, attack: 1.000, cls: 26.834939, reg: 490.265254, reg_best: 490.178296
+step:  45, lambda: 0.01600, attack: 1.000, cls: 26.892628, reg: 487.063451, reg_best: 487.063451
+step:  46, lambda: 0.01600, attack: 1.000, cls: 27.016648, reg: 484.844769, reg_best: 484.844769
+step:  47, lambda: 0.01600, attack: 1.000, cls: 27.070172, reg: 483.056789, reg_best: 483.056789
+step:  48, lambda: 0.01600, attack: 1.000, cls: 27.183666, reg: 483.030791, reg_best: 483.030791
+step:  49, lambda: 0.01600, attack: 1.000, cls: 27.242023, reg: 482.696269, reg_best: 482.696269
+step:  50, lambda: 0.01600, attack: 1.000, cls: 27.437750, reg: 481.109967, reg_best: 481.109967
+step:  51, lambda: 0.01600, attack: 1.000, cls: 27.591732, reg: 478.653476, reg_best: 478.653476
+up lambda from 0.01600 to 0.03200
+step:  52, lambda: 0.03200, attack: 1.000, cls: 27.607038, reg: 476.911757, reg_best: 476.911757
+step:  53, lambda: 0.03200, attack: 1.000, cls: 27.710085, reg: 475.770775, reg_best: 475.770775
+step:  54, lambda: 0.03200, attack: 1.000, cls: 27.741328, reg: 471.914339, reg_best: 471.914339
+step:  55, lambda: 0.03200, attack: 1.000, cls: 27.649536, reg: 467.977063, reg_best: 467.977063
+step:  56, lambda: 0.03200, attack: 1.000, cls: 27.620823, reg: 466.570372, reg_best: 466.570372
+step:  57, lambda: 0.03200, attack: 1.000, cls: 27.481361, reg: 462.579260, reg_best: 462.579260
+step:  58, lambda: 0.03200, attack: 1.000, cls: 27.465203, reg: 463.669926, reg_best: 462.579260
+step:  59, lambda: 0.03200, attack: 1.000, cls: 27.403855, reg: 460.752837, reg_best: 460.752837
+step:  60, lambda: 0.03200, attack: 1.000, cls: 27.364620, reg: 457.276152, reg_best: 457.276152
+step:  61, lambda: 0.03200, attack: 1.000, cls: 27.301443, reg: 452.068637, reg_best: 452.068637
+up lambda from 0.03200 to 0.06400
+step:  62, lambda: 0.06400, attack: 1.000, cls: 27.377459, reg: 446.182603, reg_best: 446.182603
+step:  63, lambda: 0.06400, attack: 1.000, cls: 27.495905, reg: 443.033612, reg_best: 443.033612
+step:  64, lambda: 0.06400, attack: 1.000, cls: 27.447646, reg: 439.423497, reg_best: 439.423497
+step:  65, lambda: 0.06400, attack: 1.000, cls: 27.506055, reg: 438.104720, reg_best: 438.104720
+step:  66, lambda: 0.06400, attack: 1.000, cls: 27.495105, reg: 435.780043, reg_best: 435.780043
+step:  67, lambda: 0.06400, attack: 1.000, cls: 27.439112, reg: 430.515007, reg_best: 430.515007
+step:  68, lambda: 0.06400, attack: 1.000, cls: 27.468184, reg: 426.077089, reg_best: 426.077089
+step:  69, lambda: 0.06400, attack: 1.000, cls: 27.516369, reg: 420.228419, reg_best: 420.228419
+step:  70, lambda: 0.06400, attack: 1.000, cls: 27.673618, reg: 417.405835, reg_best: 417.405835
+step:  71, lambda: 0.06400, attack: 1.000, cls: 27.706870, reg: 414.251932, reg_best: 414.251932
+up lambda from 0.06400 to 0.12800
+step:  72, lambda: 0.12800, attack: 1.000, cls: 27.697464, reg: 408.872997, reg_best: 408.872997
+step:  73, lambda: 0.12800, attack: 1.000, cls: 27.457679, reg: 400.092140, reg_best: 400.092140
+step:  74, lambda: 0.12800, attack: 1.000, cls: 27.372629, reg: 389.852390, reg_best: 389.852390
+step:  75, lambda: 0.12800, attack: 1.000, cls: 27.342620, reg: 381.510886, reg_best: 381.510886
+step:  76, lambda: 0.12800, attack: 1.000, cls: 27.413674, reg: 376.017690, reg_best: 376.017690
+step:  77, lambda: 0.12800, attack: 1.000, cls: 27.248399, reg: 368.181093, reg_best: 368.181093
+step:  78, lambda: 0.12800, attack: 1.000, cls: 27.141999, reg: 358.011827, reg_best: 358.011827
+step:  79, lambda: 0.12800, attack: 1.000, cls: 27.140507, reg: 348.613205, reg_best: 348.613205
+step:  80, lambda: 0.12800, attack: 1.000, cls: 27.135347, reg: 340.932367, reg_best: 340.932367
+step:  81, lambda: 0.12800, attack: 1.000, cls: 27.108480, reg: 333.676004, reg_best: 333.676004
+up lambda from 0.12800 to 0.25600
+step:  82, lambda: 0.25600, attack: 1.000, cls: 26.842630, reg: 322.485966, reg_best: 322.485966
+step:  83, lambda: 0.25600, attack: 1.000, cls: 26.502466, reg: 305.370502, reg_best: 305.370502
+step:  84, lambda: 0.25600, attack: 1.000, cls: 26.263066, reg: 290.142953, reg_best: 290.142953
+step:  85, lambda: 0.25600, attack: 1.000, cls: 25.898725, reg: 273.175940, reg_best: 273.175940
+step:  86, lambda: 0.25600, attack: 1.000, cls: 25.612358, reg: 255.689824, reg_best: 255.689824
+step:  87, lambda: 0.25600, attack: 1.000, cls: 25.253075, reg: 239.692024, reg_best: 239.692024
+step:  88, lambda: 0.25600, attack: 1.000, cls: 25.201550, reg: 225.583022, reg_best: 225.583022
+step:  89, lambda: 0.25600, attack: 1.000, cls: 24.929135, reg: 213.669585, reg_best: 213.669585
+step:  90, lambda: 0.25600, attack: 1.000, cls: 24.655004, reg: 203.426445, reg_best: 203.426445
+step:  91, lambda: 0.25600, attack: 1.000, cls: 24.476063, reg: 191.991320, reg_best: 191.991320
+up lambda from 0.25600 to 0.51200
+step:  92, lambda: 0.51200, attack: 1.000, cls: 23.996087, reg: 173.071339, reg_best: 173.071339
+step:  93, lambda: 0.51200, attack: 1.000, cls: 23.219428, reg: 148.247417, reg_best: 148.247417
+step:  94, lambda: 0.51200, attack: 1.000, cls: 22.666480, reg: 131.258693, reg_best: 131.258693
+step:  95, lambda: 0.51200, attack: 1.000, cls: 22.299807, reg: 117.504503, reg_best: 117.504503
+step:  96, lambda: 0.51200, attack: 1.000, cls: 22.026592, reg: 106.228621, reg_best: 106.228621
+step:  97, lambda: 0.51200, attack: 1.000, cls: 21.559964, reg: 95.048434, reg_best: 95.048434
+step:  98, lambda: 0.51200, attack: 1.000, cls: 20.863236, reg: 84.298458, reg_best: 84.298458
+step:  99, lambda: 0.51200, attack: 1.000, cls: 20.116242, reg: 73.677733, reg_best: 73.677733
+step: 100, lambda: 0.51200, attack: 1.000, cls: 19.591393, reg: 64.600963, reg_best: 64.600963
+step: 101, lambda: 0.51200, attack: 1.000, cls: 18.951845, reg: 55.659838, reg_best: 55.659838
+up lambda from 0.51200 to 1.02400
+step: 102, lambda: 1.02400, attack: 1.000, cls: 18.161434, reg: 45.974117, reg_best: 45.974117
+step: 103, lambda: 1.02400, attack: 1.000, cls: 17.127507, reg: 37.108424, reg_best: 37.108424
+step: 104, lambda: 1.02400, attack: 1.000, cls: 16.408983, reg: 31.530407, reg_best: 31.530407
+step: 105, lambda: 1.02400, attack: 1.000, cls: 15.387723, reg: 26.243041, reg_best: 26.243041
+step: 106, lambda: 1.02400, attack: 1.000, cls: 14.579527, reg: 21.656244, reg_best: 21.656244
+step: 107, lambda: 1.02400, attack: 1.000, cls: 13.770790, reg: 18.145243, reg_best: 18.145243
+step: 108, lambda: 1.02400, attack: 1.000, cls: 13.908914, reg: 15.948614, reg_best: 15.948614
+step: 109, lambda: 1.02400, attack: 1.000, cls: 14.976830, reg: 14.612701, reg_best: 14.612701
+step: 110, lambda: 1.02400, attack: 1.000, cls: 14.986018, reg: 13.559760, reg_best: 13.559760
+step: 111, lambda: 1.02400, attack: 1.000, cls: 14.779714, reg: 12.632057, reg_best: 12.632057
+up lambda from 1.02400 to 2.04800
+step: 112, lambda: 2.04800, attack: 1.000, cls: 14.391176, reg: 11.027555, reg_best: 11.027555
+step: 113, lambda: 2.04800, attack: 1.000, cls: 13.792210, reg: 9.299661, reg_best: 9.299661
+step: 114, lambda: 2.04800, attack: 1.000, cls: 13.115504, reg: 8.327870, reg_best: 8.327870
+step: 115, lambda: 2.04800, attack: 1.000, cls: 12.275735, reg: 7.635313, reg_best: 7.635313
+step: 116, lambda: 2.04800, attack: 1.000, cls: 11.874559, reg: 7.357912, reg_best: 7.357912
+step: 117, lambda: 2.04800, attack: 1.000, cls: 11.542475, reg: 7.121708, reg_best: 7.121708
+step: 118, lambda: 2.04800, attack: 1.000, cls: 11.422764, reg: 6.870410, reg_best: 6.870410
+step: 119, lambda: 2.04800, attack: 1.000, cls: 10.917449, reg: 6.421323, reg_best: 6.421323
+step: 120, lambda: 2.04800, attack: 1.000, cls: 10.235947, reg: 6.111864, reg_best: 6.111864
+step: 121, lambda: 2.04800, attack: 1.000, cls: 9.987656, reg: 6.016026, reg_best: 6.016026
+up lambda from 2.04800 to 4.09600
+step: 122, lambda: 4.09600, attack: 1.000, cls: 9.690633, reg: 5.844915, reg_best: 5.844915
+step: 123, lambda: 4.09600, attack: 1.000, cls: 8.582416, reg: 5.323229, reg_best: 5.323229
+step: 124, lambda: 4.09600, attack: 1.000, cls: 7.992617, reg: 5.047346, reg_best: 5.047346
+step: 125, lambda: 4.09600, attack: 1.000, cls: 7.921949, reg: 4.969847, reg_best: 4.969847
+step: 126, lambda: 4.09600, attack: 1.000, cls: 7.887391, reg: 4.910718, reg_best: 4.910718
+step: 127, lambda: 4.09600, attack: 1.000, cls: 7.848664, reg: 4.859964, reg_best: 4.859964
+step: 128, lambda: 4.09600, attack: 1.000, cls: 7.803851, reg: 4.821341, reg_best: 4.821341
+step: 129, lambda: 4.09600, attack: 1.000, cls: 7.827027, reg: 4.832355, reg_best: 4.821341
+step: 130, lambda: 4.09600, attack: 1.000, cls: 7.806192, reg: 4.813652, reg_best: 4.813652
+step: 131, lambda: 4.09600, attack: 1.000, cls: 7.665355, reg: 4.709575, reg_best: 4.709575
+up lambda from 4.09600 to 8.19200
+step: 132, lambda: 8.19200, attack: 1.000, cls: 5.613415, reg: 4.046659, reg_best: 4.046659
+step: 133, lambda: 8.19200, attack: 0.750, cls: 1.465908, reg: 3.097430, reg_best: 4.046659
+step: 134, lambda: 8.19200, attack: 0.000, cls: 0.040634, reg: 1.899210, reg_best: 4.046659
+step: 135, lambda: 8.19200, attack: 0.000, cls: 0.000047, reg: 0.655372, reg_best: 4.046659
+step: 136, lambda: 8.19200, attack: 0.000, cls: 0.000019, reg: 0.190348, reg_best: 4.046659
+step: 137, lambda: 8.19200, attack: 0.000, cls: 0.000020, reg: 0.068328, reg_best: 4.046659
+step: 138, lambda: 8.19200, attack: 0.000, cls: 0.000021, reg: 0.026924, reg_best: 4.046659
+step: 139, lambda: 8.19200, attack: 0.000, cls: 0.000021, reg: 0.010967, reg_best: 4.046659
+step: 140, lambda: 8.19200, attack: 0.000, cls: 0.000021, reg: 0.004525, reg_best: 4.046659
+step: 141, lambda: 8.19200, attack: 0.000, cls: 0.000021, reg: 0.001876, reg_best: 4.046659
+step: 142, lambda: 8.19200, attack: 0.000, cls: 0.000021, reg: 0.000780, reg_best: 4.046659
+down lambda from 8.19200 to 2.59054
+step: 143, lambda: 2.59054, attack: 0.000, cls: 0.000021, reg: 0.000397, reg_best: 4.046659
+step: 144, lambda: 2.59054, attack: 0.000, cls: 0.000021, reg: 0.000245, reg_best: 4.046659
+step: 145, lambda: 2.59054, attack: 0.000, cls: 0.000021, reg: 0.000123, reg_best: 4.046659
+step: 146, lambda: 2.59054, attack: 0.000, cls: 0.000021, reg: 0.000054, reg_best: 4.046659
+step: 147, lambda: 2.59054, attack: 0.000, cls: 0.000021, reg: 0.000023, reg_best: 4.046659
+step: 148, lambda: 2.59054, attack: 0.000, cls: 0.000021, reg: 0.000010, reg_best: 4.046659
+step: 149, lambda: 2.59054, attack: 0.000, cls: 0.000021, reg: 0.000004, reg_best: 4.046659
+step: 150, lambda: 2.59054, attack: 0.000, cls: 0.000021, reg: 0.000002, reg_best: 4.046659
+step: 151, lambda: 2.59054, attack: 0.000, cls: 0.000021, reg: 0.000001, reg_best: 4.046659
+step: 152, lambda: 2.59054, attack: 0.000, cls: 0.000021, reg: 0.000000, reg_best: 4.046659
+down lambda from 2.59054 to 0.81920
+step: 153, lambda: 0.81920, attack: 0.000, cls: 0.000021, reg: 0.000000, reg_best: 4.046659
+step: 154, lambda: 0.81920, attack: 0.000, cls: 0.000021, reg: 0.000000, reg_best: 4.046659
+step: 155, lambda: 0.81920, attack: 0.000, cls: 0.000021, reg: 0.000000, reg_best: 4.046659
+step: 156, lambda: 0.81920, attack: 0.000, cls: 0.000021, reg: 0.000000, reg_best: 4.046659
+step: 157, lambda: 0.81920, attack: 0.000, cls: 0.000021, reg: 0.000000, reg_best: 4.046659
+step: 158, lambda: 0.81920, attack: 0.000, cls: 0.000021, reg: 0.000000, reg_best: 4.046659
+step: 159, lambda: 0.81920, attack: 0.000, cls: 0.000021, reg: 0.000000, reg_best: 4.046659
+step: 160, lambda: 0.81920, attack: 0.000, cls: 0.000021, reg: 0.000000, reg_best: 4.046659
+step: 161, lambda: 0.81920, attack: 0.000, cls: 0.000021, reg: 0.000000, reg_best: 4.046659
+step: 162, lambda: 0.81920, attack: 0.000, cls: 0.000021, reg: 0.000000, reg_best: 4.046659
+down lambda from 0.81920 to 0.25905
+step: 163, lambda: 0.25905, attack: 0.000, cls: 0.000021, reg: 0.000000, reg_best: 4.046659
+step: 164, lambda: 0.25905, attack: 0.000, cls: 0.000021, reg: 0.000000, reg_best: 4.046659
+step: 165, lambda: 0.25905, attack: 0.000, cls: 0.000021, reg: 0.000000, reg_best: 4.046659
+step: 166, lambda: 0.25905, attack: 0.000, cls: 0.000021, reg: 0.000000, reg_best: 4.046659
+step: 167, lambda: 0.25905, attack: 0.000, cls: 0.000021, reg: 0.000000, reg_best: 4.046659
+step: 168, lambda: 0.25905, attack: 0.000, cls: 0.000021, reg: 0.000000, reg_best: 4.046659
+step: 169, lambda: 0.25905, attack: 0.000, cls: 0.000021, reg: 0.000000, reg_best: 4.046659
+step: 170, lambda: 0.25905, attack: 0.000, cls: 0.000021, reg: 0.000000, reg_best: 4.046659
+step: 171, lambda: 0.25905, attack: 0.000, cls: 0.000021, reg: 0.000000, reg_best: 4.046659
+step: 172, lambda: 0.25905, attack: 0.000, cls: 0.000021, reg: 0.000000, reg_best: 4.046659
+down lambda from 0.25905 to 0.08192
+step: 173, lambda: 0.08192, attack: 0.000, cls: 0.000021, reg: 0.000000, reg_best: 4.046659
+step: 174, lambda: 0.08192, attack: 0.000, cls: 0.000021, reg: 0.000000, reg_best: 4.046659
+step: 175, lambda: 0.08192, attack: 0.000, cls: 0.000021, reg: 0.000000, reg_best: 4.046659
+step: 176, lambda: 0.08192, attack: 0.000, cls: 0.000021, reg: 0.000000, reg_best: 4.046659
+step: 177, lambda: 0.08192, attack: 0.000, cls: 0.000021, reg: 0.000000, reg_best: 4.046659
+step: 178, lambda: 0.08192, attack: 0.000, cls: 0.000021, reg: 0.000000, reg_best: 4.046659
+step: 179, lambda: 0.08192, attack: 0.000, cls: 0.000021, reg: 0.000000, reg_best: 4.046659
+step: 180, lambda: 0.08192, attack: 0.000, cls: 0.000021, reg: 0.000000, reg_best: 4.046659
+step: 181, lambda: 0.08192, attack: 0.000, cls: 0.000021, reg: 0.000000, reg_best: 4.046659
+step: 182, lambda: 0.08192, attack: 0.000, cls: 0.000021, reg: 0.000000, reg_best: 4.046659
+early stop
+From 1 to 6
+Current mask: tensor([[[0., 0., 0.,  ..., 0., 0., 0.],
+         [0., 0., 0.,  ..., 0., 0., 0.],
+         [0., 0., 0.,  ..., 0., 0., 0.],
+         ...,
+         [0., 0., 0.,  ..., 0., 0., 0.],
+         [0., 0., 0.,  ..., 0., 0., 0.],
+         [0., 0., 0.,  ..., 0., 0., 0.]]], device='cuda:0',
+       grad_fn=<BernoulliBackward0>)
+Current l0 norm: 2
+Current l1 norm: 2.0
+Current l2 norm: 1.4142135381698608
+Current l_inf norm: 1.0
+mask: (32, 32) 0.0 1.0
+pattern: (32, 32, 3) 5.9604645e-08 1.0
+=======Attacking Target 1=======
+Trying: 4 ------> some others
+theta_m tensor(-4.1041, device='cuda:0') tensor(3.1948, device='cuda:0')
+theta_p tensor(-3.1489, device='cuda:0') tensor(3.9625, device='cuda:0')
+=========Processing epoch 0=========
+step:   1, lambda: 0.00000, attack: 1.000, cls: 15.941068, reg: 510.203940, reg_best: 510.203940
+initialize lambda to 0.00100
+step:   2, lambda: 0.00100, attack: 1.000, cls: 18.085244, reg: 506.314127, reg_best: 506.314127
+step:   3, lambda: 0.00100, attack: 1.000, cls: 18.995090, reg: 502.769469, reg_best: 502.769469
+step:   4, lambda: 0.00100, attack: 1.000, cls: 19.626735, reg: 501.849702, reg_best: 501.849702
+step:   5, lambda: 0.00100, attack: 1.000, cls: 20.039495, reg: 501.843333, reg_best: 501.843333
+step:   6, lambda: 0.00100, attack: 1.000, cls: 20.369255, reg: 501.416539, reg_best: 501.416539
+step:   7, lambda: 0.00100, attack: 1.000, cls: 20.618451, reg: 499.144722, reg_best: 499.144722
+step:   8, lambda: 0.00100, attack: 1.000, cls: 20.816353, reg: 499.186592, reg_best: 499.144722
+step:   9, lambda: 0.00100, attack: 1.000, cls: 21.398166, reg: 498.460982, reg_best: 498.460982
+step:  10, lambda: 0.00100, attack: 1.000, cls: 21.859245, reg: 496.095895, reg_best: 496.095895
+step:  11, lambda: 0.00100, attack: 1.000, cls: 22.356234, reg: 494.223125, reg_best: 494.223125
+up lambda from 0.00100 to 0.00200
+step:  12, lambda: 0.00200, attack: 1.000, cls: 22.629315, reg: 495.357268, reg_best: 494.223125
+step:  13, lambda: 0.00200, attack: 1.000, cls: 22.754972, reg: 494.328896, reg_best: 494.223125
+step:  14, lambda: 0.00200, attack: 1.000, cls: 22.970479, reg: 494.062253, reg_best: 494.062253
+step:  15, lambda: 0.00200, attack: 1.000, cls: 23.137009, reg: 490.750349, reg_best: 490.750349
+step:  16, lambda: 0.00200, attack: 1.000, cls: 23.468338, reg: 487.655447, reg_best: 487.655447
+step:  17, lambda: 0.00200, attack: 1.000, cls: 23.723289, reg: 486.850456, reg_best: 486.850456
+step:  18, lambda: 0.00200, attack: 1.000, cls: 24.040786, reg: 487.269627, reg_best: 486.850456
+step:  19, lambda: 0.00200, attack: 1.000, cls: 24.049018, reg: 490.002684, reg_best: 486.850456
+step:  20, lambda: 0.00200, attack: 1.000, cls: 24.041977, reg: 486.706540, reg_best: 486.706540
+step:  21, lambda: 0.00200, attack: 1.000, cls: 24.214436, reg: 483.508125, reg_best: 483.508125
+up lambda from 0.00200 to 0.00400
+step:  22, lambda: 0.00400, attack: 1.000, cls: 24.297956, reg: 484.245863, reg_best: 483.508125
+step:  23, lambda: 0.00400, attack: 1.000, cls: 24.521390, reg: 486.026859, reg_best: 483.508125
+step:  24, lambda: 0.00400, attack: 1.000, cls: 24.705098, reg: 488.588506, reg_best: 483.508125
+step:  25, lambda: 0.00400, attack: 1.000, cls: 25.038025, reg: 488.319588, reg_best: 483.508125
+step:  26, lambda: 0.00400, attack: 1.000, cls: 25.329162, reg: 487.148273, reg_best: 483.508125
+step:  27, lambda: 0.00400, attack: 1.000, cls: 25.398460, reg: 489.072202, reg_best: 483.508125
+step:  28, lambda: 0.00400, attack: 1.000, cls: 25.478271, reg: 491.395204, reg_best: 483.508125
+step:  29, lambda: 0.00400, attack: 1.000, cls: 25.552184, reg: 492.606010, reg_best: 483.508125
+step:  30, lambda: 0.00400, attack: 1.000, cls: 25.483128, reg: 494.229343, reg_best: 483.508125
+step:  31, lambda: 0.00400, attack: 1.000, cls: 25.813206, reg: 497.243150, reg_best: 483.508125
+up lambda from 0.00400 to 0.00800
+step:  32, lambda: 0.00800, attack: 1.000, cls: 25.791364, reg: 495.922444, reg_best: 483.508125
+step:  33, lambda: 0.00800, attack: 1.000, cls: 25.982270, reg: 493.487833, reg_best: 483.508125
+step:  34, lambda: 0.00800, attack: 1.000, cls: 26.171247, reg: 491.986047, reg_best: 483.508125
+step:  35, lambda: 0.00800, attack: 1.000, cls: 26.402634, reg: 492.167184, reg_best: 483.508125
+step:  36, lambda: 0.00800, attack: 1.000, cls: 26.529927, reg: 492.533391, reg_best: 483.508125
+step:  37, lambda: 0.00800, attack: 1.000, cls: 26.515942, reg: 492.630299, reg_best: 483.508125
+step:  38, lambda: 0.00800, attack: 1.000, cls: 26.470420, reg: 491.058963, reg_best: 483.508125
+step:  39, lambda: 0.00800, attack: 1.000, cls: 26.427032, reg: 490.894519, reg_best: 483.508125
+step:  40, lambda: 0.00800, attack: 1.000, cls: 26.406411, reg: 490.977472, reg_best: 483.508125
+step:  41, lambda: 0.00800, attack: 1.000, cls: 26.620793, reg: 489.035889, reg_best: 483.508125
+up lambda from 0.00800 to 0.01600
+step:  42, lambda: 0.01600, attack: 1.000, cls: 26.545201, reg: 488.586241, reg_best: 483.508125
+step:  43, lambda: 0.01600, attack: 1.000, cls: 26.522989, reg: 488.197993, reg_best: 483.508125
+step:  44, lambda: 0.01600, attack: 1.000, cls: 26.704427, reg: 487.638202, reg_best: 483.508125
+step:  45, lambda: 0.01600, attack: 1.000, cls: 26.734341, reg: 487.905505, reg_best: 483.508125
+step:  46, lambda: 0.01600, attack: 1.000, cls: 26.765130, reg: 486.963736, reg_best: 483.508125
+step:  47, lambda: 0.01600, attack: 1.000, cls: 26.689378, reg: 487.895261, reg_best: 483.508125
+step:  48, lambda: 0.01600, attack: 1.000, cls: 26.784742, reg: 486.692181, reg_best: 483.508125
+step:  49, lambda: 0.01600, attack: 1.000, cls: 26.948639, reg: 485.674391, reg_best: 483.508125
+step:  50, lambda: 0.01600, attack: 1.000, cls: 27.046434, reg: 484.430991, reg_best: 483.508125
+step:  51, lambda: 0.01600, attack: 1.000, cls: 26.968501, reg: 484.804961, reg_best: 483.508125
+up lambda from 0.01600 to 0.03200
+step:  52, lambda: 0.03200, attack: 1.000, cls: 27.013390, reg: 483.167628, reg_best: 483.167628
+step:  53, lambda: 0.03200, attack: 1.000, cls: 27.070218, reg: 480.468703, reg_best: 480.468703
+step:  54, lambda: 0.03200, attack: 1.000, cls: 27.172698, reg: 475.510629, reg_best: 475.510629
+step:  55, lambda: 0.03200, attack: 1.000, cls: 27.091579, reg: 473.463329, reg_best: 473.463329
+step:  56, lambda: 0.03200, attack: 1.000, cls: 27.012224, reg: 471.092210, reg_best: 471.092210
+step:  57, lambda: 0.03200, attack: 1.000, cls: 26.917528, reg: 470.993529, reg_best: 470.993529
+step:  58, lambda: 0.03200, attack: 1.000, cls: 26.978660, reg: 468.231953, reg_best: 468.231953
+step:  59, lambda: 0.03200, attack: 1.000, cls: 27.043054, reg: 469.160403, reg_best: 468.231953
+step:  60, lambda: 0.03200, attack: 1.000, cls: 27.019080, reg: 468.178220, reg_best: 468.178220
+step:  61, lambda: 0.03200, attack: 1.000, cls: 27.176292, reg: 467.362421, reg_best: 467.362421
+up lambda from 0.03200 to 0.06400
+step:  62, lambda: 0.06400, attack: 1.000, cls: 27.058498, reg: 467.844487, reg_best: 467.362421
+step:  63, lambda: 0.06400, attack: 1.000, cls: 27.097124, reg: 466.658614, reg_best: 466.658614
+step:  64, lambda: 0.06400, attack: 1.000, cls: 27.108359, reg: 460.558667, reg_best: 460.558667
+step:  65, lambda: 0.06400, attack: 1.000, cls: 27.081286, reg: 456.502661, reg_best: 456.502661
+step:  66, lambda: 0.06400, attack: 1.000, cls: 27.137289, reg: 453.308202, reg_best: 453.308202
+step:  67, lambda: 0.06400, attack: 1.000, cls: 27.113897, reg: 451.257584, reg_best: 451.257584
+step:  68, lambda: 0.06400, attack: 1.000, cls: 27.170480, reg: 448.177274, reg_best: 448.177274
+step:  69, lambda: 0.06400, attack: 1.000, cls: 27.076462, reg: 444.096432, reg_best: 444.096432
+step:  70, lambda: 0.06400, attack: 1.000, cls: 27.037327, reg: 441.620204, reg_best: 441.620204
+step:  71, lambda: 0.06400, attack: 1.000, cls: 27.273855, reg: 436.741185, reg_best: 436.741185
+up lambda from 0.06400 to 0.12800
+step:  72, lambda: 0.12800, attack: 1.000, cls: 27.243012, reg: 429.263162, reg_best: 429.263162
+step:  73, lambda: 0.12800, attack: 1.000, cls: 27.134999, reg: 420.431303, reg_best: 420.431303
+step:  74, lambda: 0.12800, attack: 1.000, cls: 27.187614, reg: 411.077124, reg_best: 411.077124
+step:  75, lambda: 0.12800, attack: 1.000, cls: 27.247381, reg: 400.527228, reg_best: 400.527228
+step:  76, lambda: 0.12800, attack: 1.000, cls: 26.982161, reg: 390.962004, reg_best: 390.962004
+step:  77, lambda: 0.12800, attack: 1.000, cls: 26.878346, reg: 380.908681, reg_best: 380.908681
+step:  78, lambda: 0.12800, attack: 1.000, cls: 26.753780, reg: 371.678445, reg_best: 371.678445
+step:  79, lambda: 0.12800, attack: 1.000, cls: 26.652474, reg: 362.730376, reg_best: 362.730376
+step:  80, lambda: 0.12800, attack: 1.000, cls: 26.598966, reg: 354.257439, reg_best: 354.257439
+step:  81, lambda: 0.12800, attack: 1.000, cls: 26.362458, reg: 348.926552, reg_best: 348.926552
+up lambda from 0.12800 to 0.25600
+step:  82, lambda: 0.25600, attack: 1.000, cls: 26.245216, reg: 337.405495, reg_best: 337.405495
+step:  83, lambda: 0.25600, attack: 1.000, cls: 26.153757, reg: 319.729494, reg_best: 319.729494
+step:  84, lambda: 0.25600, attack: 1.000, cls: 25.739066, reg: 301.726566, reg_best: 301.726566
+step:  85, lambda: 0.25600, attack: 1.000, cls: 25.221142, reg: 284.701544, reg_best: 284.701544
+step:  86, lambda: 0.25600, attack: 1.000, cls: 24.969966, reg: 268.053522, reg_best: 268.053522
+step:  87, lambda: 0.25600, attack: 1.000, cls: 24.623611, reg: 250.944983, reg_best: 250.944983
+step:  88, lambda: 0.25600, attack: 1.000, cls: 24.104487, reg: 234.014133, reg_best: 234.014133
+step:  89, lambda: 0.25600, attack: 1.000, cls: 23.839053, reg: 219.640810, reg_best: 219.640810
+step:  90, lambda: 0.25600, attack: 1.000, cls: 23.454085, reg: 206.040245, reg_best: 206.040245
+step:  91, lambda: 0.25600, attack: 1.000, cls: 23.278593, reg: 193.287627, reg_best: 193.287627
+up lambda from 0.25600 to 0.51200
+step:  92, lambda: 0.51200, attack: 1.000, cls: 22.535010, reg: 173.139323, reg_best: 173.139323
+step:  93, lambda: 0.51200, attack: 1.000, cls: 21.528954, reg: 145.338720, reg_best: 145.338720
+step:  94, lambda: 0.51200, attack: 1.000, cls: 20.560795, reg: 121.303165, reg_best: 121.303165
+step:  95, lambda: 0.51200, attack: 1.000, cls: 19.412868, reg: 99.790951, reg_best: 99.790951
+step:  96, lambda: 0.51200, attack: 1.000, cls: 18.634514, reg: 83.820312, reg_best: 83.820312
+step:  97, lambda: 0.51200, attack: 1.000, cls: 18.169905, reg: 72.459878, reg_best: 72.459878
+step:  98, lambda: 0.51200, attack: 1.000, cls: 17.612001, reg: 61.477620, reg_best: 61.477620
+step:  99, lambda: 0.51200, attack: 1.000, cls: 17.292930, reg: 52.031380, reg_best: 52.031380
+step: 100, lambda: 0.51200, attack: 1.000, cls: 16.925170, reg: 44.966901, reg_best: 44.966901
+step: 101, lambda: 0.51200, attack: 1.000, cls: 16.719447, reg: 39.389462, reg_best: 39.389462
+up lambda from 0.51200 to 1.02400
+step: 102, lambda: 1.02400, attack: 1.000, cls: 16.504343, reg: 31.818832, reg_best: 31.818832
+step: 103, lambda: 1.02400, attack: 1.000, cls: 16.131685, reg: 25.088457, reg_best: 25.088457
+step: 104, lambda: 1.02400, attack: 1.000, cls: 15.797677, reg: 20.434195, reg_best: 20.434195
+step: 105, lambda: 1.02400, attack: 1.000, cls: 15.665802, reg: 18.092646, reg_best: 18.092646
+step: 106, lambda: 1.02400, attack: 1.000, cls: 15.351242, reg: 16.661252, reg_best: 16.661252
+step: 107, lambda: 1.02400, attack: 1.000, cls: 14.901118, reg: 15.176670, reg_best: 15.176670
+step: 108, lambda: 1.02400, attack: 1.000, cls: 14.739470, reg: 13.971429, reg_best: 13.971429
+step: 109, lambda: 1.02400, attack: 1.000, cls: 14.922708, reg: 13.178393, reg_best: 13.178393
+step: 110, lambda: 1.02400, attack: 1.000, cls: 14.867494, reg: 12.419853, reg_best: 12.419853
+step: 111, lambda: 1.02400, attack: 1.000, cls: 14.949764, reg: 11.691747, reg_best: 11.691747
+up lambda from 1.02400 to 2.04800
+step: 112, lambda: 2.04800, attack: 1.000, cls: 14.659164, reg: 10.414027, reg_best: 10.414027
+step: 113, lambda: 2.04800, attack: 1.000, cls: 14.044861, reg: 9.202314, reg_best: 9.202314
+step: 114, lambda: 2.04800, attack: 1.000, cls: 13.643150, reg: 8.695986, reg_best: 8.695986
+step: 115, lambda: 2.04800, attack: 1.000, cls: 13.321845, reg: 8.414428, reg_best: 8.414428
+step: 116, lambda: 2.04800, attack: 1.000, cls: 13.281724, reg: 8.247968, reg_best: 8.247968
+step: 117, lambda: 2.04800, attack: 1.000, cls: 13.147935, reg: 8.131534, reg_best: 8.131534
+step: 118, lambda: 2.04800, attack: 1.000, cls: 13.019650, reg: 8.034042, reg_best: 8.034042
+step: 119, lambda: 2.04800, attack: 1.000, cls: 13.021186, reg: 7.963584, reg_best: 7.963584
+step: 120, lambda: 2.04800, attack: 1.000, cls: 13.039532, reg: 7.886246, reg_best: 7.886246
+step: 121, lambda: 2.04800, attack: 1.000, cls: 13.192198, reg: 7.625794, reg_best: 7.625794
+up lambda from 2.04800 to 4.09600
+step: 122, lambda: 4.09600, attack: 1.000, cls: 12.756316, reg: 7.171397, reg_best: 7.171397
+step: 123, lambda: 4.09600, attack: 1.000, cls: 11.627332, reg: 6.985981, reg_best: 6.985981
+step: 124, lambda: 4.09600, attack: 1.000, cls: 11.468621, reg: 6.944021, reg_best: 6.944021
+step: 125, lambda: 4.09600, attack: 1.000, cls: 11.438475, reg: 6.920031, reg_best: 6.920031
+step: 126, lambda: 4.09600, attack: 1.000, cls: 11.444538, reg: 6.869394, reg_best: 6.869394
+step: 127, lambda: 4.09600, attack: 1.000, cls: 11.402467, reg: 6.667654, reg_best: 6.667654
+step: 128, lambda: 4.09600, attack: 1.000, cls: 10.808432, reg: 6.240678, reg_best: 6.240678
+step: 129, lambda: 4.09600, attack: 1.000, cls: 9.558679, reg: 5.977482, reg_best: 5.977482
+step: 130, lambda: 4.09600, attack: 1.000, cls: 8.937684, reg: 5.915946, reg_best: 5.915946
+step: 131, lambda: 4.09600, attack: 1.000, cls: 8.757275, reg: 5.900450, reg_best: 5.900450
+up lambda from 4.09600 to 8.19200
+step: 132, lambda: 8.19200, attack: 1.000, cls: 8.191095, reg: 5.594696, reg_best: 5.594696
+step: 133, lambda: 8.19200, attack: 1.000, cls: 6.312311, reg: 5.072743, reg_best: 5.072743
+step: 134, lambda: 8.19200, attack: 1.000, cls: 4.255178, reg: 4.508264, reg_best: 4.508264
+step: 135, lambda: 8.19200, attack: 0.300, cls: 0.510632, reg: 2.975596, reg_best: 4.508264
+step: 136, lambda: 8.19200, attack: 0.000, cls: 0.000051, reg: 1.149106, reg_best: 4.508264
+step: 137, lambda: 8.19200, attack: 0.000, cls: 0.000016, reg: 0.324607, reg_best: 4.508264
+step: 138, lambda: 8.19200, attack: 0.000, cls: 0.000014, reg: 0.112238, reg_best: 4.508264
+step: 139, lambda: 8.19200, attack: 0.000, cls: 0.000014, reg: 0.043649, reg_best: 4.508264
+step: 140, lambda: 8.19200, attack: 0.000, cls: 0.000014, reg: 0.017693, reg_best: 4.508264
+step: 141, lambda: 8.19200, attack: 0.000, cls: 0.000014, reg: 0.007285, reg_best: 4.508264
+step: 142, lambda: 8.19200, attack: 0.000, cls: 0.000014, reg: 0.003019, reg_best: 4.508264
+step: 143, lambda: 8.19200, attack: 0.000, cls: 0.000014, reg: 0.001254, reg_best: 4.508264
+step: 144, lambda: 8.19200, attack: 0.000, cls: 0.000014, reg: 0.000521, reg_best: 4.508264
+down lambda from 8.19200 to 2.59054
+step: 145, lambda: 2.59054, attack: 0.000, cls: 0.000014, reg: 0.000266, reg_best: 4.508264
+step: 146, lambda: 2.59054, attack: 0.000, cls: 0.000014, reg: 0.000164, reg_best: 4.508264
+step: 147, lambda: 2.59054, attack: 0.000, cls: 0.000014, reg: 0.000082, reg_best: 4.508264
+step: 148, lambda: 2.59054, attack: 0.000, cls: 0.000014, reg: 0.000036, reg_best: 4.508264
+step: 149, lambda: 2.59054, attack: 0.000, cls: 0.000014, reg: 0.000015, reg_best: 4.508264
+step: 150, lambda: 2.59054, attack: 0.000, cls: 0.000014, reg: 0.000006, reg_best: 4.508264
+step: 151, lambda: 2.59054, attack: 0.000, cls: 0.000014, reg: 0.000003, reg_best: 4.508264
+step: 152, lambda: 2.59054, attack: 0.000, cls: 0.000014, reg: 0.000001, reg_best: 4.508264
+step: 153, lambda: 2.59054, attack: 0.000, cls: 0.000014, reg: 0.000000, reg_best: 4.508264
+step: 154, lambda: 2.59054, attack: 0.000, cls: 0.000014, reg: 0.000000, reg_best: 4.508264
+down lambda from 2.59054 to 0.81920
+step: 155, lambda: 0.81920, attack: 0.000, cls: 0.000014, reg: 0.000000, reg_best: 4.508264
+step: 156, lambda: 0.81920, attack: 0.000, cls: 0.000014, reg: 0.000000, reg_best: 4.508264
+step: 157, lambda: 0.81920, attack: 0.000, cls: 0.000014, reg: 0.000000, reg_best: 4.508264
+step: 158, lambda: 0.81920, attack: 0.000, cls: 0.000014, reg: 0.000000, reg_best: 4.508264
+step: 159, lambda: 0.81920, attack: 0.000, cls: 0.000014, reg: 0.000000, reg_best: 4.508264
+step: 160, lambda: 0.81920, attack: 0.000, cls: 0.000014, reg: 0.000000, reg_best: 4.508264
+step: 161, lambda: 0.81920, attack: 0.000, cls: 0.000014, reg: 0.000000, reg_best: 4.508264
+step: 162, lambda: 0.81920, attack: 0.000, cls: 0.000014, reg: 0.000000, reg_best: 4.508264
+step: 163, lambda: 0.81920, attack: 0.000, cls: 0.000014, reg: 0.000000, reg_best: 4.508264
+step: 164, lambda: 0.81920, attack: 0.000, cls: 0.000014, reg: 0.000000, reg_best: 4.508264
+down lambda from 0.81920 to 0.25905
+step: 165, lambda: 0.25905, attack: 0.000, cls: 0.000014, reg: 0.000000, reg_best: 4.508264
+step: 166, lambda: 0.25905, attack: 0.000, cls: 0.000014, reg: 0.000000, reg_best: 4.508264
+step: 167, lambda: 0.25905, attack: 0.000, cls: 0.000014, reg: 0.000000, reg_best: 4.508264
+step: 168, lambda: 0.25905, attack: 0.000, cls: 0.000014, reg: 0.000000, reg_best: 4.508264
+step: 169, lambda: 0.25905, attack: 0.000, cls: 0.000014, reg: 0.000000, reg_best: 4.508264
+step: 170, lambda: 0.25905, attack: 0.000, cls: 0.000014, reg: 0.000000, reg_best: 4.508264
+step: 171, lambda: 0.25905, attack: 0.000, cls: 0.000014, reg: 0.000000, reg_best: 4.508264
+step: 172, lambda: 0.25905, attack: 0.000, cls: 0.000014, reg: 0.000000, reg_best: 4.508264
+step: 173, lambda: 0.25905, attack: 0.000, cls: 0.000014, reg: 0.000000, reg_best: 4.508264
+step: 174, lambda: 0.25905, attack: 0.000, cls: 0.000014, reg: 0.000000, reg_best: 4.508264
+down lambda from 0.25905 to 0.08192
+step: 175, lambda: 0.08192, attack: 0.000, cls: 0.000014, reg: 0.000000, reg_best: 4.508264
+step: 176, lambda: 0.08192, attack: 0.000, cls: 0.000014, reg: 0.000000, reg_best: 4.508264
+step: 177, lambda: 0.08192, attack: 0.000, cls: 0.000014, reg: 0.000000, reg_best: 4.508264
+step: 178, lambda: 0.08192, attack: 0.000, cls: 0.000014, reg: 0.000000, reg_best: 4.508264
+step: 179, lambda: 0.08192, attack: 0.000, cls: 0.000014, reg: 0.000000, reg_best: 4.508264
+step: 180, lambda: 0.08192, attack: 0.000, cls: 0.000014, reg: 0.000000, reg_best: 4.508264
+step: 181, lambda: 0.08192, attack: 0.000, cls: 0.000014, reg: 0.000000, reg_best: 4.508264
+step: 182, lambda: 0.08192, attack: 0.000, cls: 0.000014, reg: 0.000000, reg_best: 4.508264
+step: 183, lambda: 0.08192, attack: 0.000, cls: 0.000014, reg: 0.000000, reg_best: 4.508264
+step: 184, lambda: 0.08192, attack: 0.000, cls: 0.000014, reg: 0.000000, reg_best: 4.508264
+early stop
+From 4 to 6
+Current mask: tensor([[[0., 0., 0.,  ..., 0., 0., 0.],
+         [0., 0., 0.,  ..., 0., 0., 0.],
+         [0., 0., 0.,  ..., 0., 0., 0.],
+         ...,
+         [0., 0., 0.,  ..., 0., 0., 0.],
+         [0., 0., 0.,  ..., 0., 0., 0.],
+         [0., 0., 0.,  ..., 0., 0., 0.]]], device='cuda:0',
+       grad_fn=<BernoulliBackward0>)
+Current l0 norm: 4
+Current l1 norm: 4.0
+Current l2 norm: 2.0
+Current l_inf norm: 1.0
+mask: (32, 32) 0.0 1.0
+pattern: (32, 32, 3) 0.0 1.0
+=======Attacking Target 2=======
+Trying: 8 ------> some others
+theta_m tensor(-3.8019, device='cuda:0') tensor(4.9138, device='cuda:0')
+theta_p tensor(-3.5729, device='cuda:0') tensor(5.2236, device='cuda:0')
+=========Processing epoch 0=========
+step:   1, lambda: 0.00000, attack: 1.000, cls: 14.007453, reg: 513.889423, reg_best: 513.889423
+initialize lambda to 0.00100
+step:   2, lambda: 0.00100, attack: 1.000, cls: 18.516169, reg: 516.326779, reg_best: 513.889423
+step:   3, lambda: 0.00100, attack: 1.000, cls: 20.542169, reg: 514.243045, reg_best: 513.889423
+step:   4, lambda: 0.00100, attack: 1.000, cls: 21.485727, reg: 514.243719, reg_best: 513.889423
+step:   5, lambda: 0.00100, attack: 1.000, cls: 22.477664, reg: 513.511401, reg_best: 513.511401
+step:   6, lambda: 0.00100, attack: 1.000, cls: 23.007072, reg: 513.907367, reg_best: 513.511401
+step:   7, lambda: 0.00100, attack: 1.000, cls: 23.541720, reg: 515.875793, reg_best: 513.511401
+step:   8, lambda: 0.00100, attack: 1.000, cls: 23.874081, reg: 516.521744, reg_best: 513.511401
+step:   9, lambda: 0.00100, attack: 1.000, cls: 24.182926, reg: 514.420242, reg_best: 513.511401
+step:  10, lambda: 0.00100, attack: 1.000, cls: 24.629612, reg: 516.396051, reg_best: 513.511401
+step:  11, lambda: 0.00100, attack: 1.000, cls: 24.902571, reg: 516.968256, reg_best: 513.511401
+up lambda from 0.00100 to 0.00200
+step:  12, lambda: 0.00200, attack: 1.000, cls: 25.276053, reg: 518.782462, reg_best: 513.511401
+step:  13, lambda: 0.00200, attack: 1.000, cls: 25.441281, reg: 516.983273, reg_best: 513.511401
+step:  14, lambda: 0.00200, attack: 1.000, cls: 25.728601, reg: 514.229483, reg_best: 513.511401
+step:  15, lambda: 0.00200, attack: 1.000, cls: 25.927684, reg: 512.155196, reg_best: 512.155196
+step:  16, lambda: 0.00200, attack: 1.000, cls: 26.120542, reg: 511.471817, reg_best: 511.471817
+step:  17, lambda: 0.00200, attack: 1.000, cls: 26.135018, reg: 511.247652, reg_best: 511.247652
+step:  18, lambda: 0.00200, attack: 1.000, cls: 26.335736, reg: 513.083398, reg_best: 511.247652
+step:  19, lambda: 0.00200, attack: 1.000, cls: 26.611996, reg: 515.555423, reg_best: 511.247652
+step:  20, lambda: 0.00200, attack: 1.000, cls: 26.790942, reg: 516.967487, reg_best: 511.247652
+step:  21, lambda: 0.00200, attack: 1.000, cls: 27.123023, reg: 520.118927, reg_best: 511.247652
+up lambda from 0.00200 to 0.00400
+step:  22, lambda: 0.00400, attack: 1.000, cls: 27.546874, reg: 522.732138, reg_best: 511.247652
+step:  23, lambda: 0.00400, attack: 1.000, cls: 27.479249, reg: 521.768237, reg_best: 511.247652
+step:  24, lambda: 0.00400, attack: 1.000, cls: 27.701145, reg: 521.976501, reg_best: 511.247652
+step:  25, lambda: 0.00400, attack: 1.000, cls: 27.862850, reg: 524.578601, reg_best: 511.247652
+step:  26, lambda: 0.00400, attack: 1.000, cls: 27.839605, reg: 526.369397, reg_best: 511.247652
+step:  27, lambda: 0.00400, attack: 1.000, cls: 27.881855, reg: 525.903021, reg_best: 511.247652
+step:  28, lambda: 0.00400, attack: 1.000, cls: 28.205462, reg: 526.146567, reg_best: 511.247652
+step:  29, lambda: 0.00400, attack: 1.000, cls: 28.704757, reg: 526.749680, reg_best: 511.247652
+step:  30, lambda: 0.00400, attack: 1.000, cls: 28.905663, reg: 529.332242, reg_best: 511.247652
+step:  31, lambda: 0.00400, attack: 1.000, cls: 29.168284, reg: 528.227533, reg_best: 511.247652
+up lambda from 0.00400 to 0.00800
+step:  32, lambda: 0.00800, attack: 1.000, cls: 29.367264, reg: 524.638684, reg_best: 511.247652
+step:  33, lambda: 0.00800, attack: 1.000, cls: 29.438102, reg: 523.772189, reg_best: 511.247652
+step:  34, lambda: 0.00800, attack: 1.000, cls: 29.444143, reg: 520.327737, reg_best: 511.247652
+step:  35, lambda: 0.00800, attack: 1.000, cls: 29.507648, reg: 519.159491, reg_best: 511.247652
+step:  36, lambda: 0.00800, attack: 1.000, cls: 29.557953, reg: 519.300394, reg_best: 511.247652
+step:  37, lambda: 0.00800, attack: 1.000, cls: 29.643531, reg: 514.165086, reg_best: 511.247652
+step:  38, lambda: 0.00800, attack: 1.000, cls: 29.631007, reg: 511.991249, reg_best: 511.247652
+step:  39, lambda: 0.00800, attack: 1.000, cls: 29.717893, reg: 513.369513, reg_best: 511.247652
+step:  40, lambda: 0.00800, attack: 1.000, cls: 29.832715, reg: 514.532953, reg_best: 511.247652
+step:  41, lambda: 0.00800, attack: 1.000, cls: 29.915871, reg: 512.352336, reg_best: 511.247652
+up lambda from 0.00800 to 0.01600
+step:  42, lambda: 0.01600, attack: 1.000, cls: 29.821518, reg: 512.432962, reg_best: 511.247652
+step:  43, lambda: 0.01600, attack: 1.000, cls: 29.930032, reg: 509.561960, reg_best: 509.561960
+step:  44, lambda: 0.01600, attack: 1.000, cls: 29.795780, reg: 507.840483, reg_best: 507.840483
+step:  45, lambda: 0.01600, attack: 1.000, cls: 29.995545, reg: 509.333101, reg_best: 507.840483
+step:  46, lambda: 0.01600, attack: 1.000, cls: 30.025021, reg: 507.762459, reg_best: 507.762459
+step:  47, lambda: 0.01600, attack: 1.000, cls: 30.282781, reg: 506.623326, reg_best: 506.623326
+step:  48, lambda: 0.01600, attack: 1.000, cls: 30.599087, reg: 504.934470, reg_best: 504.934470
+step:  49, lambda: 0.01600, attack: 1.000, cls: 30.623096, reg: 504.616278, reg_best: 504.616278
+step:  50, lambda: 0.01600, attack: 1.000, cls: 30.749392, reg: 502.657085, reg_best: 502.657085
+step:  51, lambda: 0.01600, attack: 1.000, cls: 31.027929, reg: 502.926741, reg_best: 502.657085
+up lambda from 0.01600 to 0.03200
+step:  52, lambda: 0.03200, attack: 1.000, cls: 31.226450, reg: 500.871957, reg_best: 500.871957
+step:  53, lambda: 0.03200, attack: 1.000, cls: 31.490173, reg: 500.228107, reg_best: 500.228107
+step:  54, lambda: 0.03200, attack: 1.000, cls: 31.410765, reg: 498.404240, reg_best: 498.404240
+step:  55, lambda: 0.03200, attack: 1.000, cls: 31.720765, reg: 496.785880, reg_best: 496.785880
+step:  56, lambda: 0.03200, attack: 1.000, cls: 32.003518, reg: 496.873663, reg_best: 496.785880
+step:  57, lambda: 0.03200, attack: 1.000, cls: 32.177620, reg: 497.322853, reg_best: 496.785880
+step:  58, lambda: 0.03200, attack: 1.000, cls: 32.121699, reg: 496.371326, reg_best: 496.371326
+step:  59, lambda: 0.03200, attack: 1.000, cls: 32.219570, reg: 492.050569, reg_best: 492.050569
+step:  60, lambda: 0.03200, attack: 1.000, cls: 32.002863, reg: 490.568172, reg_best: 490.568172
+step:  61, lambda: 0.03200, attack: 1.000, cls: 32.128994, reg: 489.437230, reg_best: 489.437230
+up lambda from 0.03200 to 0.06400
+step:  62, lambda: 0.06400, attack: 1.000, cls: 32.225815, reg: 487.382001, reg_best: 487.382001
+step:  63, lambda: 0.06400, attack: 1.000, cls: 32.226872, reg: 482.154034, reg_best: 482.154034
+step:  64, lambda: 0.06400, attack: 1.000, cls: 32.119699, reg: 479.172878, reg_best: 479.172878
+step:  65, lambda: 0.06400, attack: 1.000, cls: 32.119763, reg: 478.265880, reg_best: 478.265880
+step:  66, lambda: 0.06400, attack: 1.000, cls: 32.156823, reg: 478.129855, reg_best: 478.129855
+step:  67, lambda: 0.06400, attack: 1.000, cls: 32.127724, reg: 472.065880, reg_best: 472.065880
+step:  68, lambda: 0.06400, attack: 1.000, cls: 32.222869, reg: 466.014160, reg_best: 466.014160
+step:  69, lambda: 0.06400, attack: 1.000, cls: 32.297749, reg: 462.635191, reg_best: 462.635191
+step:  70, lambda: 0.06400, attack: 1.000, cls: 32.141181, reg: 457.598611, reg_best: 457.598611
+step:  71, lambda: 0.06400, attack: 1.000, cls: 32.201158, reg: 453.537721, reg_best: 453.537721
+up lambda from 0.06400 to 0.12800
+step:  72, lambda: 0.12800, attack: 1.000, cls: 32.276443, reg: 450.254366, reg_best: 450.254366
+step:  73, lambda: 0.12800, attack: 1.000, cls: 32.285994, reg: 444.615146, reg_best: 444.615146
+step:  74, lambda: 0.12800, attack: 1.000, cls: 32.422760, reg: 438.288455, reg_best: 438.288455
+step:  75, lambda: 0.12800, attack: 1.000, cls: 32.269173, reg: 431.247005, reg_best: 431.247005
+step:  76, lambda: 0.12800, attack: 1.000, cls: 32.587649, reg: 425.939119, reg_best: 425.939119
+step:  77, lambda: 0.12800, attack: 1.000, cls: 32.672775, reg: 420.691507, reg_best: 420.691507
+step:  78, lambda: 0.12800, attack: 1.000, cls: 32.595228, reg: 413.942807, reg_best: 413.942807
+step:  79, lambda: 0.12800, attack: 1.000, cls: 32.539441, reg: 404.725877, reg_best: 404.725877
+step:  80, lambda: 0.12800, attack: 1.000, cls: 32.553156, reg: 400.360081, reg_best: 400.360081
+step:  81, lambda: 0.12800, attack: 1.000, cls: 32.471820, reg: 393.848402, reg_best: 393.848402
+up lambda from 0.12800 to 0.25600
+step:  82, lambda: 0.25600, attack: 1.000, cls: 32.318468, reg: 382.447055, reg_best: 382.447055
+step:  83, lambda: 0.25600, attack: 1.000, cls: 32.098291, reg: 369.054475, reg_best: 369.054475
+step:  84, lambda: 0.25600, attack: 1.000, cls: 31.817416, reg: 354.959218, reg_best: 354.959218
+step:  85, lambda: 0.25600, attack: 1.000, cls: 31.761747, reg: 342.572705, reg_best: 342.572705
+step:  86, lambda: 0.25600, attack: 1.000, cls: 31.667845, reg: 329.647324, reg_best: 329.647324
+step:  87, lambda: 0.25600, attack: 1.000, cls: 31.512424, reg: 319.051250, reg_best: 319.051250
+step:  88, lambda: 0.25600, attack: 1.000, cls: 31.382306, reg: 307.175563, reg_best: 307.175563
+step:  89, lambda: 0.25600, attack: 1.000, cls: 31.417137, reg: 295.107016, reg_best: 295.107016
+step:  90, lambda: 0.25600, attack: 1.000, cls: 31.012837, reg: 282.864032, reg_best: 282.864032
+step:  91, lambda: 0.25600, attack: 1.000, cls: 30.870341, reg: 273.817790, reg_best: 273.817790
+up lambda from 0.25600 to 0.51200
+step:  92, lambda: 0.51200, attack: 1.000, cls: 30.628089, reg: 260.487808, reg_best: 260.487808
+step:  93, lambda: 0.51200, attack: 1.000, cls: 30.170183, reg: 242.093081, reg_best: 242.093081
+step:  94, lambda: 0.51200, attack: 1.000, cls: 29.914044, reg: 224.127159, reg_best: 224.127159
+step:  95, lambda: 0.51200, attack: 1.000, cls: 29.692316, reg: 209.390113, reg_best: 209.390113
+step:  96, lambda: 0.51200, attack: 1.000, cls: 29.430421, reg: 196.730827, reg_best: 196.730827
+step:  97, lambda: 0.51200, attack: 1.000, cls: 29.186200, reg: 183.959333, reg_best: 183.959333
+step:  98, lambda: 0.51200, attack: 1.000, cls: 28.780221, reg: 171.663400, reg_best: 171.663400
+step:  99, lambda: 0.51200, attack: 1.000, cls: 28.082032, reg: 162.169563, reg_best: 162.169563
+step: 100, lambda: 0.51200, attack: 1.000, cls: 28.028101, reg: 154.820625, reg_best: 154.820625
+step: 101, lambda: 0.51200, attack: 1.000, cls: 27.870937, reg: 146.750944, reg_best: 146.750944
+up lambda from 0.51200 to 1.02400
+step: 102, lambda: 1.02400, attack: 1.000, cls: 27.160284, reg: 133.790433, reg_best: 133.790433
+step: 103, lambda: 1.02400, attack: 1.000, cls: 25.860000, reg: 116.296812, reg_best: 116.296812
+step: 104, lambda: 1.02400, attack: 1.000, cls: 24.669936, reg: 103.121579, reg_best: 103.121579
+step: 105, lambda: 1.02400, attack: 1.000, cls: 23.850639, reg: 92.160009, reg_best: 92.160009
+step: 106, lambda: 1.02400, attack: 1.000, cls: 22.817182, reg: 83.495166, reg_best: 83.495166
+step: 107, lambda: 1.02400, attack: 1.000, cls: 22.327240, reg: 76.685914, reg_best: 76.685914
+step: 108, lambda: 1.02400, attack: 1.000, cls: 22.182185, reg: 70.941425, reg_best: 70.941425
+step: 109, lambda: 1.02400, attack: 1.000, cls: 21.955394, reg: 65.356773, reg_best: 65.356773
+step: 110, lambda: 1.02400, attack: 1.000, cls: 21.564639, reg: 60.927653, reg_best: 60.927653
+step: 111, lambda: 1.02400, attack: 1.000, cls: 20.788042, reg: 56.825521, reg_best: 56.825521
+up lambda from 1.02400 to 2.04800
+step: 112, lambda: 2.04800, attack: 1.000, cls: 19.770967, reg: 50.683641, reg_best: 50.683641
+step: 113, lambda: 2.04800, attack: 1.000, cls: 16.868122, reg: 41.223314, reg_best: 41.223314
+step: 114, lambda: 2.04800, attack: 1.000, cls: 12.588598, reg: 32.148780, reg_best: 32.148780
+step: 115, lambda: 2.04800, attack: 1.000, cls: 7.950292, reg: 22.453539, reg_best: 22.453539
+step: 116, lambda: 2.04800, attack: 1.000, cls: 12.907483, reg: 14.739431, reg_best: 14.739431
+step: 117, lambda: 2.04800, attack: 1.000, cls: 13.626878, reg: 11.001957, reg_best: 11.001957
+step: 118, lambda: 2.04800, attack: 1.000, cls: 13.539459, reg: 8.952910, reg_best: 8.952910
+step: 119, lambda: 2.04800, attack: 1.000, cls: 13.659363, reg: 7.587859, reg_best: 7.587859
+step: 120, lambda: 2.04800, attack: 1.000, cls: 12.700069, reg: 5.725809, reg_best: 5.725809
+step: 121, lambda: 2.04800, attack: 1.000, cls: 11.133486, reg: 4.359292, reg_best: 4.359292
+up lambda from 2.04800 to 4.09600
+step: 122, lambda: 4.09600, attack: 1.000, cls: 10.566589, reg: 3.564050, reg_best: 3.564050
+step: 123, lambda: 4.09600, attack: 1.000, cls: 10.402110, reg: 3.222725, reg_best: 3.222725
+step: 124, lambda: 4.09600, attack: 1.000, cls: 10.432637, reg: 3.103423, reg_best: 3.103423
+step: 125, lambda: 4.09600, attack: 1.000, cls: 10.415329, reg: 3.051393, reg_best: 3.051393
+step: 126, lambda: 4.09600, attack: 1.000, cls: 10.404928, reg: 3.021167, reg_best: 3.021167
+step: 127, lambda: 4.09600, attack: 1.000, cls: 10.400754, reg: 3.009109, reg_best: 3.009109
+step: 128, lambda: 4.09600, attack: 1.000, cls: 10.400058, reg: 3.003512, reg_best: 3.003512
+step: 129, lambda: 4.09600, attack: 1.000, cls: 10.400097, reg: 3.000806, reg_best: 3.000806
+step: 130, lambda: 4.09600, attack: 1.000, cls: 10.402421, reg: 2.999514, reg_best: 2.999514
+step: 131, lambda: 4.09600, attack: 1.000, cls: 10.400028, reg: 2.998489, reg_best: 2.998489
+up lambda from 4.09600 to 8.19200
+step: 132, lambda: 8.19200, attack: 1.000, cls: 10.401119, reg: 2.997501, reg_best: 2.997501
+step: 133, lambda: 8.19200, attack: 1.000, cls: 10.401163, reg: 2.997553, reg_best: 2.997501
+step: 134, lambda: 8.19200, attack: 1.000, cls: 10.401274, reg: 2.997529, reg_best: 2.997501
+step: 135, lambda: 8.19200, attack: 1.000, cls: 10.401671, reg: 2.997558, reg_best: 2.997501
+step: 136, lambda: 8.19200, attack: 1.000, cls: 10.396582, reg: 2.993917, reg_best: 2.993917
+step: 137, lambda: 8.19200, attack: 1.000, cls: 10.380480, reg: 2.984032, reg_best: 2.984032
+step: 138, lambda: 8.19200, attack: 1.000, cls: 10.373428, reg: 2.980519, reg_best: 2.980519
+step: 139, lambda: 8.19200, attack: 1.000, cls: 10.376213, reg: 2.982818, reg_best: 2.980519
+step: 140, lambda: 8.19200, attack: 1.000, cls: 10.362121, reg: 2.973414, reg_best: 2.973414
+step: 141, lambda: 8.19200, attack: 1.000, cls: 10.353104, reg: 2.967780, reg_best: 2.967780
+up lambda from 8.19200 to 16.38400
+step: 142, lambda: 16.38400, attack: 1.000, cls: 10.302566, reg: 2.944815, reg_best: 2.944815
+step: 143, lambda: 16.38400, attack: 1.000, cls: 9.257955, reg: 2.701315, reg_best: 2.701315
+step: 144, lambda: 16.38400, attack: 0.550, cls: 2.164550, reg: 1.984643, reg_best: 2.701315
+step: 145, lambda: 16.38400, attack: 0.000, cls: 0.000227, reg: 1.227275, reg_best: 2.701315
+step: 146, lambda: 16.38400, attack: 0.000, cls: 0.000021, reg: 0.606510, reg_best: 2.701315
+step: 147, lambda: 16.38400, attack: 0.000, cls: 0.000009, reg: 0.170790, reg_best: 2.701315
+step: 148, lambda: 16.38400, attack: 0.000, cls: 0.000008, reg: 0.056349, reg_best: 2.701315
+step: 149, lambda: 16.38400, attack: 0.000, cls: 0.000008, reg: 0.021551, reg_best: 2.701315
+step: 150, lambda: 16.38400, attack: 0.000, cls: 0.000008, reg: 0.008684, reg_best: 2.701315
+step: 151, lambda: 16.38400, attack: 0.000, cls: 0.000008, reg: 0.003568, reg_best: 2.701315
+step: 152, lambda: 16.38400, attack: 0.000, cls: 0.000008, reg: 0.001477, reg_best: 2.701315
+step: 153, lambda: 16.38400, attack: 0.000, cls: 0.000008, reg: 0.000613, reg_best: 2.701315
+down lambda from 16.38400 to 5.18108
+step: 154, lambda: 5.18108, attack: 0.000, cls: 0.000008, reg: 0.000312, reg_best: 2.701315
+step: 155, lambda: 5.18108, attack: 0.000, cls: 0.000008, reg: 0.000193, reg_best: 2.701315
+step: 156, lambda: 5.18108, attack: 0.000, cls: 0.000008, reg: 0.000096, reg_best: 2.701315
+step: 157, lambda: 5.18108, attack: 0.000, cls: 0.000008, reg: 0.000043, reg_best: 2.701315
+step: 158, lambda: 5.18108, attack: 0.000, cls: 0.000008, reg: 0.000018, reg_best: 2.701315
+step: 159, lambda: 5.18108, attack: 0.000, cls: 0.000008, reg: 0.000008, reg_best: 2.701315
+step: 160, lambda: 5.18108, attack: 0.000, cls: 0.000008, reg: 0.000003, reg_best: 2.701315
+step: 161, lambda: 5.18108, attack: 0.000, cls: 0.000008, reg: 0.000001, reg_best: 2.701315
+step: 162, lambda: 5.18108, attack: 0.000, cls: 0.000008, reg: 0.000001, reg_best: 2.701315
+step: 163, lambda: 5.18108, attack: 0.000, cls: 0.000008, reg: 0.000000, reg_best: 2.701315
+down lambda from 5.18108 to 1.63840
+step: 164, lambda: 1.63840, attack: 0.000, cls: 0.000008, reg: 0.000000, reg_best: 2.701315
+step: 165, lambda: 1.63840, attack: 0.000, cls: 0.000008, reg: 0.000000, reg_best: 2.701315
+step: 166, lambda: 1.63840, attack: 0.000, cls: 0.000008, reg: 0.000000, reg_best: 2.701315
+step: 167, lambda: 1.63840, attack: 0.000, cls: 0.000008, reg: 0.000000, reg_best: 2.701315
+step: 168, lambda: 1.63840, attack: 0.000, cls: 0.000008, reg: 0.000000, reg_best: 2.701315
+step: 169, lambda: 1.63840, attack: 0.000, cls: 0.000008, reg: 0.000000, reg_best: 2.701315
+step: 170, lambda: 1.63840, attack: 0.000, cls: 0.000008, reg: 0.000000, reg_best: 2.701315
+step: 171, lambda: 1.63840, attack: 0.000, cls: 0.000008, reg: 0.000000, reg_best: 2.701315
+step: 172, lambda: 1.63840, attack: 0.000, cls: 0.000008, reg: 0.000000, reg_best: 2.701315
+step: 173, lambda: 1.63840, attack: 0.000, cls: 0.000008, reg: 0.000000, reg_best: 2.701315
+down lambda from 1.63840 to 0.51811
+step: 174, lambda: 0.51811, attack: 0.000, cls: 0.000008, reg: 0.000000, reg_best: 2.701315
+step: 175, lambda: 0.51811, attack: 0.000, cls: 0.000008, reg: 0.000000, reg_best: 2.701315
+step: 176, lambda: 0.51811, attack: 0.000, cls: 0.000008, reg: 0.000000, reg_best: 2.701315
+step: 177, lambda: 0.51811, attack: 0.000, cls: 0.000008, reg: 0.000000, reg_best: 2.701315
+step: 178, lambda: 0.51811, attack: 0.000, cls: 0.000008, reg: 0.000000, reg_best: 2.701315
+step: 179, lambda: 0.51811, attack: 0.000, cls: 0.000008, reg: 0.000000, reg_best: 2.701315
+step: 180, lambda: 0.51811, attack: 0.000, cls: 0.000008, reg: 0.000000, reg_best: 2.701315
+step: 181, lambda: 0.51811, attack: 0.000, cls: 0.000008, reg: 0.000000, reg_best: 2.701315
+step: 182, lambda: 0.51811, attack: 0.000, cls: 0.000008, reg: 0.000000, reg_best: 2.701315
+step: 183, lambda: 0.51811, attack: 0.000, cls: 0.000008, reg: 0.000000, reg_best: 2.701315
+down lambda from 0.51811 to 0.16384
+step: 184, lambda: 0.16384, attack: 0.000, cls: 0.000008, reg: 0.000000, reg_best: 2.701315
+step: 185, lambda: 0.16384, attack: 0.000, cls: 0.000008, reg: 0.000000, reg_best: 2.701315
+step: 186, lambda: 0.16384, attack: 0.000, cls: 0.000008, reg: 0.000000, reg_best: 2.701315
+step: 187, lambda: 0.16384, attack: 0.000, cls: 0.000008, reg: 0.000000, reg_best: 2.701315
+step: 188, lambda: 0.16384, attack: 0.000, cls: 0.000008, reg: 0.000000, reg_best: 2.701315
+step: 189, lambda: 0.16384, attack: 0.000, cls: 0.000008, reg: 0.000000, reg_best: 2.701315
+step: 190, lambda: 0.16384, attack: 0.000, cls: 0.000008, reg: 0.000000, reg_best: 2.701315
+step: 191, lambda: 0.16384, attack: 0.000, cls: 0.000008, reg: 0.000000, reg_best: 2.701315
+step: 192, lambda: 0.16384, attack: 0.000, cls: 0.000008, reg: 0.000000, reg_best: 2.701315
+step: 193, lambda: 0.16384, attack: 0.000, cls: 0.000008, reg: 0.000000, reg_best: 2.701315
+early stop
+From 8 to 0
+Current mask: tensor([[[0., 0., 0.,  ..., 0., 0., 0.],
+         [0., 0., 0.,  ..., 0., 0., 0.],
+         [0., 0., 0.,  ..., 0., 0., 0.],
+         ...,
+         [0., 0., 0.,  ..., 0., 0., 0.],
+         [0., 0., 0.,  ..., 0., 0., 0.],
+         [0., 0., 0.,  ..., 0., 0., 0.]]], device='cuda:0',
+       grad_fn=<BernoulliBackward0>)
+Current l0 norm: 3
+Current l1 norm: 3.0
+Current l2 norm: 1.7320507764816284
+Current l_inf norm: 1.0
+mask: (32, 32) 0.0 1.0
+pattern: (32, 32, 3) 0.0 0.99999994
+=======Attacking Target 3=======
+Trying: 1 ------> some others
+theta_m tensor(-3.8632, device='cuda:0') tensor(4.7183, device='cuda:0')
+theta_p tensor(-3.9418, device='cuda:0') tensor(3.7312, device='cuda:0')
+=========Processing epoch 0=========
+step:   1, lambda: 0.00000, attack: 1.000, cls: 15.756573, reg: 496.452347, reg_best: 496.452347
+initialize lambda to 0.00100
+step:   2, lambda: 0.00100, attack: 1.000, cls: 17.857353, reg: 498.254961, reg_best: 496.452347
+step:   3, lambda: 0.00100, attack: 1.000, cls: 19.062329, reg: 499.974179, reg_best: 496.452347
+step:   4, lambda: 0.00100, attack: 1.000, cls: 20.005188, reg: 498.997464, reg_best: 496.452347
+step:   5, lambda: 0.00100, attack: 1.000, cls: 20.320016, reg: 496.551860, reg_best: 496.452347
+step:   6, lambda: 0.00100, attack: 1.000, cls: 20.852930, reg: 496.043791, reg_best: 496.043791
+step:   7, lambda: 0.00100, attack: 1.000, cls: 21.193321, reg: 494.849033, reg_best: 494.849033
+step:   8, lambda: 0.00100, attack: 1.000, cls: 21.418390, reg: 493.099323, reg_best: 493.099323
+step:   9, lambda: 0.00100, attack: 1.000, cls: 21.748987, reg: 493.011580, reg_best: 493.011580
+step:  10, lambda: 0.00100, attack: 1.000, cls: 22.081694, reg: 494.643201, reg_best: 493.011580
+step:  11, lambda: 0.00100, attack: 1.000, cls: 22.234585, reg: 496.748476, reg_best: 493.011580
+up lambda from 0.00100 to 0.00200
+step:  12, lambda: 0.00200, attack: 1.000, cls: 22.388399, reg: 498.942989, reg_best: 493.011580
+step:  13, lambda: 0.00200, attack: 1.000, cls: 22.627677, reg: 501.890872, reg_best: 493.011580
+step:  14, lambda: 0.00200, attack: 1.000, cls: 22.863633, reg: 502.285707, reg_best: 493.011580
+step:  15, lambda: 0.00200, attack: 1.000, cls: 23.081089, reg: 503.766243, reg_best: 493.011580
+step:  16, lambda: 0.00200, attack: 1.000, cls: 23.403032, reg: 504.501831, reg_best: 493.011580
+step:  17, lambda: 0.00200, attack: 1.000, cls: 23.538148, reg: 507.403636, reg_best: 493.011580
+step:  18, lambda: 0.00200, attack: 1.000, cls: 23.792344, reg: 509.878065, reg_best: 493.011580
+step:  19, lambda: 0.00200, attack: 1.000, cls: 23.924528, reg: 510.351704, reg_best: 493.011580
+step:  20, lambda: 0.00200, attack: 1.000, cls: 23.945571, reg: 511.511063, reg_best: 493.011580
+step:  21, lambda: 0.00200, attack: 1.000, cls: 24.049576, reg: 514.296817, reg_best: 493.011580
+up lambda from 0.00200 to 0.00400
+step:  22, lambda: 0.00400, attack: 1.000, cls: 24.164209, reg: 513.592349, reg_best: 493.011580
+step:  23, lambda: 0.00400, attack: 1.000, cls: 24.268313, reg: 513.446774, reg_best: 493.011580
+step:  24, lambda: 0.00400, attack: 1.000, cls: 24.553297, reg: 513.947778, reg_best: 493.011580
+step:  25, lambda: 0.00400, attack: 1.000, cls: 24.722320, reg: 515.085660, reg_best: 493.011580
+step:  26, lambda: 0.00400, attack: 1.000, cls: 24.894708, reg: 516.962439, reg_best: 493.011580
+step:  27, lambda: 0.00400, attack: 1.000, cls: 24.985274, reg: 519.042789, reg_best: 493.011580
+step:  28, lambda: 0.00400, attack: 1.000, cls: 25.139718, reg: 518.929080, reg_best: 493.011580
+step:  29, lambda: 0.00400, attack: 1.000, cls: 25.333825, reg: 519.146884, reg_best: 493.011580
+step:  30, lambda: 0.00400, attack: 1.000, cls: 25.196286, reg: 517.812411, reg_best: 493.011580
+step:  31, lambda: 0.00400, attack: 1.000, cls: 25.234321, reg: 518.225089, reg_best: 493.011580
+up lambda from 0.00400 to 0.00800
+step:  32, lambda: 0.00800, attack: 1.000, cls: 25.287753, reg: 516.472141, reg_best: 493.011580
+step:  33, lambda: 0.00800, attack: 1.000, cls: 25.428171, reg: 515.234030, reg_best: 493.011580
+step:  34, lambda: 0.00800, attack: 1.000, cls: 25.557339, reg: 514.614523, reg_best: 493.011580
+step:  35, lambda: 0.00800, attack: 1.000, cls: 25.504373, reg: 514.874203, reg_best: 493.011580
+step:  36, lambda: 0.00800, attack: 1.000, cls: 25.493052, reg: 516.435516, reg_best: 493.011580
+step:  37, lambda: 0.00800, attack: 1.000, cls: 25.590053, reg: 515.521567, reg_best: 493.011580
+step:  38, lambda: 0.00800, attack: 1.000, cls: 25.640382, reg: 514.250745, reg_best: 493.011580
+step:  39, lambda: 0.00800, attack: 1.000, cls: 25.644759, reg: 515.710025, reg_best: 493.011580
+step:  40, lambda: 0.00800, attack: 1.000, cls: 25.912765, reg: 517.770651, reg_best: 493.011580
+step:  41, lambda: 0.00800, attack: 1.000, cls: 26.053190, reg: 517.639215, reg_best: 493.011580
+up lambda from 0.00800 to 0.01600
+step:  42, lambda: 0.01600, attack: 1.000, cls: 26.192189, reg: 518.466504, reg_best: 493.011580
+step:  43, lambda: 0.01600, attack: 1.000, cls: 26.254177, reg: 518.279288, reg_best: 493.011580
+step:  44, lambda: 0.01600, attack: 1.000, cls: 26.325874, reg: 518.472272, reg_best: 493.011580
+step:  45, lambda: 0.01600, attack: 1.000, cls: 26.366275, reg: 516.001984, reg_best: 493.011580
+step:  46, lambda: 0.01600, attack: 1.000, cls: 26.462524, reg: 516.095139, reg_best: 493.011580
+step:  47, lambda: 0.01600, attack: 1.000, cls: 26.630538, reg: 516.367850, reg_best: 493.011580
+step:  48, lambda: 0.01600, attack: 1.000, cls: 26.709514, reg: 517.279691, reg_best: 493.011580
+step:  49, lambda: 0.01600, attack: 1.000, cls: 26.712312, reg: 516.862817, reg_best: 493.011580
+step:  50, lambda: 0.01600, attack: 1.000, cls: 26.848183, reg: 515.935745, reg_best: 493.011580
+step:  51, lambda: 0.01600, attack: 1.000, cls: 26.883042, reg: 516.099200, reg_best: 493.011580
+up lambda from 0.01600 to 0.03200
+step:  52, lambda: 0.03200, attack: 1.000, cls: 27.108800, reg: 518.566461, reg_best: 493.011580
+step:  53, lambda: 0.03200, attack: 1.000, cls: 27.219332, reg: 515.814011, reg_best: 493.011580
+step:  54, lambda: 0.03200, attack: 1.000, cls: 27.312837, reg: 511.278978, reg_best: 493.011580
+step:  55, lambda: 0.03200, attack: 1.000, cls: 27.368833, reg: 510.141692, reg_best: 493.011580
+step:  56, lambda: 0.03200, attack: 1.000, cls: 27.435550, reg: 508.607516, reg_best: 493.011580
+step:  57, lambda: 0.03200, attack: 1.000, cls: 27.392111, reg: 506.195842, reg_best: 493.011580
+step:  58, lambda: 0.03200, attack: 1.000, cls: 27.371360, reg: 502.458194, reg_best: 493.011580
+step:  59, lambda: 0.03200, attack: 1.000, cls: 27.482609, reg: 498.988573, reg_best: 493.011580
+step:  60, lambda: 0.03200, attack: 1.000, cls: 27.473753, reg: 495.116878, reg_best: 493.011580
+step:  61, lambda: 0.03200, attack: 1.000, cls: 27.503220, reg: 493.337024, reg_best: 493.011580
+up lambda from 0.03200 to 0.06400
+step:  62, lambda: 0.06400, attack: 1.000, cls: 27.497035, reg: 490.555357, reg_best: 490.555357
+step:  63, lambda: 0.06400, attack: 1.000, cls: 27.462591, reg: 483.991530, reg_best: 483.991530
+step:  64, lambda: 0.06400, attack: 1.000, cls: 27.411820, reg: 477.631403, reg_best: 477.631403
+step:  65, lambda: 0.06400, attack: 1.000, cls: 27.443050, reg: 472.493480, reg_best: 472.493480
+step:  66, lambda: 0.06400, attack: 1.000, cls: 27.442949, reg: 466.279405, reg_best: 466.279405
+step:  67, lambda: 0.06400, attack: 1.000, cls: 27.509351, reg: 459.818889, reg_best: 459.818889
+step:  68, lambda: 0.06400, attack: 1.000, cls: 27.634325, reg: 451.508723, reg_best: 451.508723
+step:  69, lambda: 0.06400, attack: 1.000, cls: 27.690980, reg: 445.680136, reg_best: 445.680136
+step:  70, lambda: 0.06400, attack: 1.000, cls: 27.797164, reg: 441.042122, reg_best: 441.042122
+step:  71, lambda: 0.06400, attack: 1.000, cls: 27.796439, reg: 437.058508, reg_best: 437.058508
+up lambda from 0.06400 to 0.12800
+step:  72, lambda: 0.12800, attack: 1.000, cls: 27.780781, reg: 430.282161, reg_best: 430.282161
+step:  73, lambda: 0.12800, attack: 1.000, cls: 27.795520, reg: 420.993774, reg_best: 420.993774
+step:  74, lambda: 0.12800, attack: 1.000, cls: 27.802713, reg: 412.733116, reg_best: 412.733116
+step:  75, lambda: 0.12800, attack: 1.000, cls: 27.804877, reg: 406.338847, reg_best: 406.338847
+step:  76, lambda: 0.12800, attack: 1.000, cls: 27.670107, reg: 395.993561, reg_best: 395.993561
+step:  77, lambda: 0.12800, attack: 1.000, cls: 27.638433, reg: 387.762366, reg_best: 387.762366
+step:  78, lambda: 0.12800, attack: 1.000, cls: 27.514484, reg: 382.138446, reg_best: 382.138446
+step:  79, lambda: 0.12800, attack: 1.000, cls: 27.462570, reg: 376.292413, reg_best: 376.292413
+step:  80, lambda: 0.12800, attack: 1.000, cls: 27.420665, reg: 370.352367, reg_best: 370.352367
+step:  81, lambda: 0.12800, attack: 1.000, cls: 27.430584, reg: 363.415236, reg_best: 363.415236
+up lambda from 0.12800 to 0.25600
+step:  82, lambda: 0.25600, attack: 1.000, cls: 27.298501, reg: 352.635561, reg_best: 352.635561
+step:  83, lambda: 0.25600, attack: 1.000, cls: 27.091381, reg: 334.728966, reg_best: 334.728966
+step:  84, lambda: 0.25600, attack: 1.000, cls: 26.788556, reg: 317.276801, reg_best: 317.276801
+step:  85, lambda: 0.25600, attack: 1.000, cls: 26.518260, reg: 301.888277, reg_best: 301.888277
+step:  86, lambda: 0.25600, attack: 1.000, cls: 26.272999, reg: 286.069588, reg_best: 286.069588
+step:  87, lambda: 0.25600, attack: 1.000, cls: 26.247810, reg: 274.674020, reg_best: 274.674020
+step:  88, lambda: 0.25600, attack: 1.000, cls: 26.001594, reg: 260.855809, reg_best: 260.855809
+step:  89, lambda: 0.25600, attack: 1.000, cls: 25.634692, reg: 248.358520, reg_best: 248.358520
+step:  90, lambda: 0.25600, attack: 1.000, cls: 25.361368, reg: 238.291998, reg_best: 238.291998
+step:  91, lambda: 0.25600, attack: 1.000, cls: 25.065148, reg: 228.281216, reg_best: 228.281216
+up lambda from 0.25600 to 0.51200
+step:  92, lambda: 0.51200, attack: 1.000, cls: 24.186700, reg: 209.535952, reg_best: 209.535952
+step:  93, lambda: 0.51200, attack: 1.000, cls: 22.982919, reg: 184.866673, reg_best: 184.866673
+step:  94, lambda: 0.51200, attack: 1.000, cls: 22.084809, reg: 163.893156, reg_best: 163.893156
+step:  95, lambda: 0.51200, attack: 1.000, cls: 21.494956, reg: 148.376598, reg_best: 148.376598
+step:  96, lambda: 0.51200, attack: 1.000, cls: 21.338633, reg: 136.511514, reg_best: 136.511514
+step:  97, lambda: 0.51200, attack: 1.000, cls: 20.749261, reg: 125.615360, reg_best: 125.615360
+step:  98, lambda: 0.51200, attack: 1.000, cls: 20.263546, reg: 117.032619, reg_best: 117.032619
+step:  99, lambda: 0.51200, attack: 1.000, cls: 20.024858, reg: 110.957558, reg_best: 110.957558
+step: 100, lambda: 0.51200, attack: 1.000, cls: 19.698511, reg: 103.600946, reg_best: 103.600946
+step: 101, lambda: 0.51200, attack: 1.000, cls: 19.653162, reg: 97.982195, reg_best: 97.982195
+up lambda from 0.51200 to 1.02400
+step: 102, lambda: 1.02400, attack: 1.000, cls: 19.281668, reg: 88.500713, reg_best: 88.500713
+step: 103, lambda: 1.02400, attack: 1.000, cls: 18.636204, reg: 77.252400, reg_best: 77.252400
+step: 104, lambda: 1.02400, attack: 1.000, cls: 17.975131, reg: 68.443559, reg_best: 68.443559
+step: 105, lambda: 1.02400, attack: 1.000, cls: 17.685027, reg: 59.843161, reg_best: 59.843161
+step: 106, lambda: 1.02400, attack: 1.000, cls: 17.517237, reg: 53.141283, reg_best: 53.141283
+step: 107, lambda: 1.02400, attack: 1.000, cls: 17.332140, reg: 48.217084, reg_best: 48.217084
+step: 108, lambda: 1.02400, attack: 1.000, cls: 16.910530, reg: 43.263646, reg_best: 43.263646
+step: 109, lambda: 1.02400, attack: 1.000, cls: 16.809807, reg: 40.433998, reg_best: 40.433998
+step: 110, lambda: 1.02400, attack: 1.000, cls: 16.622778, reg: 37.437359, reg_best: 37.437359
+step: 111, lambda: 1.02400, attack: 1.000, cls: 16.342373, reg: 35.875444, reg_best: 35.875444
+up lambda from 1.02400 to 2.04800
+step: 112, lambda: 2.04800, attack: 1.000, cls: 15.504102, reg: 32.279198, reg_best: 32.279198
+step: 113, lambda: 2.04800, attack: 1.000, cls: 13.827398, reg: 28.180996, reg_best: 28.180996
+step: 114, lambda: 2.04800, attack: 1.000, cls: 12.087308, reg: 24.895703, reg_best: 24.895703
+step: 115, lambda: 2.04800, attack: 1.000, cls: 10.753031, reg: 22.152835, reg_best: 22.152835
+step: 116, lambda: 2.04800, attack: 1.000, cls: 9.959231, reg: 20.299627, reg_best: 20.299627
+step: 117, lambda: 2.04800, attack: 1.000, cls: 8.657406, reg: 18.810438, reg_best: 18.810438
+step: 118, lambda: 2.04800, attack: 1.000, cls: 7.633386, reg: 17.028241, reg_best: 17.028241
+step: 119, lambda: 2.04800, attack: 1.000, cls: 7.482800, reg: 15.456752, reg_best: 15.456752
+step: 120, lambda: 2.04800, attack: 1.000, cls: 7.124730, reg: 14.106918, reg_best: 14.106918
+step: 121, lambda: 2.04800, attack: 1.000, cls: 6.066882, reg: 12.819595, reg_best: 12.819595
+up lambda from 2.04800 to 4.09600
+step: 122, lambda: 4.09600, attack: 1.000, cls: 4.184772, reg: 10.990113, reg_best: 10.990113
+step: 123, lambda: 4.09600, attack: 0.450, cls: 0.982924, reg: 7.984628, reg_best: 10.990113
+step: 124, lambda: 4.09600, attack: 0.000, cls: 0.000055, reg: 3.732767, reg_best: 10.990113
+step: 125, lambda: 4.09600, attack: 0.000, cls: 0.000005, reg: 1.203155, reg_best: 10.990113
+step: 126, lambda: 4.09600, attack: 0.000, cls: 0.000005, reg: 0.397932, reg_best: 10.990113
+step: 127, lambda: 4.09600, attack: 0.000, cls: 0.000005, reg: 0.152177, reg_best: 10.990113
+step: 128, lambda: 4.09600, attack: 0.000, cls: 0.000005, reg: 0.061372, reg_best: 10.990113
+step: 129, lambda: 4.09600, attack: 0.000, cls: 0.000005, reg: 0.025225, reg_best: 10.990113
+step: 130, lambda: 4.09600, attack: 0.000, cls: 0.000005, reg: 0.010445, reg_best: 10.990113
+step: 131, lambda: 4.09600, attack: 0.000, cls: 0.000005, reg: 0.004338, reg_best: 10.990113
+step: 132, lambda: 4.09600, attack: 0.000, cls: 0.000005, reg: 0.001804, reg_best: 10.990113
+down lambda from 4.09600 to 1.29527
+step: 133, lambda: 1.29527, attack: 0.000, cls: 0.000005, reg: 0.000919, reg_best: 10.990113
+step: 134, lambda: 1.29527, attack: 0.000, cls: 0.000005, reg: 0.000567, reg_best: 10.990113
+step: 135, lambda: 1.29527, attack: 0.000, cls: 0.000005, reg: 0.000283, reg_best: 10.990113
+step: 136, lambda: 1.29527, attack: 0.000, cls: 0.000005, reg: 0.000125, reg_best: 10.990113
+step: 137, lambda: 1.29527, attack: 0.000, cls: 0.000005, reg: 0.000048, reg_best: 10.990113
+step: 138, lambda: 1.29527, attack: 0.000, cls: 0.000005, reg: 0.000018, reg_best: 10.990113
+step: 139, lambda: 1.29527, attack: 0.000, cls: 0.000005, reg: 0.000008, reg_best: 10.990113
+step: 140, lambda: 1.29527, attack: 0.000, cls: 0.000005, reg: 0.000003, reg_best: 10.990113
+step: 141, lambda: 1.29527, attack: 0.000, cls: 0.000005, reg: 0.000001, reg_best: 10.990113
+step: 142, lambda: 1.29527, attack: 0.000, cls: 0.000005, reg: 0.000001, reg_best: 10.990113
+down lambda from 1.29527 to 0.40960
+step: 143, lambda: 0.40960, attack: 0.000, cls: 0.000005, reg: 0.000000, reg_best: 10.990113
+step: 144, lambda: 0.40960, attack: 0.000, cls: 0.000005, reg: 0.000000, reg_best: 10.990113
+step: 145, lambda: 0.40960, attack: 0.000, cls: 0.000005, reg: 0.000000, reg_best: 10.990113
+step: 146, lambda: 0.40960, attack: 0.000, cls: 0.000005, reg: 0.000000, reg_best: 10.990113
+step: 147, lambda: 0.40960, attack: 0.000, cls: 0.000005, reg: 0.000000, reg_best: 10.990113
+step: 148, lambda: 0.40960, attack: 0.000, cls: 0.000005, reg: 0.000000, reg_best: 10.990113
+step: 149, lambda: 0.40960, attack: 0.000, cls: 0.000005, reg: 0.000000, reg_best: 10.990113
+step: 150, lambda: 0.40960, attack: 0.000, cls: 0.000005, reg: 0.000000, reg_best: 10.990113
+step: 151, lambda: 0.40960, attack: 0.000, cls: 0.000005, reg: 0.000000, reg_best: 10.990113
+step: 152, lambda: 0.40960, attack: 0.000, cls: 0.000005, reg: 0.000000, reg_best: 10.990113
+down lambda from 0.40960 to 0.12953
+step: 153, lambda: 0.12953, attack: 0.000, cls: 0.000005, reg: 0.000000, reg_best: 10.990113
+step: 154, lambda: 0.12953, attack: 0.000, cls: 0.000005, reg: 0.000000, reg_best: 10.990113
+step: 155, lambda: 0.12953, attack: 0.000, cls: 0.000005, reg: 0.000000, reg_best: 10.990113
+step: 156, lambda: 0.12953, attack: 0.000, cls: 0.000005, reg: 0.000000, reg_best: 10.990113
+step: 157, lambda: 0.12953, attack: 0.000, cls: 0.000005, reg: 0.000000, reg_best: 10.990113
+step: 158, lambda: 0.12953, attack: 0.000, cls: 0.000005, reg: 0.000000, reg_best: 10.990113
+step: 159, lambda: 0.12953, attack: 0.000, cls: 0.000005, reg: 0.000000, reg_best: 10.990113
+step: 160, lambda: 0.12953, attack: 0.000, cls: 0.000005, reg: 0.000000, reg_best: 10.990113
+step: 161, lambda: 0.12953, attack: 0.000, cls: 0.000005, reg: 0.000000, reg_best: 10.990113
+step: 162, lambda: 0.12953, attack: 0.000, cls: 0.000005, reg: 0.000000, reg_best: 10.990113
+down lambda from 0.12953 to 0.04096
+step: 163, lambda: 0.04096, attack: 0.000, cls: 0.000005, reg: 0.000000, reg_best: 10.990113
+step: 164, lambda: 0.04096, attack: 0.000, cls: 0.000005, reg: 0.000000, reg_best: 10.990113
+step: 165, lambda: 0.04096, attack: 0.000, cls: 0.000005, reg: 0.000000, reg_best: 10.990113
+step: 166, lambda: 0.04096, attack: 0.000, cls: 0.000005, reg: 0.000000, reg_best: 10.990113
+step: 167, lambda: 0.04096, attack: 0.000, cls: 0.000005, reg: 0.000000, reg_best: 10.990113
+step: 168, lambda: 0.04096, attack: 0.000, cls: 0.000005, reg: 0.000000, reg_best: 10.990113
+step: 169, lambda: 0.04096, attack: 0.000, cls: 0.000005, reg: 0.000000, reg_best: 10.990113
+step: 170, lambda: 0.04096, attack: 0.000, cls: 0.000005, reg: 0.000000, reg_best: 10.990113
+step: 171, lambda: 0.04096, attack: 0.000, cls: 0.000005, reg: 0.000000, reg_best: 10.990113
+step: 172, lambda: 0.04096, attack: 0.000, cls: 0.000005, reg: 0.000000, reg_best: 10.990113
+early stop
+From 1 to 6
+Current mask: tensor([[[0., 0., 0.,  ..., 0., 0., 0.],
+         [0., 0., 0.,  ..., 0., 0., 0.],
+         [0., 0., 0.,  ..., 0., 0., 0.],
+         ...,
+         [0., 0., 0.,  ..., 0., 0., 0.],
+         [0., 0., 0.,  ..., 0., 0., 0.],
+         [0., 0., 0.,  ..., 0., 0., 0.]]], device='cuda:0',
+       grad_fn=<BernoulliBackward0>)
+Current l0 norm: 8
+Current l1 norm: 8.0
+Current l2 norm: 2.8284270763397217
+Current l_inf norm: 1.0
+mask: (32, 32) 0.0 1.0
+pattern: (32, 32, 3) 2.9802322e-08 1.0
+=======Attacking Target 4=======
+Trying: 5 ------> some others
+theta_m tensor(-3.7203, device='cuda:0') tensor(4.1468, device='cuda:0')
+theta_p tensor(-4.7896, device='cuda:0') tensor(4.8985, device='cuda:0')
+=========Processing epoch 0=========
+step:   1, lambda: 0.00000, attack: 1.000, cls: 14.056565, reg: 515.292615, reg_best: 515.292615
+initialize lambda to 0.00100
+step:   2, lambda: 0.00100, attack: 1.000, cls: 16.891651, reg: 518.068106, reg_best: 515.292615
+step:   3, lambda: 0.00100, attack: 1.000, cls: 17.883102, reg: 521.862268, reg_best: 515.292615
+step:   4, lambda: 0.00100, attack: 1.000, cls: 18.536133, reg: 523.719699, reg_best: 515.292615
+step:   5, lambda: 0.00100, attack: 1.000, cls: 19.163600, reg: 519.468149, reg_best: 515.292615
+step:   6, lambda: 0.00100, attack: 1.000, cls: 19.493502, reg: 519.081705, reg_best: 515.292615
+step:   7, lambda: 0.00100, attack: 1.000, cls: 19.606137, reg: 516.202356, reg_best: 515.292615
+step:   8, lambda: 0.00100, attack: 1.000, cls: 19.909027, reg: 515.471997, reg_best: 515.292615
+step:   9, lambda: 0.00100, attack: 1.000, cls: 20.102270, reg: 516.463565, reg_best: 515.292615
+step:  10, lambda: 0.00100, attack: 1.000, cls: 20.381690, reg: 514.279105, reg_best: 514.279105
+step:  11, lambda: 0.00100, attack: 1.000, cls: 20.585653, reg: 512.668672, reg_best: 512.668672
+up lambda from 0.00100 to 0.00200
+step:  12, lambda: 0.00200, attack: 1.000, cls: 20.978514, reg: 509.787302, reg_best: 509.787302
+step:  13, lambda: 0.00200, attack: 1.000, cls: 21.270277, reg: 506.614444, reg_best: 506.614444
+step:  14, lambda: 0.00200, attack: 1.000, cls: 21.536362, reg: 503.396053, reg_best: 503.396053
+step:  15, lambda: 0.00200, attack: 1.000, cls: 21.586158, reg: 504.353761, reg_best: 503.396053
+step:  16, lambda: 0.00200, attack: 1.000, cls: 21.761893, reg: 504.050710, reg_best: 503.396053
+step:  17, lambda: 0.00200, attack: 1.000, cls: 21.999325, reg: 503.981479, reg_best: 503.396053
+step:  18, lambda: 0.00200, attack: 1.000, cls: 22.254991, reg: 504.151111, reg_best: 503.396053
+step:  19, lambda: 0.00200, attack: 1.000, cls: 22.457288, reg: 506.637404, reg_best: 503.396053
+step:  20, lambda: 0.00200, attack: 1.000, cls: 22.605330, reg: 505.569843, reg_best: 503.396053
+step:  21, lambda: 0.00200, attack: 1.000, cls: 23.027817, reg: 504.447008, reg_best: 503.396053
+up lambda from 0.00200 to 0.00400
+step:  22, lambda: 0.00400, attack: 1.000, cls: 23.177063, reg: 506.621046, reg_best: 503.396053
+step:  23, lambda: 0.00400, attack: 1.000, cls: 23.428252, reg: 505.743416, reg_best: 503.396053
+step:  24, lambda: 0.00400, attack: 1.000, cls: 23.473361, reg: 507.119020, reg_best: 503.396053
+step:  25, lambda: 0.00400, attack: 1.000, cls: 23.352580, reg: 506.319630, reg_best: 503.396053
+step:  26, lambda: 0.00400, attack: 1.000, cls: 23.388524, reg: 508.055988, reg_best: 503.396053
+step:  27, lambda: 0.00400, attack: 1.000, cls: 23.543966, reg: 509.436166, reg_best: 503.396053
+step:  28, lambda: 0.00400, attack: 1.000, cls: 23.631250, reg: 511.659718, reg_best: 503.396053
+step:  29, lambda: 0.00400, attack: 1.000, cls: 23.968310, reg: 507.577650, reg_best: 503.396053
+step:  30, lambda: 0.00400, attack: 1.000, cls: 24.089910, reg: 508.674513, reg_best: 503.396053
+step:  31, lambda: 0.00400, attack: 1.000, cls: 24.275737, reg: 510.849600, reg_best: 503.396053
+up lambda from 0.00400 to 0.00800
+step:  32, lambda: 0.00800, attack: 1.000, cls: 24.401186, reg: 510.293466, reg_best: 503.396053
+step:  33, lambda: 0.00800, attack: 1.000, cls: 24.332162, reg: 507.467024, reg_best: 503.396053
+step:  34, lambda: 0.00800, attack: 1.000, cls: 24.500959, reg: 504.905263, reg_best: 503.396053
+step:  35, lambda: 0.00800, attack: 1.000, cls: 24.765922, reg: 502.233641, reg_best: 502.233641
+step:  36, lambda: 0.00800, attack: 1.000, cls: 24.919221, reg: 499.492107, reg_best: 499.492107
+step:  37, lambda: 0.00800, attack: 1.000, cls: 25.140434, reg: 497.762816, reg_best: 497.762816
+step:  38, lambda: 0.00800, attack: 1.000, cls: 25.216662, reg: 498.043460, reg_best: 497.762816
+step:  39, lambda: 0.00800, attack: 1.000, cls: 25.267221, reg: 498.686110, reg_best: 497.762816
+step:  40, lambda: 0.00800, attack: 1.000, cls: 25.363937, reg: 499.695798, reg_best: 497.762816
+step:  41, lambda: 0.00800, attack: 1.000, cls: 25.595069, reg: 500.696027, reg_best: 497.762816
+up lambda from 0.00800 to 0.01600
+step:  42, lambda: 0.01600, attack: 1.000, cls: 25.818342, reg: 501.249126, reg_best: 497.762816
+step:  43, lambda: 0.01600, attack: 1.000, cls: 26.012823, reg: 500.221858, reg_best: 497.762816
+step:  44, lambda: 0.01600, attack: 1.000, cls: 26.159126, reg: 499.900412, reg_best: 497.762816
+step:  45, lambda: 0.01600, attack: 1.000, cls: 26.433614, reg: 501.432272, reg_best: 497.762816
+step:  46, lambda: 0.01600, attack: 1.000, cls: 26.517509, reg: 502.589566, reg_best: 497.762816
+step:  47, lambda: 0.01600, attack: 1.000, cls: 26.699715, reg: 502.463835, reg_best: 497.762816
+step:  48, lambda: 0.01600, attack: 1.000, cls: 26.797263, reg: 500.905949, reg_best: 497.762816
+step:  49, lambda: 0.01600, attack: 1.000, cls: 26.907546, reg: 498.579996, reg_best: 497.762816
+step:  50, lambda: 0.01600, attack: 1.000, cls: 26.892411, reg: 496.395990, reg_best: 496.395990
+step:  51, lambda: 0.01600, attack: 1.000, cls: 27.130674, reg: 492.314398, reg_best: 492.314398
+up lambda from 0.01600 to 0.03200
+step:  52, lambda: 0.03200, attack: 1.000, cls: 27.196273, reg: 490.742952, reg_best: 490.742952
+step:  53, lambda: 0.03200, attack: 1.000, cls: 27.315673, reg: 485.828011, reg_best: 485.828011
+step:  54, lambda: 0.03200, attack: 1.000, cls: 27.244123, reg: 482.871442, reg_best: 482.871442
+step:  55, lambda: 0.03200, attack: 1.000, cls: 27.239190, reg: 478.578676, reg_best: 478.578676
+step:  56, lambda: 0.03200, attack: 1.000, cls: 27.319617, reg: 475.409941, reg_best: 475.409941
+step:  57, lambda: 0.03200, attack: 1.000, cls: 27.405669, reg: 475.712369, reg_best: 475.409941
+step:  58, lambda: 0.03200, attack: 1.000, cls: 27.420145, reg: 472.044550, reg_best: 472.044550
+step:  59, lambda: 0.03200, attack: 1.000, cls: 27.457654, reg: 470.579776, reg_best: 470.579776
+step:  60, lambda: 0.03200, attack: 1.000, cls: 27.475025, reg: 467.820984, reg_best: 467.820984
+step:  61, lambda: 0.03200, attack: 1.000, cls: 27.431768, reg: 465.122507, reg_best: 465.122507
+up lambda from 0.03200 to 0.06400
+step:  62, lambda: 0.06400, attack: 1.000, cls: 27.557689, reg: 461.472464, reg_best: 461.472464
+step:  63, lambda: 0.06400, attack: 1.000, cls: 27.530247, reg: 455.728470, reg_best: 455.728470
+step:  64, lambda: 0.06400, attack: 1.000, cls: 27.698568, reg: 452.488289, reg_best: 452.488289
+step:  65, lambda: 0.06400, attack: 1.000, cls: 27.790065, reg: 446.792438, reg_best: 446.792438
+step:  66, lambda: 0.06400, attack: 1.000, cls: 27.853203, reg: 444.227440, reg_best: 444.227440
+step:  67, lambda: 0.06400, attack: 1.000, cls: 27.746257, reg: 442.311340, reg_best: 442.311340
+step:  68, lambda: 0.06400, attack: 1.000, cls: 27.729638, reg: 439.472147, reg_best: 439.472147
+step:  69, lambda: 0.06400, attack: 1.000, cls: 27.782597, reg: 437.822586, reg_best: 437.822586
+step:  70, lambda: 0.06400, attack: 1.000, cls: 27.717130, reg: 435.375084, reg_best: 435.375084
+step:  71, lambda: 0.06400, attack: 1.000, cls: 27.722683, reg: 429.850723, reg_best: 429.850723
+up lambda from 0.06400 to 0.12800
+step:  72, lambda: 0.12800, attack: 1.000, cls: 27.501737, reg: 422.799600, reg_best: 422.799600
+step:  73, lambda: 0.12800, attack: 1.000, cls: 27.589005, reg: 412.542891, reg_best: 412.542891
+step:  74, lambda: 0.12800, attack: 1.000, cls: 27.516982, reg: 403.724861, reg_best: 403.724861
+step:  75, lambda: 0.12800, attack: 1.000, cls: 27.465909, reg: 395.669571, reg_best: 395.669571
+step:  76, lambda: 0.12800, attack: 1.000, cls: 27.355077, reg: 386.727553, reg_best: 386.727553
+step:  77, lambda: 0.12800, attack: 1.000, cls: 27.273689, reg: 375.901743, reg_best: 375.901743
+step:  78, lambda: 0.12800, attack: 1.000, cls: 27.304756, reg: 366.583357, reg_best: 366.583357
+step:  79, lambda: 0.12800, attack: 1.000, cls: 27.294426, reg: 358.790660, reg_best: 358.790660
+step:  80, lambda: 0.12800, attack: 1.000, cls: 27.128563, reg: 351.666554, reg_best: 351.666554
+step:  81, lambda: 0.12800, attack: 1.000, cls: 26.928694, reg: 345.606363, reg_best: 345.606363
+up lambda from 0.12800 to 0.25600
+step:  82, lambda: 0.25600, attack: 1.000, cls: 26.721892, reg: 334.020306, reg_best: 334.020306
+step:  83, lambda: 0.25600, attack: 1.000, cls: 26.419217, reg: 318.682735, reg_best: 318.682735
+step:  84, lambda: 0.25600, attack: 1.000, cls: 26.232170, reg: 305.236165, reg_best: 305.236165
+step:  85, lambda: 0.25600, attack: 1.000, cls: 25.948100, reg: 289.777661, reg_best: 289.777661
+step:  86, lambda: 0.25600, attack: 1.000, cls: 25.760229, reg: 273.922075, reg_best: 273.922075
+step:  87, lambda: 0.25600, attack: 1.000, cls: 25.450038, reg: 258.810766, reg_best: 258.810766
+step:  88, lambda: 0.25600, attack: 1.000, cls: 25.080446, reg: 244.868098, reg_best: 244.868098
+step:  89, lambda: 0.25600, attack: 1.000, cls: 24.730816, reg: 232.005796, reg_best: 232.005796
+step:  90, lambda: 0.25600, attack: 1.000, cls: 24.520286, reg: 220.507600, reg_best: 220.507600
+step:  91, lambda: 0.25600, attack: 1.000, cls: 24.189916, reg: 208.297749, reg_best: 208.297749
+up lambda from 0.25600 to 0.51200
+step:  92, lambda: 0.51200, attack: 1.000, cls: 23.564907, reg: 189.177078, reg_best: 189.177078
+step:  93, lambda: 0.51200, attack: 1.000, cls: 22.944777, reg: 166.030167, reg_best: 166.030167
+step:  94, lambda: 0.51200, attack: 1.000, cls: 22.329360, reg: 145.821855, reg_best: 145.821855
+step:  95, lambda: 0.51200, attack: 1.000, cls: 21.743196, reg: 128.550693, reg_best: 128.550693
+step:  96, lambda: 0.51200, attack: 1.000, cls: 20.994964, reg: 113.038281, reg_best: 113.038281
+step:  97, lambda: 0.51200, attack: 1.000, cls: 20.607792, reg: 101.352119, reg_best: 101.352119
+step:  98, lambda: 0.51200, attack: 1.000, cls: 20.115460, reg: 91.075273, reg_best: 91.075273
+step:  99, lambda: 0.51200, attack: 1.000, cls: 19.807101, reg: 81.038534, reg_best: 81.038534
+step: 100, lambda: 0.51200, attack: 1.000, cls: 19.316845, reg: 71.335749, reg_best: 71.335749
+step: 101, lambda: 0.51200, attack: 1.000, cls: 18.644075, reg: 62.831261, reg_best: 62.831261
+up lambda from 0.51200 to 1.02400
+step: 102, lambda: 1.02400, attack: 1.000, cls: 17.686878, reg: 51.269731, reg_best: 51.269731
+step: 103, lambda: 1.02400, attack: 1.000, cls: 16.636616, reg: 38.974848, reg_best: 38.974848
+step: 104, lambda: 1.02400, attack: 1.000, cls: 16.078650, reg: 31.849507, reg_best: 31.849507
+step: 105, lambda: 1.02400, attack: 1.000, cls: 15.521798, reg: 27.025286, reg_best: 27.025286
+step: 106, lambda: 1.02400, attack: 1.000, cls: 14.986034, reg: 23.552748, reg_best: 23.552748
+step: 107, lambda: 1.02400, attack: 1.000, cls: 14.484257, reg: 20.229988, reg_best: 20.229988
+step: 108, lambda: 1.02400, attack: 1.000, cls: 14.168557, reg: 17.198310, reg_best: 17.198310
+step: 109, lambda: 1.02400, attack: 1.000, cls: 13.729960, reg: 14.734760, reg_best: 14.734760
+step: 110, lambda: 1.02400, attack: 1.000, cls: 13.519541, reg: 12.787353, reg_best: 12.787353
+step: 111, lambda: 1.02400, attack: 1.000, cls: 13.416641, reg: 11.075543, reg_best: 11.075543
+up lambda from 1.02400 to 2.04800
+step: 112, lambda: 2.04800, attack: 1.000, cls: 13.212323, reg: 9.144897, reg_best: 9.144897
+step: 113, lambda: 2.04800, attack: 1.000, cls: 12.953445, reg: 7.720592, reg_best: 7.720592
+step: 114, lambda: 2.04800, attack: 1.000, cls: 12.909134, reg: 7.233657, reg_best: 7.233657
+step: 115, lambda: 2.04800, attack: 1.000, cls: 12.912681, reg: 6.975698, reg_best: 6.975698
+step: 116, lambda: 2.04800, attack: 1.000, cls: 12.898254, reg: 6.680301, reg_best: 6.680301
+step: 117, lambda: 2.04800, attack: 1.000, cls: 12.432758, reg: 6.202721, reg_best: 6.202721
+step: 118, lambda: 2.04800, attack: 1.000, cls: 11.904921, reg: 6.038460, reg_best: 6.038460
+step: 119, lambda: 2.04800, attack: 1.000, cls: 11.772634, reg: 5.998494, reg_best: 5.998494
+step: 120, lambda: 2.04800, attack: 1.000, cls: 11.746489, reg: 5.989874, reg_best: 5.989874
+step: 121, lambda: 2.04800, attack: 1.000, cls: 11.757742, reg: 5.990193, reg_best: 5.989874
+up lambda from 2.04800 to 4.09600
+step: 122, lambda: 4.09600, attack: 1.000, cls: 11.733267, reg: 5.988066, reg_best: 5.988066
+step: 123, lambda: 4.09600, attack: 1.000, cls: 11.721819, reg: 5.965549, reg_best: 5.965549
+step: 124, lambda: 4.09600, attack: 1.000, cls: 11.716893, reg: 5.862956, reg_best: 5.862956
+step: 125, lambda: 4.09600, attack: 1.000, cls: 11.267830, reg: 5.380532, reg_best: 5.380532
+step: 126, lambda: 4.09600, attack: 1.000, cls: 9.930087, reg: 5.059222, reg_best: 5.059222
+step: 127, lambda: 4.09600, attack: 1.000, cls: 9.493080, reg: 4.876263, reg_best: 4.876263
+step: 128, lambda: 4.09600, attack: 1.000, cls: 9.184073, reg: 4.280427, reg_best: 4.280427
+step: 129, lambda: 4.09600, attack: 1.000, cls: 7.632455, reg: 3.179729, reg_best: 3.179729
+step: 130, lambda: 4.09600, attack: 1.000, cls: 4.814606, reg: 2.155732, reg_best: 2.155732
+step: 131, lambda: 4.09600, attack: 1.000, cls: 2.661905, reg: 1.382997, reg_best: 1.382997
+up lambda from 4.09600 to 8.19200
+step: 132, lambda: 8.19200, attack: 1.000, cls: 2.400792, reg: 0.952777, reg_best: 0.952777
+step: 133, lambda: 8.19200, attack: 1.000, cls: 1.796422, reg: 0.371118, reg_best: 0.371118
+step: 134, lambda: 8.19200, attack: 0.300, cls: 0.743541, reg: 0.097309, reg_best: 0.371118
+step: 135, lambda: 8.19200, attack: 0.000, cls: 0.496207, reg: 0.033742, reg_best: 0.371118
+step: 136, lambda: 8.19200, attack: 0.000, cls: 0.440296, reg: 0.013205, reg_best: 0.371118
+step: 137, lambda: 8.19200, attack: 0.000, cls: 0.422996, reg: 0.005370, reg_best: 0.371118
+step: 138, lambda: 8.19200, attack: 0.000, cls: 0.415445, reg: 0.002209, reg_best: 0.371118
+step: 139, lambda: 8.19200, attack: 0.000, cls: 0.411933, reg: 0.000915, reg_best: 0.371118
+step: 140, lambda: 8.19200, attack: 0.000, cls: 0.410355, reg: 0.000379, reg_best: 0.371118
+step: 141, lambda: 8.19200, attack: 0.000, cls: 0.409687, reg: 0.000157, reg_best: 0.371118
+step: 142, lambda: 8.19200, attack: 0.000, cls: 0.409404, reg: 0.000069, reg_best: 0.371118
+step: 143, lambda: 8.19200, attack: 0.000, cls: 0.409292, reg: 0.000032, reg_best: 0.371118
+down lambda from 8.19200 to 2.59054
+step: 144, lambda: 2.59054, attack: 0.000, cls: 0.409253, reg: 0.000018, reg_best: 0.371118
+step: 145, lambda: 2.59054, attack: 0.000, cls: 0.409232, reg: 0.000012, reg_best: 0.371118
+step: 146, lambda: 2.59054, attack: 0.000, cls: 0.409215, reg: 0.000007, reg_best: 0.371118
+step: 147, lambda: 2.59054, attack: 0.000, cls: 0.409206, reg: 0.000004, reg_best: 0.371118
+step: 148, lambda: 2.59054, attack: 0.000, cls: 0.409201, reg: 0.000002, reg_best: 0.371118
+step: 149, lambda: 2.59054, attack: 0.000, cls: 0.409199, reg: 0.000001, reg_best: 0.371118
+step: 150, lambda: 2.59054, attack: 0.000, cls: 0.409199, reg: 0.000000, reg_best: 0.371118
+step: 151, lambda: 2.59054, attack: 0.000, cls: 0.409200, reg: 0.000000, reg_best: 0.371118
+step: 152, lambda: 2.59054, attack: 0.000, cls: 0.409198, reg: 0.000000, reg_best: 0.371118
+step: 153, lambda: 2.59054, attack: 0.000, cls: 0.409198, reg: 0.000000, reg_best: 0.371118
+down lambda from 2.59054 to 0.81920
+step: 154, lambda: 0.81920, attack: 0.000, cls: 0.409198, reg: 0.000000, reg_best: 0.371118
+step: 155, lambda: 0.81920, attack: 0.000, cls: 0.409198, reg: 0.000000, reg_best: 0.371118
+step: 156, lambda: 0.81920, attack: 0.000, cls: 0.409198, reg: 0.000000, reg_best: 0.371118
+step: 157, lambda: 0.81920, attack: 0.000, cls: 0.409198, reg: 0.000000, reg_best: 0.371118
+step: 158, lambda: 0.81920, attack: 0.000, cls: 0.409198, reg: 0.000000, reg_best: 0.371118
+step: 159, lambda: 0.81920, attack: 0.000, cls: 0.409198, reg: 0.000000, reg_best: 0.371118
+step: 160, lambda: 0.81920, attack: 0.000, cls: 0.409198, reg: 0.000000, reg_best: 0.371118
+step: 161, lambda: 0.81920, attack: 0.000, cls: 0.409198, reg: 0.000000, reg_best: 0.371118
+step: 162, lambda: 0.81920, attack: 0.000, cls: 0.409198, reg: 0.000000, reg_best: 0.371118
+step: 163, lambda: 0.81920, attack: 0.000, cls: 0.409198, reg: 0.000000, reg_best: 0.371118
+down lambda from 0.81920 to 0.25905
+step: 164, lambda: 0.25905, attack: 0.000, cls: 0.409198, reg: 0.000000, reg_best: 0.371118
+step: 165, lambda: 0.25905, attack: 0.000, cls: 0.409198, reg: 0.000000, reg_best: 0.371118
+step: 166, lambda: 0.25905, attack: 0.000, cls: 0.409198, reg: 0.000000, reg_best: 0.371118
+step: 167, lambda: 0.25905, attack: 0.000, cls: 0.409198, reg: 0.000000, reg_best: 0.371118
+step: 168, lambda: 0.25905, attack: 0.000, cls: 0.409198, reg: 0.000000, reg_best: 0.371118
+step: 169, lambda: 0.25905, attack: 0.000, cls: 0.409198, reg: 0.000000, reg_best: 0.371118
+step: 170, lambda: 0.25905, attack: 0.000, cls: 0.409198, reg: 0.000000, reg_best: 0.371118
+step: 171, lambda: 0.25905, attack: 0.000, cls: 0.409198, reg: 0.000000, reg_best: 0.371118
+step: 172, lambda: 0.25905, attack: 0.000, cls: 0.409198, reg: 0.000000, reg_best: 0.371118
+step: 173, lambda: 0.25905, attack: 0.000, cls: 0.409198, reg: 0.000000, reg_best: 0.371118
+down lambda from 0.25905 to 0.08192
+step: 174, lambda: 0.08192, attack: 0.000, cls: 0.409198, reg: 0.000000, reg_best: 0.371118
+step: 175, lambda: 0.08192, attack: 0.000, cls: 0.409198, reg: 0.000000, reg_best: 0.371118
+step: 176, lambda: 0.08192, attack: 0.000, cls: 0.409198, reg: 0.000000, reg_best: 0.371118
+step: 177, lambda: 0.08192, attack: 0.000, cls: 0.409198, reg: 0.000000, reg_best: 0.371118
+step: 178, lambda: 0.08192, attack: 0.000, cls: 0.409198, reg: 0.000000, reg_best: 0.371118
+step: 179, lambda: 0.08192, attack: 0.000, cls: 0.409198, reg: 0.000000, reg_best: 0.371118
+step: 180, lambda: 0.08192, attack: 0.000, cls: 0.409198, reg: 0.000000, reg_best: 0.371118
+step: 181, lambda: 0.08192, attack: 0.000, cls: 0.409198, reg: 0.000000, reg_best: 0.371118
+step: 182, lambda: 0.08192, attack: 0.000, cls: 0.409198, reg: 0.000000, reg_best: 0.371118
+step: 183, lambda: 0.08192, attack: 0.000, cls: 0.409198, reg: 0.000000, reg_best: 0.371118
+early stop
+From 5 to 3
+Current mask: tensor([[[0., 0., 0.,  ..., 0., 0., 0.],
+         [0., 0., 0.,  ..., 0., 0., 0.],
+         [0., 0., 0.,  ..., 0., 0., 0.],
+         ...,
+         [0., 0., 0.,  ..., 0., 0., 0.],
+         [0., 0., 0.,  ..., 0., 0., 0.],
+         [0., 0., 0.,  ..., 0., 0., 0.]]], device='cuda:0',
+       grad_fn=<BernoulliBackward0>)
+Current l0 norm: 0
+Current l1 norm: 0.0
+Current l2 norm: 0.0
+Current l_inf norm: 0.0
+mask: (32, 32) 0.0 0.0
+pattern: (32, 32, 3) 0.0 1.0
+Average l0_norm: 3.4
+Average l1_norm: 3.4
+Average l2_norm: 1.5949382781982422
+Average l_inf_norm: 0.8
