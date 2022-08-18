@@ -1,15 +1,7 @@
-<<<<<<< HEAD
 attack/GreedyFool/pretrain
 attack/GreedyFool/test
 checkpoints
 datasets
 output
 result
-=======
-attack/GreedyFool/pretrain
-attack/GreedyFool/test
-checkpoints
-datasets
-output
-result
->>>>>>> 0b9e7e3357fc6994362217d2b32507c34a28e0f3
+__pycache__
