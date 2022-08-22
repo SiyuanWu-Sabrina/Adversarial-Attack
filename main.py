@@ -1,6 +1,9 @@
+import os
+import sys
+
 import torch
 import torchvision.transforms as transforms
-from attack.GreedyFool.data_loader import ImageNetDataset
+from data_loader import ImageNetDataset
 from torch.utils.data import DataLoader
 from torch.autograd import Variable
 from torchvision import models
@@ -20,7 +23,7 @@ if __name__ == '__main__':
     print("<=======Loading Model=======>")
     if use_local:
         base_model = inception_v3.inception_v3(pretrained=False)
-        base_model.load_state_dict(torch.load('./checkpoints/inception_v3.pth'))
+        base_model.load_state_dict(torch.load(f'./checkpoints/inception_v3.pth'))
     else:
         # base_model = models.inception_v3(pretrained=False)
         base_model = models.densenet161(pretrained=True)
@@ -45,21 +48,20 @@ if __name__ == '__main__':
     )
 
     test_loader = DataLoader(test_dataset, batch_size=50, shuffle=False)
-    base_model.eval()
 
     print("<==========Testing==========>")
     correct_cnt = 0
     total_cnt = 0
     for data in test_loader:
         if total_cnt % report_freq == 0:
-            print(f"Now dealing with image No.{total_cnt + 1}")
+            print("Now dealing with image No.{}".format(total_cnt + 1))
 
         input_A = data['A']
         real_A = Variable(input_A, requires_grad=False)
-        image_labels = Variable(data['label'], requires_grad=False).to(device)
+        image_labels = Variable(data['label'], requires_grad=False)
         logit = base_model(real_A)
         _, target = torch.max(logit, 1)
-        correct_cnt += sum(target == image_labels).item()
+        correct_cnt += sum(target == torch.tensor(image_labels)).item()
         total_cnt += len(target)
 
-    print(f"Classification Accuracy: {correct_cnt / total_cnt * 100}%.")
+    print("Classification Accuracy: {}%.".format(correct_cnt / total_cnt * 100))
