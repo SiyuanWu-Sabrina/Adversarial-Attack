@@ -26,14 +26,14 @@ from inception_v3_imagenet import *
 parser = argparse.ArgumentParser(description='Black-box Adversarial Attack')
 parser.add_argument('--no-cuda', action='store_true', default=False,
                     help='disables CUDA training')
-# parser.add_argument('--seed', type=int, default=0, metavar='S',
-#                     help='random seed (default: 0)')
 parser.add_argument('--model-path', default='../../checkpoints',
                     help='directory of model for saving checkpoint')
 parser.add_argument('--test-batch-size', type=int, default=50, metavar='N',
                     help='input batch size for testing (default: 50)')
 parser.add_argument('--target-num', type=int, default=2, metavar='N',
-                    help='the amount of targets(default: 2)')
+                    help='the amount of targets (default: 2)')
+parser.add_argument('--visualization', action='store_true',default=False,
+                    help='visualize the perturbation')
 
 args = parser.parse_args()
 print(args)
@@ -83,6 +83,10 @@ if not os.path.exists(save_path):
 # if not os.path.exists(pert_path):
 #     os.makedirs(pert_path)
 
+'''
+function below is used for evaluate the model itself,
+just to make sure it works well...
+'''
 def evaluate(model, device, test_loader):
     model.eval()
     test_loss = 0
