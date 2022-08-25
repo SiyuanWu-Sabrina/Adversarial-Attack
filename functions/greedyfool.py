@@ -1,93 +1,100 @@
-import time
-from options import BaseOptions
+from __future__ import print_function
+from __future__ import division
+
 import os
-import sys
-from utils.data_loader import ImageNetDataset
-import torchvision.transforms as transforms
-import torch
-from torch.utils.data import DataLoader
-from torch.autograd import Variable
-from PIL import Image
+from telnetlib import GA
 import numpy as np
-from torchvision.transforms import ToPILImage
+from PIL import Image
+import torch
 import torch.nn as nn
-import torch.backends.cudnn as cudnn
-from shutil import copyfile
-import generators
-import inception_v3_imagenet as inception_v3
-cudnn.benchmark = True 
+from torch.autograd import Variable
+from torchvision.transforms import ToPILImage
 
-pool_kernel = 3
-Avg_pool = nn.AvgPool2d(pool_kernel, stride=1, padding=int(pool_kernel/2))
+import models.generators as generators
 
-def main():
-    opt = BaseOptions().parse()
-    print (torch.cuda.device_count())
-    
-    
-    ##### Target model loading
-    #netT = models.inception_v3(pretrained=True)
-    netT = inception_v3.inception_v3(pretrained=False)
-    netT.load_state_dict(torch.load('./pretrain/inception_v3_google-1a9a5a14.pth'))
-    netT.eval()
-    netT.cuda()
-    
-    ##### Generator loading for distortion map
-    netG = generators.Res_ResnetGenerator(3, 1, 16, norm_type='batch', act_type='relu')
+
+class AverageMeter(object):
+    """Computes and stores the average and current value"""
+    def __init__(self):
+        self.reset()
+
+    def reset(self):
+        self.val = 0
+        self.avg = 0
+        self.sum = 0
+        self.count = 0
+
+    def update(self, val, n=1):
+        self.val = val
+        self.sum += val * n
+        self.count += n
+        self.avg = self.sum / self.count
+
+
+def GanGenerator(dataset_type):
+    netG = generators.Res_ResnetGenerator(3, 1, 16, norm_type='batch', act_type='relu', dataset_type=dataset_type)
     netG = torch.nn.DataParallel(netG, device_ids=range(torch.cuda.device_count()))
-    netG.load_state_dict(torch.load('./pretrain/G_imagenet.pth'))
+    netG.load_state_dict(torch.load('./checkpoints/G_imagenet.pth'))
     netG.cuda()
     netG.eval()
+    return netG
 
-    mean_arr = (0.5, 0.5, 0.5)
-    stddev_arr = (0.5, 0.5, 0.5)
-    im_size = 299
-    test_dataset = ImageNetDataset(
-        image_dir=opt.dataroot,
-        label_filepath=opt.label_filepath,
-        transform=transforms.Compose([
-            transforms.Resize((im_size, im_size)),
-            transforms.ToTensor(),
-            transforms.Normalize(mean_arr, stddev_arr)
-        ]),
-    )
-    test_loader = DataLoader(test_dataset, batch_size=opt.batchSize, shuffle=True)
+
+def clip(adv_A,real_A,eps):
+    g_x=real_A-adv_A
+    clip_gx=torch.clamp(g_x, min=-eps, max=eps)
+    adv_x=real_A-clip_gx
+    return adv_x
+
+def CWLoss(logits, target, kappa=0, tar=True, num_label=1000):
+    target = torch.ones(logits.size(0)).type(torch.cuda.FloatTensor).mul(target.float())
+    target_one_hot = Variable(torch.eye(num_label).type(torch.cuda.FloatTensor)[target.long()].cuda())
     
-    file_root = os.path.join('./test/file/', opt.phase, opt.name)
-    if not os.path.exists(file_root):
-        os.makedirs(file_root)
-    filename = sys.argv[0].split('.')[0]
+    real = torch.sum(target_one_hot*logits, 1)
+    other = torch.max((1-target_one_hot)*logits - (target_one_hot*10000), 1)[0]  ## 这里的10000是什么原理
+    kappa = torch.zeros_like(other).fill_(kappa)
     
-    copyfile(filename+'.py', os.path.join(file_root, filename+'.py'))
-    copyfile(filename+'.sh', os.path.join(file_root, filename+'.sh'))
+    if tar:
+        return torch.sum(torch.max(other - real, kappa))
+    else:
+        return torch.sum(torch.max(real - other, kappa))
+
+
+def greedyfool_attack_white(target_model, test_loader, config):
+    generator = GanGenerator(config.dataset_type)
+    pool_kernel = 3
+    Avg_pool = nn.AvgPool2d(pool_kernel, stride=1, padding=int(pool_kernel/2))
     
-    root = os.path.join('./test/out/',opt.phase,opt.name)
-    eps = opt.max_epsilon * 2 / 255.
-    Iter = int(opt.iter)
-    print("Iter {0}".format(Iter))
-    print("EPS {0}".format(opt.max_epsilon))
+    print("Iter {0}".format(config.iter))
+    print("EPS {0}".format(config.max_epsilon))
+    Iter = config.iter
+    eps = config.max_epsilon * 2 / 255
+    im_size = config.image_size
+    root = config.saving_root
     
     Baccu = []
     for i in range(1):
         temp_accu = AverageMeter()
         Baccu.append(temp_accu)
-    
+        
     num_count = []
     time_count = []
-    if opt.max_epsilon >= 128:
+    if config.max_epsilon >= 128:
         boost = False
     else:
         boost = True
     print ("Boost:{0}".format(boost))
     for idx, data in enumerate(test_loader):
-        netG.eval()
-        iter_start_time = time.time()
-        input_A = data['A']
+        if config.dataset_type == 'ImageNet':
+            input_A, label_A, image_names = data
+        elif config.dataset_type == 'Cifar10':
+            input_A, label_A = data
+            image_names = idx
+        generator.eval()
         input_A = input_A.cuda()
         real_A = Variable(input_A, requires_grad=False)
-        image_names = data['name']
         
-        image_hill = netG(real_A * 0.5 + 0.5) * 0.5 + 0.5
+        image_hill = generator(real_A * 0.5 + 0.5) * 0.5 + 0.5
         pre_hill = 1 - image_hill
         pre_hill = pre_hill.view(1, 1, -1)
        
@@ -102,8 +109,10 @@ def main():
         SIZE = int(im_size * im_size)
         
         loss_adv = CWLoss
+        tar = True if config.target_type == 'Targeted' else False
+        num_label = 1000 if config.dataset_type == 'ImageNet' else 10
         
-        logist_B = netT(real_A)
+        logist_B = target_model(real_A)
         _, target = torch.max(logist_B, 1)
         adv = real_A
         ini_num = 1
@@ -116,14 +125,14 @@ def main():
         for iters in range(Iter):
             # print (iters)
             temp_A = Variable(adv.data, requires_grad=True)
-            logist_B = netT(temp_A)
+            logist_B = target_model(temp_A)
             _, pre = torch.max(logist_B, 1)
             
             if target.cpu().data.float() != pre.cpu().data.float():
                 break
-            Loss = loss_adv(logist_B, target, -100, False) / real_A.size(0)
+            Loss = loss_adv(logist_B, target, -100, tar, num_label) / real_A.size(0)
             
-            netT.zero_grad()
+            target_model.zero_grad()
             if temp_A.grad is not None:
                 temp_A.grad.data.fill_(0)
             Loss.backward()
@@ -189,9 +198,9 @@ def main():
                 normalized_grad = abs_noise * noise.sign()
                 
                 with torch.no_grad():
-                    netT.eval()
-                    step = int(max(int(opt.max_epsilon/10.),1))
-                    a = [i for i in range(0, int(opt.max_epsilon+step), step)]
+                    target_model.eval()
+                    step = int(max(int(config.max_epsilon/10.),1))
+                    a = [i for i in range(0, int(config.max_epsilon+step), step)]
                     search_num = len(a)
                     a = np.asarray(a)*2/255. 
                     ex_temp_eps = torch.from_numpy(a).view(-1,1,1,1).float().cuda()
@@ -202,7 +211,7 @@ def main():
                     ex_temp_A = clip(ex_temp_A, ex_real_A, eps)
                     ex_adv = torch.clamp(ex_temp_A, -1, 1)
                     ex_temp_A = Variable(ex_adv.data, requires_grad=False)
-                    ex_logist_B = netT(ex_temp_A)
+                    ex_logist_B = target_model(ex_temp_A)
                     _,pre=torch.max(ex_logist_B,1)
                     comp = torch.eq(target.cpu().data.float(), pre.cpu().data.float())
                     top1 = torch.sum(comp).float() / pre.size(0)
@@ -211,7 +220,7 @@ def main():
                         for i in range(int(search_num)):
                             if comp[i] == 0:
                                 temp_adv = ex_temp_A[i:i+1]
-                                logist_B = netT(temp_adv)
+                                logist_B = target_model(temp_adv)
                                 _,pre=torch.max(logist_B,1)
                                 new_comp = torch.eq(target.cpu().data.float(), pre.cpu().data.float())
                                 if torch.sum(new_comp) != 0:
@@ -234,21 +243,18 @@ def main():
 
         num_count.append(reduce_num)
 
-        logist_B = netT(adv)
+        logist_B = target_model(adv)
         _, pre = torch.max(logist_B, 1)
         top1 = torch.sum(torch.eq(target.cpu().data.float(), pre.cpu().data.float()).float()) / input_A.size(0)
 
         top1 = torch.from_numpy(np.asarray([(1 - top1)*100])).float().cuda()
         Baccu[0].update(top1[0], input_A.size(0))
         
-        time_count.append(time.time() - iter_start_time)
         print('[{it:.2f}][{name}] '
                       'BTOP1: {BTOP1.avg:.2f} '
                       'lossX: {ori:d}/{redu:d} '
-                      'Time: {ti:.3f} '
                       'L1: {l1:.1f} '
                       'M&m {mean:.2f}/{median:.2f} '
-                      'T&t {tmean:.2f}/{tmedian:.2f} '
                       'Num: {num}'.format(
                           it = float(idx*100)/len(test_loader),
                           name = image_names[0].split('_')[-1],
@@ -258,10 +264,7 @@ def main():
                           l1 = L1_X_show.data.clone().item(),
                           num = grad_num,
                           mean = np.mean(num_count),
-                          median = np.median(num_count),
-                          tmean = np.mean(time_count),
-                          tmedian = np.median(time_count),
-                          ti = time.time() - iter_start_time))
+                          median = np.median(num_count)))
 
        
         if not os.path.exists(root):
@@ -300,46 +303,4 @@ def main():
                     final = Image.fromarray(np.concatenate([temp_hill, hill_img, real_img,adv_img,clip_img],1))
                     final.save( os.path.join(root,'show', image_names[i] +'_' +str(int(modi_num))+'.png'))
 
-
-
-def clip(adv_A,real_A,eps):
-    g_x=real_A-adv_A
-    clip_gx=torch.clamp(g_x, min=-eps, max=eps)
-    adv_x=real_A-clip_gx
-    return adv_x
-
     
-def CWLoss(logits, target, kappa=0, tar=True):
-    target = torch.ones(logits.size(0)).type(torch.cuda.FloatTensor).mul(target.float())
-    target_one_hot = Variable(torch.eye(1000).type(torch.cuda.FloatTensor)[target.long()].cuda())
-    
-    real = torch.sum(target_one_hot*logits, 1)
-    other = torch.max((1-target_one_hot)*logits - (target_one_hot*10000), 1)[0]
-    kappa = torch.zeros_like(other).fill_(kappa)
-    
-    if tar:
-        return torch.sum(torch.max(other - real, kappa))
-    else:
-        return torch.sum(torch.max(real - other, kappa))
-
-
-class AverageMeter(object):
-    """Computes and stores the average and current value"""
-    def __init__(self):
-        self.reset()
-
-    def reset(self):
-        self.val = 0
-        self.avg = 0
-        self.sum = 0
-        self.count = 0
-
-    def update(self, val, n=1):
-        self.val = val
-        self.sum += val * n
-        self.count += n
-        self.avg = self.sum / self.count
-
-      
-if __name__ == '__main__':
-    main()
