@@ -13,7 +13,7 @@ class ImageNetDataset(Dataset):
     def __init__(self, image_dir, label_filepath, transform=None):
         """
             Load metadata of the imagenet dataset, including image-label mapping,
-        image file path, and corresponding image names.
+            image file path, and corresponding image names.
         """
         with open(label_filepath, 'r') as fp:
             data = [i.strip() for i in fp.readlines()]
@@ -45,3 +45,4 @@ class ImageNetDataset(Dataset):
         label = self.all_labels[index % self.size]
         name = self.all_names[index % self.size]
         return {'image': data, 'label': label, 'name': name}
+        # return data, label
