@@ -314,14 +314,8 @@ def optimize_blackbox(model, data, ini_label):
 
 
 def main():
-<<<<<<< HEAD
-    # model = ResNet18()
-    # model = VGG('VGG16')
-    model = inception_v3(pretrained=False)
-=======
     model = ResNet18()
     # model = VGG('VGG16')
->>>>>>> 0b9e7e3357fc6994362217d2b32507c34a28e0f3
     model = nn.DataParallel(model).cuda()
     print('======Load Model======')
     model.load_state_dict(torch.load(args.model_path))

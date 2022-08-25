@@ -43,6 +43,6 @@ class ImageNetDataset(Dataset):
         if self.transform is not None:
             data = self.transform(data)
         label = self.all_labels[index % self.size]
-        # name = self.all_names[index % self.size]
+        name = self.all_names[index % self.size]
         # return {'image': data, 'label': label, 'name': name}
-        return (data, label)
+        return (data, label, name)
