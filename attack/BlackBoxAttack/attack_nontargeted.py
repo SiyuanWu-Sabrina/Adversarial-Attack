@@ -20,10 +20,7 @@ sys.path.append('../../models')
 
 from resnet_cifar10 import *
 from vgg_cifar10 import *
-<<<<<<< HEAD
 from inception_v3_imagenet import *
-=======
->>>>>>> 0b9e7e3357fc6994362217d2b32507c34a28e0f3
 
 parser = argparse.ArgumentParser(description='Black-box Adversarial Attack')
 parser.add_argument('--no-cuda', action='store_true', default=False,
