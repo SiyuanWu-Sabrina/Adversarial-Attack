@@ -60,5 +60,5 @@ if __name__ == '__main__':
     netT = target_net_factory(config.target_model)
     attack_algorithm = Attack('greedyfool_w')
 
-    ##### Generator loading for distortion map
+    ##### Test attack
     test_attack_success_rate(config, netT, attack_algorithm.attack)
