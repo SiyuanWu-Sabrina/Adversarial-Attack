@@ -44,4 +44,4 @@ class ImageNetDataset(Dataset):
             data = self.transform(data)
         label = self.all_labels[index % self.size]
         name = self.all_names[index % self.size]
-        return {'data': data, 'label': label, 'name': name}
+        return {'image': data, 'label': label, 'name': name}
