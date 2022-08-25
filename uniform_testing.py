@@ -25,7 +25,7 @@ def target_net_factory(net_name):
         return netT
 
 
-def test_attack_success_rate(config, target_model, attack_algorithm, **kwargs):
+def test_attack_success_rate(config, target_model, attack, **kwargs):
     # sourcery skip: last-if-guard, use-fstring-for-concatenation
     """This is the unified model for testing attack success rate for adversarial success under a certain configuration.
 
@@ -35,30 +35,55 @@ def test_attack_success_rate(config, target_model, attack_algorithm, **kwargs):
         data_loader: batch_size = 1
     """
     print(f"=====Running test on {config.dataset_type} dataset, attacking model {config.target_model}.=====")
-    dataloader = data_factory(config.dataset_type)
-    if config.target_type == 'Untargeted':
-        result = attack_algorithm(target_model, dataloader, config, **kwargs)  # untargeted attack
+    dataloader = data_factory(dataset_type=config.dataset_type, batch_size=config.batch_size)
+    attack(target_model, dataloader, config, **kwargs)
 
 
-def configuration():
+def configuration(attack_algorithm):
     config = Namespace()
     config.target_type = 'Untargeted'
-    config.dataset_type = 'ImageNet'
-    config.target_model = 'inception_v3'
-    config.iter = 50
-    config.max_epsilon = 100
-    config.image_size = 299
-    config.saving_root = './result/Greedyfool/untargeted/' + config.dataset_type + '/'
+    config.dataset_type = 'Cifar10'
+    config.target_model = 'resnet18'
+    config.image_size = 32
+    config.saving_root = f'./result/{attack_algorithm}/{config.target_type.lower()}/' + config.dataset_type + '/'
+
+    if attack_algorithm == 'greedyfool_w':
+        config.iter = 50
+        config.max_epsilon = 100
+        config.batch_size = 1
+    
+    elif attack_algorithm == 'PGD_attack_w':
+        config.batch_size = 1000
+        config.args = {'type_attack': 'L0',
+                       'n_restarts': 5,
+                       'num_steps': 100,
+                       'step_size': 120000.0/255.0,
+                       'kappa': -1,
+                       'epsilon': -1,
+                       'sparsity': 5}
+    
+    elif attack_algorithm == 'cornersearch_b':
+        config.batch_size = 1000
+        config.args = {'type_attack': 'L0',
+                       'n_iter': 1000,
+                       'n_max': 100,
+                       'kappa': -1,
+                       'epsilon': -1,
+                       'sparsity': 10,
+                       'size_incr': 1}
+
     return config
 
 
 if __name__ == '__main__':
+    attack_algorithm = 'cornersearch_b'
+
     ##### configuration
-    config = configuration()
+    config = configuration(attack_algorithm)
 
     ##### Target model loading
     netT = target_net_factory(config.target_model)
-    attack_algorithm = Attack('greedyfool_w')
+    attack_algorithm = Attack(attack_algorithm)
 
     ##### Test attack
     test_attack_success_rate(config, netT, attack_algorithm.attack)

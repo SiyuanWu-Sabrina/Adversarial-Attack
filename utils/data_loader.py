@@ -13,7 +13,6 @@ def data_factory(dataset_type = 'ImageNet', no_cuda = False, batch_size = 1):
         dataset = torchvision.datasets.CIFAR10(
             root='./datasets', train=False, download=True, 
             transform=transforms.Compose([
-                transforms.CenterCrop(31),
                 transforms.ToTensor()
             ])
         )
