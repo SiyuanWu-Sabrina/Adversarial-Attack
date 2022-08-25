@@ -45,7 +45,11 @@ parser.add_argument('--log-interval', type=int, default=100, metavar='N',
 parser.add_argument('--model-dir', default='../checkpoints',
 =======
 parser.add_argument('--model-dir', default='../../models',
+<<<<<<< HEAD
 >>>>>>> 0b9e7e3357fc6994362217d2b32507c34a28e0f3
+=======
+>>>>>>> b13c8d747a1b14706288fa8de1ae6cf9895c9c2e
+>>>>>>> refs/remotes/origin/chujun
                     help='directory of model for saving checkpoint')
 parser.add_argument('--save-freq', '-s', default=200, type=int, metavar='N',
                     help='save frequency')
@@ -57,7 +61,11 @@ parser.add_argument('--trigger-ratio', type=float, default=0.1)
 <<<<<<< HEAD
 parser.add_argument('--model-type', type=str, default='vgg16')
 =======
+<<<<<<< HEAD
 >>>>>>> 0b9e7e3357fc6994362217d2b32507c34a28e0f3
+=======
+>>>>>>> b13c8d747a1b14706288fa8de1ae6cf9895c9c2e
+>>>>>>> refs/remotes/origin/chujun
 
 
 args = parser.parse_args()
@@ -93,7 +101,11 @@ testset = torchvision.datasets.CIFAR10(root='../datasets', train=False, download
 =======
 trainset = torchvision.datasets.CIFAR10(root='../../datasets', train=True, download=True, transform=transform_train)
 testset = torchvision.datasets.CIFAR10(root='../../datasets', train=False, download=True, transform=transform_test)
+<<<<<<< HEAD
 >>>>>>> 0b9e7e3357fc6994362217d2b32507c34a28e0f3
+=======
+>>>>>>> b13c8d747a1b14706288fa8de1ae6cf9895c9c2e
+>>>>>>> refs/remotes/origin/chujun
 
 train_loader = torch.utils.data.DataLoader(trainset, batch_size=args.batch_size, shuffle=True, **kwargs)
 test_loader = torch.utils.data.DataLoader(testset, batch_size=args.test_batch_size, shuffle=False, **kwargs)
@@ -145,7 +157,11 @@ def main():
 =======
     model = ResNet18()
     # model = VGG('VGG16')
+<<<<<<< HEAD
 >>>>>>> 0b9e7e3357fc6994362217d2b32507c34a28e0f3
+=======
+>>>>>>> b13c8d747a1b14706288fa8de1ae6cf9895c9c2e
+>>>>>>> refs/remotes/origin/chujun
     model = nn.DataParallel(model).cuda()
     optimizer = optim.SGD(model.parameters(), lr=args.lr, momentum=args.momentum, weight_decay=args.weight_decay)
 
@@ -181,7 +197,11 @@ def main():
                        os.path.join(model_dir, 'resnet18_cifar10_{}.pt'.format(epoch)))
             # torch.save(optimizer.state_dict(),
             #            os.path.join(model_dir, 'resnet18_cifar10_{}.tar'.format(epoch)))
+<<<<<<< HEAD
 >>>>>>> 0b9e7e3357fc6994362217d2b32507c34a28e0f3
+=======
+>>>>>>> b13c8d747a1b14706288fa8de1ae6cf9895c9c2e
+>>>>>>> refs/remotes/origin/chujun
 
 
 if __name__ == '__main__':

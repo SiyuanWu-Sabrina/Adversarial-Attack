@@ -98,4 +98,8 @@ class ImageNetDataset(Dataset):
         A_label = self.A_labels[index % self.A_size]
         A_name = self.A_names[index % self.A_size]
         return {'A': A, 'label': A_label, 'name': A_name}
+<<<<<<< HEAD
 >>>>>>> 0b9e7e3357fc6994362217d2b32507c34a28e0f3
+=======
+>>>>>>> b13c8d747a1b14706288fa8de1ae6cf9895c9c2e
+>>>>>>> refs/remotes/origin/chujun

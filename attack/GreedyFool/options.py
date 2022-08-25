@@ -54,4 +54,8 @@ class BaseOptions():
         self.opt = opt
         return self.opt
 
+<<<<<<< HEAD
 >>>>>>> 0b9e7e3357fc6994362217d2b32507c34a28e0f3
+=======
+>>>>>>> b13c8d747a1b14706288fa8de1ae6cf9895c9c2e
+>>>>>>> refs/remotes/origin/chujun

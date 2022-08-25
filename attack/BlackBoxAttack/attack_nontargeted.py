@@ -21,6 +21,10 @@ sys.path.append('../../models')
 from resnet_cifar10 import *
 from vgg_cifar10 import *
 from inception_v3_imagenet import *
+<<<<<<< HEAD
+=======
+
+>>>>>>> refs/remotes/origin/chujun
 
 parser = argparse.ArgumentParser(description='Black-box Adversarial Attack')
 parser.add_argument('--no-cuda', action='store_true', default=False,
@@ -71,9 +75,13 @@ testset = torchvision.datasets.CIFAR10(root='../../datasets', train=False, downl
 test_loader = torch.utils.data.DataLoader(testset, batch_size=args.test_batch_size, shuffle=True, **kwargs)  #  传输多个参数的方法：**
 target_loader = torch.utils.data.DataLoader(testset, batch_size=1, shuffle=True, **kwargs)
 <<<<<<< HEAD
+<<<<<<< HEAD
 testset = torchvision.datasets.ImageNet(root='')
 =======
 >>>>>>> 0b9e7e3357fc6994362217d2b32507c34a28e0f3
+=======
+
+>>>>>>> refs/remotes/origin/chujun
 
 save_path = '../../result/BlackBoxAttack/nontargeted'
 # adv_path = '../../result/BlackBoxAttack/nontargeted/adv'
@@ -315,6 +323,7 @@ def optimize_blackbox(model, data, ini_label):
 
 def main():
 <<<<<<< HEAD
+<<<<<<< HEAD
     # model = ResNet18()
     # model = VGG('VGG16')
     model = inception_v3(pretrained=False)
@@ -322,6 +331,11 @@ def main():
     model = ResNet18()
     # model = VGG('VGG16')
 >>>>>>> 0b9e7e3357fc6994362217d2b32507c34a28e0f3
+=======
+    model = ResNet18()
+    # model = VGG('VGG16')
+    # model = inception_v3(pretrained=False)
+>>>>>>> refs/remotes/origin/chujun
     model = nn.DataParallel(model).cuda()
     print('======Load Model======')
     model.load_state_dict(torch.load(args.model_path))
