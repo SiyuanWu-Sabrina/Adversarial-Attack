@@ -1,7 +1,7 @@
-attack/GreedyFool/pretrain
-attack/GreedyFool/test
+**/.vscode/**
+attack
 checkpoints
 datasets
 output
 result
-__pycache__
+**/__pycache__/**
