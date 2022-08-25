@@ -2,7 +2,7 @@ import time
 from options import BaseOptions
 import os
 import sys
-from data_loader import ImageNetDataset
+from utils.data_loader import ImageNetDataset
 import torchvision.transforms as transforms
 import torch
 from torch.utils.data import DataLoader

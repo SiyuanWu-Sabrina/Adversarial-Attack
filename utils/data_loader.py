@@ -3,7 +3,7 @@ import torchvision
 from torchvision import transforms
 from torch.utils.data import DataLoader
 
-from imagenet_dataset import ImageNetDataset
+from utils.imagenet_dataset import ImageNetDataset
 
 
 def data_factory(dataset_type = 'ImageNet', no_cuda = False, batch_size = 1):

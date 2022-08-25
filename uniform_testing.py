@@ -15,7 +15,7 @@ import torch.optim as optim
 from torch.optim import lr_scheduler
 from torchvision import datasets, transforms
 
-from imagenet_dataset import ImageNetDataset
+from utils.imagenet_dataset import ImageNetDataset
 from torch.utils.data import DataLoader
 from torchvision.transforms import ToPILImage
 import models.inception_v3_imagenet as inception_v3
@@ -23,8 +23,8 @@ import models.generators as generators
 import models.resnet_cifar10 as resnet
 from argparse import Namespace
 
-from data_loader import data_factory
-from attack_factory import Attack
+from utils.data_loader import data_factory
+from utils.attack_factory import Attack
 
 
 def target_net_factory(net_name):
