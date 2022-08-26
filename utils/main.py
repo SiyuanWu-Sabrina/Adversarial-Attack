@@ -3,7 +3,7 @@ import sys
 
 import torch
 import torchvision.transforms as transforms
-from data_loader import ImageNetDataset
+from utils.data_loader import ImageNetDataset
 from torch.utils.data import DataLoader
 from torch.autograd import Variable
 from torchvision import models
