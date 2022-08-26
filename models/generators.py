@@ -333,7 +333,8 @@ class Weight_ResnetGenerator(nn.Module):
 
         
 class Res_ResnetGenerator(nn.Module):
-    def __init__(self, input_nc, output_nc, ngf, norm_type, act_type='selu', use_dropout=False, n_blocks=6, padding_type='reflect', addition_res=True):
+    def __init__(self, input_nc, output_nc, ngf, norm_type, act_type='selu', use_dropout=False, 
+                 n_blocks=6, padding_type='reflect', addition_res=True, dataset_type='ImageNet'):
         assert(n_blocks >= 0)
         super(Res_ResnetGenerator, self).__init__()
 
@@ -407,7 +408,6 @@ class Res_ResnetGenerator(nn.Module):
                     Dn += [ResnetBlock(int(ngf * mult / 2), padding_type=padding_type, norm_layer=norm_layer, use_dropout=use_dropout,
                                        use_bias=use_bias)]
         Dn += [nn.ReflectionPad2d(3)]
-        #Dn += [nn.Conv2d(ngf, output_nc, kernel_size=7, padding=0)]
         Dn += [nn.Conv2d(ngf, output_nc, kernel_size=8, padding=0)]
         Dn += [nn.Tanh()] 
 
