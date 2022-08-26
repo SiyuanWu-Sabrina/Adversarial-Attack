@@ -34,6 +34,7 @@ def test_attack_success_rate(config, target_model, attack, **kwargs):
         target_model: the model to be attacked
         data_loader: batch_size = 1
     """
+    
     print(f"=====Running test on {config.dataset_type} dataset, attacking model {config.target_model}.=====")
     dataloader = data_factory(dataset_type=config.dataset_type, batch_size=config.batch_size)
     attack(target_model, dataloader, config, **kwargs)
@@ -72,11 +73,14 @@ def configuration(attack_algorithm):
                        'sparsity': 10,
                        'size_incr': 1}
 
+    elif attack_algorithm == 'perturbation_b':
+        config.batch_size = 1
+
     return config
 
 
 if __name__ == '__main__':
-    attack_algorithm = 'cornersearch_b'
+    attack_algorithm = 'perturbation_b'
 
     ##### configuration
     config = configuration(attack_algorithm)
