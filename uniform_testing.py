@@ -108,8 +108,8 @@ def overall():
 
 def test():
     attack_algorithm = 'greedyfool_w'
-    # dataset_setting = 'ImageNet'
-    dataset_setting = 'Cifar10'
+    dataset_setting = 'ImageNet'
+    # dataset_setting = 'Cifar10'
 
     ##### configuration
     config = configuration(attack_algorithm, dataset_setting, batch_size=10, targeted=True)
