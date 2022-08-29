@@ -40,19 +40,24 @@ def test_attack_success_rate(config, target_model, attack, **kwargs):
     attack(target_model, dataloader, config, **kwargs)
 
 
-def configuration(attack_algorithm):
+def configuration(attack_algorithm, dataset_setting):
     config = Namespace()
-    config.target_type = 'Untargeted'
-    config.dataset_type = 'Cifar10'
-    config.target_model = 'resnet18'
-    config.image_size = 32
-    config.saving_root = f'./result/{attack_algorithm}/{config.target_type.lower()}/' + config.dataset_type + '/'
+    config.targeted = false
+    if dataset_setting == 'Cifar10':
+        config.dataset_type = 'Cifar10'
+        config.target_model = 'resnet18'
+        config.image_size = 32
+    elif dataset_setting == 'ImageNet':
+        config.dataset_type = 'ImageNet'
+        config.target_model = 'inception_v3'
+        config.image_size = 224
+    config.saving_root = f'./result/{attack_algorithm}/{config.target_type.lower()}/{config.dataset_type}/'
 
     if attack_algorithm == 'greedyfool_w':
         config.iter = 50
         config.max_epsilon = 100
         config.batch_size = 1
-    
+
     elif attack_algorithm == 'PGD_attack_w':
         config.batch_size = 1000
         config.args = {'type_attack': 'L0',
@@ -62,7 +67,7 @@ def configuration(attack_algorithm):
                        'kappa': -1,
                        'epsilon': -1,
                        'sparsity': 5}
-    
+
     elif attack_algorithm == 'cornersearch_b':
         config.batch_size = 1000
         config.args = {'type_attack': 'L0',
@@ -81,9 +86,10 @@ def configuration(attack_algorithm):
 
 if __name__ == '__main__':
     attack_algorithm = 'perturbation_b'
+    dataset_setting = 'ImageNet'
 
     ##### configuration
-    config = configuration(attack_algorithm)
+    config = configuration(attack_algorithm, dataset_setting)
 
     ##### Target model loading
     netT = target_net_factory(config.target_model)
