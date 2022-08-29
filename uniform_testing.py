@@ -87,6 +87,9 @@ def configuration(attack_algorithm, dataset_setting, targeted=False):
 
     elif attack_algorithm == 'perturbation_b':
         config.batch_size = 1
+    
+    else:
+        config.batch_size = 1
 
     return config
 
@@ -95,14 +98,16 @@ def overall():
     attack_list = ['B3D_b', 'greedyfool_w', 'cornersearch_b', 'PGD_attack_w', 'homotopy_w', 'perturbation_b']
     data_list = ['Cifar10', 'ImageNet']
     for data in data_list:
-        netT = target_net_factory(config.target_model)
         for attack in attack_list:
-            attack_algorithm = Attack(attack)
+            print(f"==========Testing on: {data}, attack type: {attack}==========")
             config = configuration(attack, data)
+            attack_algorithm = Attack(attack)
+            netT = target_net_factory(config.target_model)
             test_attack_success_rate(config, netT, attack_algorithm.attack)
+            print(f"==========Test on: {data}, attack type: {attack} succeeded.==========")
 
 
-if __name__ == '__main__':
+def test():
     attack_algorithm = 'greedyfool_w'
     dataset_setting = 'ImageNet'
 
@@ -115,3 +120,8 @@ if __name__ == '__main__':
 
     ##### Test attack
     test_attack_success_rate(config, netT, attack_algorithm.attack)
+
+
+if __name__ == '__main__':
+    # overall()
+    test()

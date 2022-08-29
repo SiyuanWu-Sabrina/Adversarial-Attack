@@ -78,7 +78,6 @@ def greedyfool_attack_white(target_model, test_loader, config):
         Baccu.append(temp_accu)
         
     num_count = []
-    time_count = []
     if config.max_epsilon >= 128:
         boost = False
     else:
@@ -89,7 +88,7 @@ def greedyfool_attack_white(target_model, test_loader, config):
             input_A, label_A, image_names = data
         elif config.dataset_type == 'Cifar10':
             input_A, label_A = data
-            image_names = idx
+            image_names = str(idx)
         generator.eval()
         input_A = input_A.cuda()
         real_A = Variable(input_A, requires_grad=False)
@@ -105,7 +104,7 @@ def greedyfool_attack_white(target_model, test_loader, config):
         percen = np.percentile(np_hill, 75)
         pre_hill /= percen
         pre_hill = torch.clamp(pre_hill, 0, 1)
-        pre_hill = Avg_pool(pre_hill) 
+        pre_hill = Avg_pool(pre_hill)
         SIZE = int(im_size * im_size)
         
         loss_adv = CWLoss

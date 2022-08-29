@@ -407,7 +407,8 @@ class Res_ResnetGenerator(nn.Module):
                 for j in range(2):
                     Dn += [ResnetBlock(int(ngf * mult / 2), padding_type=padding_type, norm_layer=norm_layer, use_dropout=use_dropout,
                                        use_bias=use_bias)]
-        Dn += [nn.ReflectionPad2d(3)]
+        # accommodate different datasets
+        Dn += [nn.ReflectionPad2d(3)] if dataset_type == 'ImageNet' else [nn.ReflectionPad2d((3, 4, 3, 4))]
         Dn += [nn.Conv2d(ngf, output_nc, kernel_size=8, padding=0)]
         Dn += [nn.Tanh()] 
 
