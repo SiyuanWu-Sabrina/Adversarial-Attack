@@ -42,7 +42,7 @@ def test_attack_success_rate(config, target_model, attack, **kwargs):
 
 def configuration(attack_algorithm, dataset_setting):
     config = Namespace()
-    config.targeted = false
+    config.targeted = False
     if dataset_setting == 'Cifar10':
         config.dataset_type = 'Cifar10'
         config.target_model = 'resnet18'
