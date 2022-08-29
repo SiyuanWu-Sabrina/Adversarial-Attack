@@ -36,13 +36,19 @@ def test_attack_success_rate(config, target_model, attack, **kwargs):
     """
     
     print(f"=====Running test on {config.dataset_type} dataset, attacking model {config.target_model}.=====")
-    dataloader = data_factory(dataset_type=config.dataset_type, batch_size=config.batch_size)
+    dataloader = data_factory(dataset_type=config.dataset_type, batch_size=config.batch_size, image_size=config.image_size)
     attack(target_model, dataloader, config, **kwargs)
 
 
-def configuration(attack_algorithm, dataset_setting):
+def configuration(attack_algorithm, dataset_setting, targeted=False):
     config = Namespace()
-    config.targeted = False
+    if not targeted:
+        config.target_type = 'Untargeted'
+        config.targeted = False
+    else:
+        config.target_type = 'Targeted'
+        config.targeted = True
+    
     if dataset_setting == 'Cifar10':
         config.dataset_type = 'Cifar10'
         config.target_model = 'resnet18'
@@ -50,7 +56,8 @@ def configuration(attack_algorithm, dataset_setting):
     elif dataset_setting == 'ImageNet':
         config.dataset_type = 'ImageNet'
         config.target_model = 'inception_v3'
-        config.image_size = 224
+        config.image_size = 299
+    
     config.saving_root = f'./result/{attack_algorithm}/{config.target_type.lower()}/{config.dataset_type}/'
 
     if attack_algorithm == 'greedyfool_w':
@@ -84,8 +91,19 @@ def configuration(attack_algorithm, dataset_setting):
     return config
 
 
+def overall():
+    attack_list = ['B3D_b', 'greedyfool_w', 'cornersearch_b', 'PGD_attack_w', 'homotopy_w', 'perturbation_b']
+    data_list = ['Cifar10', 'ImageNet']
+    for data in data_list:
+        netT = target_net_factory(config.target_model)
+        for attack in attack_list:
+            attack_algorithm = Attack(attack)
+            config = configuration(attack, data)
+            test_attack_success_rate(config, netT, attack_algorithm.attack)
+
+
 if __name__ == '__main__':
-    attack_algorithm = 'perturbation_b'
+    attack_algorithm = 'greedyfool_w'
     dataset_setting = 'ImageNet'
 
     ##### configuration
