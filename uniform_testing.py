@@ -1,5 +1,6 @@
 from __future__ import print_function
 from __future__ import division
+from tkinter.tix import Tree
 
 import torch
 import torch.nn as nn
@@ -40,7 +41,7 @@ def test_attack_success_rate(config, target_model, attack, **kwargs):
     attack(target_model, dataloader, config, **kwargs)
 
 
-def configuration(attack_algorithm, dataset_setting, targeted=False):
+def configuration(attack_algorithm, dataset_setting, targeted=False, batch_size=1):
     config = Namespace()
     if not targeted:
         config.target_type = 'Untargeted'
@@ -59,14 +60,16 @@ def configuration(attack_algorithm, dataset_setting, targeted=False):
         config.image_size = 299
     
     config.saving_root = f'./result/{attack_algorithm}/{config.target_type.lower()}/{config.dataset_type}/'
+    config.batch_size = batch_size
 
     if attack_algorithm == 'greedyfool_w':
         config.iter = 50
         config.max_epsilon = 100
-        config.batch_size = 1
+        if config.batch_size != 1:
+            print("Batch size for greedyfool must be 1.\nSet batch_size to 1.")
+            config.batch_size = 1
 
     elif attack_algorithm == 'PGD_attack_w':
-        config.batch_size = 1000
         config.args = {'type_attack': 'L0',
                        'n_restarts': 5,
                        'num_steps': 100,
@@ -76,7 +79,6 @@ def configuration(attack_algorithm, dataset_setting, targeted=False):
                        'sparsity': 5}
 
     elif attack_algorithm == 'cornersearch_b':
-        config.batch_size = 1000
         config.args = {'type_attack': 'L0',
                        'n_iter': 1000,
                        'n_max': 100,
@@ -86,10 +88,7 @@ def configuration(attack_algorithm, dataset_setting, targeted=False):
                        'size_incr': 1}
 
     elif attack_algorithm == 'perturbation_b':
-        config.batch_size = 1
-    
-    else:
-        config.batch_size = 1
+        pass
 
     return config
 
@@ -109,10 +108,11 @@ def overall():
 
 def test():
     attack_algorithm = 'greedyfool_w'
-    dataset_setting = 'ImageNet'
+    # dataset_setting = 'ImageNet'
+    dataset_setting = 'Cifar10'
 
     ##### configuration
-    config = configuration(attack_algorithm, dataset_setting)
+    config = configuration(attack_algorithm, dataset_setting, batch_size=10, targeted=True)
 
     ##### Target model loading
     netT = target_net_factory(config.target_model)

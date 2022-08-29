@@ -108,11 +108,19 @@ def greedyfool_attack_white(target_model, test_loader, config):
         SIZE = int(im_size * im_size)
         
         loss_adv = CWLoss
-        tar = True if config.target_type == 'Targeted' else False
+        tar = config.targeted
         num_label = 1000 if config.dataset_type == 'ImageNet' else 10
         
         logist_B = target_model(real_A)
         _, target = torch.max(logist_B, 1)
+        if config.targeted:
+            print("original class:", target.item())
+            target = target + 1
+            if target.item() >= num_label:
+                target -= (num_label - 1)
+            print("target class:", target.item())
+        else:
+            print("target class:", target.item())
         adv = real_A
         ini_num = 1
         grad_num = ini_num
@@ -127,7 +135,8 @@ def greedyfool_attack_white(target_model, test_loader, config):
             logist_B = target_model(temp_A)
             _, pre = torch.max(logist_B, 1)
             
-            if target.cpu().data.float() != pre.cpu().data.float():
+            if (not config.targeted and target.cpu().data.float() != pre.cpu().data.float())\
+                or (config.targeted and target.cpu().data.float() == pre.cpu().data.float()):
                 break
             Loss = loss_adv(logist_B, target, -100, tar, num_label) / real_A.size(0)
             
@@ -185,7 +194,7 @@ def greedyfool_attack_white(target_model, test_loader, config):
                     break
                 
                 noise_show, noise_sort_idx = torch.sort(abs_noise)
-                noise_sort_idx = noise_sort_idx.view( -1)
+                noise_sort_idx = noise_sort_idx.view(-1)
                 
                 noise_idx = noise_sort_idx[reduce_idx]
                 reduce_mask[0,:,noise_idx] = 0.
@@ -214,15 +223,18 @@ def greedyfool_attack_white(target_model, test_loader, config):
                     _,pre=torch.max(ex_logist_B,1)
                     comp = torch.eq(target.cpu().data.float(), pre.cpu().data.float())
                     top1 = torch.sum(comp).float() / pre.size(0)
-                    if top1 != 1: ##### exists at least one adversarial sample
+                    if (not config.targeted and top1 != 1) \
+                            or (config.targeted and top1 != 0): ##### exists at least one adversarial sample
                         found = False
                         for i in range(int(search_num)):
-                            if comp[i] == 0:
+                            if (not config.targeted and comp[i] == 0) \
+                                    or (config.targeted and comp[i] == 1):
                                 temp_adv = ex_temp_A[i:i+1]
                                 logist_B = target_model(temp_adv)
                                 _,pre=torch.max(logist_B,1)
                                 new_comp = torch.eq(target.cpu().data.float(), pre.cpu().data.float())
-                                if torch.sum(new_comp) != 0:
+                                if (not config.targeted and torch.sum(new_comp) != 0) \
+                                        or (config.targeted and torch.sum(new_comp) != 1):
                                     continue
                                 found = True
                                 adv = temp_adv
@@ -244,9 +256,13 @@ def greedyfool_attack_white(target_model, test_loader, config):
 
         logist_B = target_model(adv)
         _, pre = torch.max(logist_B, 1)
+        print("Prediction:", pre.item())
         top1 = torch.sum(torch.eq(target.cpu().data.float(), pre.cpu().data.float()).float()) / input_A.size(0)
 
-        top1 = torch.from_numpy(np.asarray([(1 - top1)*100])).float().cuda()
+        if not config.targeted:
+            top1 = torch.from_numpy(np.asarray([(1 - top1)*100])).float().cuda()
+        else:
+            top1 = torch.from_numpy(np.asarray([top1*100])).float().cuda()
         Baccu[0].update(top1[0], input_A.size(0))
         
         print('[{it:.2f}][{name}] '
@@ -256,7 +272,7 @@ def greedyfool_attack_white(target_model, test_loader, config):
                       'M&m {mean:.2f}/{median:.2f} '
                       'Num: {num}'.format(
                           it = float(idx*100)/len(test_loader),
-                          name = image_names[0].split('_')[-1],
+                          name = image_names[0].split('_')[-1] if config.dataset_type == 'ImageNet' else image_names,
                           BTOP1 = Baccu[0],
                           ori = int(modi_num),
                           redu = int(reduce_num),
