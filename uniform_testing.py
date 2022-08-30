@@ -97,7 +97,11 @@ def configuration(attack_algorithm, dataset_setting, targeted=False, batch_size=
                        'size_incr': 1}
 
     elif attack_algorithm == 'perturbation_b':
-        pass
+        config.maxIter_e = 2000
+        config.maxIter_g = 2000
+        if config.batch_size != 1:
+            print("Batch size for perturbation-factorization must be 1.\nSet batch_size to 1.")
+            config.batch_size = 1
 
     return config
 
@@ -116,7 +120,7 @@ def overall():
 
 
 def test():
-    attack_algorithm = 'greedyfool_b'
+    attack_algorithm = 'perturbation_b'
     # dataset_setting = 'ImageNet'
     dataset_setting = 'Cifar10'
 
