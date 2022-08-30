@@ -68,6 +68,15 @@ def configuration(attack_algorithm, dataset_setting, targeted=False, batch_size=
         if config.batch_size != 1:
             print("Batch size for greedyfool must be 1.\nSet batch_size to 1.")
             config.batch_size = 1
+    
+    elif attack_algorithm == 'greedyfool_b':
+        config.iter = 50
+        config.max_epsilon = 100
+        config.image_size = 224
+        config.confidence = 5  # kappa
+        if config.batch_size != 1:
+            print("Batch size for greedyfool must be 1.\nSet batch_size to 1.")
+            config.batch_size = 1
 
     elif attack_algorithm == 'PGD_attack_w':
         config.args = {'type_attack': 'L0',
@@ -108,11 +117,11 @@ def overall():
 
 def test():
     attack_algorithm = 'greedyfool_w'
-    dataset_setting = 'ImageNet'
-    # dataset_setting = 'Cifar10'
+    # dataset_setting = 'ImageNet'
+    dataset_setting = 'Cifar10'
 
     ##### configuration
-    config = configuration(attack_algorithm, dataset_setting, batch_size=10, targeted=True)
+    config = configuration(attack_algorithm, dataset_setting, batch_size=10, targeted=False)
 
     ##### Target model loading
     netT = target_net_factory(config.target_model)
