@@ -70,10 +70,10 @@ def configuration(attack_algorithm, dataset_setting, targeted=False, batch_size=
             config.batch_size = 1
     
     elif attack_algorithm == 'greedyfool_b':
-        config.iter = 50
+        config.iter = 100
+        config.init_num = 5
         config.max_epsilon = 100
-        config.image_size = 224
-        config.confidence = 5  # kappa
+        config.confidence = 10  # kappa
         if config.batch_size != 1:
             print("Batch size for greedyfool must be 1.\nSet batch_size to 1.")
             config.batch_size = 1
@@ -116,7 +116,7 @@ def overall():
 
 
 def test():
-    attack_algorithm = 'greedyfool_w'
+    attack_algorithm = 'greedyfool_b'
     # dataset_setting = 'ImageNet'
     dataset_setting = 'Cifar10'
 
