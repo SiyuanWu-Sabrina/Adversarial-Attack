@@ -9,6 +9,8 @@ import torch
 import torch.nn as nn
 from torch.autograd import Variable
 from torchvision.transforms import ToPILImage
+import torchvision.models as models
+import torchvision
 
 import models.generators as generators
 
@@ -60,6 +62,27 @@ def CWLoss(logits, target, kappa=0, tar=True, num_label=1000):
         return torch.sum(torch.max(real - other, kappa))
 
 
+def transfer_target_models():
+    netB1 = models.resnet50(pretrained=True)
+    netB2 = models.densenet161(pretrained=True)
+    netB3 = models.vgg16(pretrained=True)
+    netB1.eval()
+    netB1.cuda()
+    netB2.eval()
+    netB2.cuda()
+    netB3.eval()
+    netB3.cuda()
+    return netB1, netB2, netB3
+
+
+def calculate_norm(adv_noise):
+    L_inf = torch.norm(adv_noise, p=float('inf')) * 255. / 2
+    L_0 = torch.norm(adv_noise, p=0) / 3
+    L_1 = torch.norm(adv_noise, p=1) * 255. / 2 / 3
+    L_2 = torch.norm(adv_noise, p=2) * 255. / 2 / 3
+    return L_inf.clone().item(), L_0.clone().item(), L_1.clone().item(), L_2.clone().item()
+
+
 def greedyfool_attack_white(target_model, test_loader, config):
     generator = GanGenerator(config.dataset_type)
     pool_kernel = 3
@@ -73,12 +96,15 @@ def greedyfool_attack_white(target_model, test_loader, config):
     root = config.saving_root
     
     Baccu = []
+    L_0_list = []
+    L_1_list = []
+    L_2_list = []
+    L_inf_list = []
     for i in range(1):
         temp_accu = AverageMeter()
         Baccu.append(temp_accu)
         
     num_count = []
-    time_count = []
     if config.max_epsilon >= 128:
         boost = False
     else:
@@ -89,7 +115,7 @@ def greedyfool_attack_white(target_model, test_loader, config):
             input_A, label_A, image_names = data
         elif config.dataset_type == 'Cifar10':
             input_A, label_A = data
-            image_names = idx
+            image_names = str(idx)
         generator.eval()
         input_A = input_A.cuda()
         real_A = Variable(input_A, requires_grad=False)
@@ -105,15 +131,23 @@ def greedyfool_attack_white(target_model, test_loader, config):
         percen = np.percentile(np_hill, 75)
         pre_hill /= percen
         pre_hill = torch.clamp(pre_hill, 0, 1)
-        pre_hill = Avg_pool(pre_hill) 
+        pre_hill = Avg_pool(pre_hill)
         SIZE = int(im_size * im_size)
         
         loss_adv = CWLoss
-        tar = True if config.target_type == 'Targeted' else False
+        tar = config.targeted
         num_label = 1000 if config.dataset_type == 'ImageNet' else 10
         
         logist_B = target_model(real_A)
         _, target = torch.max(logist_B, 1)
+        if config.targeted:
+            print("original class:", target.item())
+            target = target + 1
+            if target.item() >= num_label:
+                target -= (num_label - 1)
+            print("target class:", target.item())
+        else:
+            print("target class:", target.item())
         adv = real_A
         ini_num = 1
         grad_num = ini_num
@@ -128,7 +162,8 @@ def greedyfool_attack_white(target_model, test_loader, config):
             logist_B = target_model(temp_A)
             _, pre = torch.max(logist_B, 1)
             
-            if target.cpu().data.float() != pre.cpu().data.float():
+            if (not config.targeted and target.cpu().data.float() != pre.cpu().data.float())\
+                or (config.targeted and target.cpu().data.float() == pre.cpu().data.float()):
                 break
             Loss = loss_adv(logist_B, target, -100, tar, num_label) / real_A.size(0)
             
@@ -186,7 +221,7 @@ def greedyfool_attack_white(target_model, test_loader, config):
                     break
                 
                 noise_show, noise_sort_idx = torch.sort(abs_noise)
-                noise_sort_idx = noise_sort_idx.view( -1)
+                noise_sort_idx = noise_sort_idx.view(-1)
                 
                 noise_idx = noise_sort_idx[reduce_idx]
                 reduce_mask[0,:,noise_idx] = 0.
@@ -215,15 +250,18 @@ def greedyfool_attack_white(target_model, test_loader, config):
                     _,pre=torch.max(ex_logist_B,1)
                     comp = torch.eq(target.cpu().data.float(), pre.cpu().data.float())
                     top1 = torch.sum(comp).float() / pre.size(0)
-                    if top1 != 1: ##### exists at least one adversarial sample
+                    if (not config.targeted and top1 != 1) \
+                            or (config.targeted and top1 != 0): ##### exists at least one adversarial sample
                         found = False
                         for i in range(int(search_num)):
-                            if comp[i] == 0:
+                            if (not config.targeted and comp[i] == 0) \
+                                    or (config.targeted and comp[i] == 1):
                                 temp_adv = ex_temp_A[i:i+1]
                                 logist_B = target_model(temp_adv)
                                 _,pre=torch.max(logist_B,1)
                                 new_comp = torch.eq(target.cpu().data.float(), pre.cpu().data.float())
-                                if torch.sum(new_comp) != 0:
+                                if (not config.targeted and torch.sum(new_comp) != 0) \
+                                        or (config.targeted and torch.sum(new_comp) != 1):
                                     continue
                                 found = True
                                 adv = temp_adv
@@ -239,30 +277,39 @@ def greedyfool_attack_white(target_model, test_loader, config):
         temp_mask = abs_noise != 0
         
         reduce_num = torch.sum(temp_mask).data.clone().item()
-        L1_X_show = torch.max(torch.abs(real_A - adv)) * 255. / 2
+        L_inf, L_0, L_1, L_2 = calculate_norm(adv_noise)
+        L_0_list.append(L_0)
+        L_1_list.append(L_1)
+        L_2_list.append(L_2)
+        L_inf_list.append(L_inf)
 
         num_count.append(reduce_num)
 
         logist_B = target_model(adv)
         _, pre = torch.max(logist_B, 1)
+        print("Prediction:", pre.item())
         top1 = torch.sum(torch.eq(target.cpu().data.float(), pre.cpu().data.float()).float()) / input_A.size(0)
 
-        top1 = torch.from_numpy(np.asarray([(1 - top1)*100])).float().cuda()
+        if not config.targeted:
+            top1 = torch.from_numpy(np.asarray([(1 - top1)*100])).float().cuda()
+        else:
+            top1 = torch.from_numpy(np.asarray([top1*100])).float().cuda()
         Baccu[0].update(top1[0], input_A.size(0))
         
-        print('[{it:.2f}][{name}] '
-                      'BTOP1: {BTOP1.avg:.2f} '
-                      'lossX: {ori:d}/{redu:d} '
-                      'L1: {l1:.1f} '
-                      'M&m {mean:.2f}/{median:.2f} '
-                      'Num: {num}'.format(
+        print('[{it:.2f}%][{name}] '
+                      'ASR: {BTOP1.avg:.2f}, '
+                      'L-0 avg: {l0}, '
+                      'L-1 avg: {l1:.1f}, '
+                      'L-2 avg: {l2:.1f}, '
+                      'L-inf avg: {linf:.1f}, '
+                      'M&m(# pixel modified) {mean:.2f}/{median:.2f} '.format(
                           it = float(idx*100)/len(test_loader),
-                          name = image_names[0].split('_')[-1],
+                          name = image_names[0].split('_')[-1] if config.dataset_type == 'ImageNet' else image_names,
                           BTOP1 = Baccu[0],
-                          ori = int(modi_num),
-                          redu = int(reduce_num),
-                          l1 = L1_X_show.data.clone().item(),
-                          num = grad_num,
+                          l0 = np.median(L_0_list),
+                          l1 = np.median(L_1_list),
+                          l2 = np.median(L_2_list),
+                          linf = np.median(L_inf_list),
                           mean = np.mean(num_count),
                           median = np.median(num_count)))
 
@@ -303,4 +350,147 @@ def greedyfool_attack_white(target_model, test_loader, config):
                     final = Image.fromarray(np.concatenate([temp_hill, hill_img, real_img,adv_img,clip_img],1))
                     final.save( os.path.join(root,'show', image_names[i] +'_' +str(int(modi_num))+'.png'))
 
+
+def greedyfool_attack_black(target_model, test_loader, config):
+    netB1, netB2, netB3 = transfer_target_models()  # ResNet, DenseNet, VGG
+   
+    mean_arr = (0.485, 0.456, 0.406)
+    stddev_arr = (0.229, 0.224, 0.225)
+    def normalized_eval(net, x):
+        x_copy = x.clone()
+        x_copy = torch.stack([torchvision.transforms.functional.normalize(x_copy[i], mean_arr, stddev_arr)\
+            for i in range(1)])
+        return net(x_copy)
+
+    im_size = config.image_size
+    eps = config.max_epsilon * 2 / 255.
+    Iter = int(config.iter)
+    confi = config.confidence
+    print ("Iter {0}".format(config.iter))
+    print ("EPS {0}".format(config.max_epsilon))
+    print ("Confidence {0}".format(confi))
+    Baccu = []
+    L_0_list = []
+    L_1_list = []
+    L_2_list = []
+    L_inf_list = []
+    for i in range(3):
+        temp_accu = AverageMeter()
+        Baccu.append(temp_accu)
     
+    num_count = []
+    if config.max_epsilon >= 128:
+        boost = False
+    else:
+        boost = True
+    print ("Boost:{0}".format(boost))
+    for idx, data in enumerate(test_loader):
+        if config.dataset_type == 'ImageNet':
+            input_A, label_A, image_names = data
+        elif config.dataset_type == 'Cifar10':
+            input_A, label_A = data
+            image_names = str(idx)
+        input_A = input_A.cuda()
+        real_A = Variable(input_A,requires_grad = False)
+       
+        SIZE = int(im_size * im_size)
+        
+        loss_adv = CWLoss
+        tar = config.targeted
+        num_label = 1000 if config.dataset_type == 'ImageNet' else 10
+        
+        logist_B = normalized_eval(target_model, real_A)
+        _, target = torch.max(logist_B, 1)
+        adv = real_A
+        ini_num = config.init_num
+        grad_num = ini_num
+        mask = torch.zeros(1, 3, SIZE).cuda()
+
+        temp_eps = eps / 2
+        for iters in range(Iter):
+            #print (iters)
+            temp_A = Variable(adv.data, requires_grad=True)
+            logist_B = normalized_eval(target_model, temp_A)
+            _, pre = torch.max(logist_B, 1)
+            Loss = loss_adv(logist_B, target, -100, tar, num_label) / real_A.size(0)
+            
+            if (not config.targeted and target.cpu().data.float() != pre.cpu().data.float())\
+                or (config.targeted and target.cpu().data.float() == pre.cpu().data.float()):
+                temp_loss = Loss.data.cpu().numpy().item()
+                if temp_loss < -1 * confi:
+                    #print (temp_loss)
+                    break
+            
+            target_model.zero_grad()
+            if temp_A.grad is not None:
+                temp_A.grad.data.fill_(0)
+            Loss.backward()
+            
+            grad = temp_A.grad
+            abs_grad = torch.abs(grad).view(1,3,-1).mean(1, keepdim=True)
+            
+            if not boost:
+                abs_grad = abs_grad * (1 - mask)
+            _, grad_sort_idx = torch.sort(abs_grad)
+            grad_sort_idx = grad_sort_idx.view( -1)
+            grad_idx = grad_sort_idx[-grad_num:]
+            mask[0,:,grad_idx] = 1.
+            temp_mask = mask.view(1,3,im_size,im_size)
+            grad = temp_mask * grad
+            
+            abs_grad = torch.abs(grad)
+            abs_grad = abs_grad / torch.max(abs_grad)
+            normalized_grad = abs_grad * grad.sign()
+            scaled_grad = normalized_grad.mul(temp_eps)
+            temp_A = temp_A - scaled_grad
+            temp_A = clip(temp_A, real_A, eps)
+            adv = torch.clamp(temp_A, -1, 1)
+            if boost:
+                grad_num += ini_num
+            
+        adv_noise = real_A - adv
+        abs_noise = torch.abs(adv_noise).view(1,3,-1).mean(1, keepdim=True)
+        temp_mask = abs_noise != 0
+        
+
+        reduce_num = torch.sum(temp_mask).data.clone().item()
+        L_inf, L_0, L_1, L_2 = calculate_norm(adv_noise)
+        L_0_list.append(L_0)
+        L_1_list.append(L_1)
+        L_2_list.append(L_2)
+        L_inf_list.append(L_inf)
+
+        num_count.append(reduce_num)
+      
+        for i, netB in enumerate([netB1, netB2, netB3]):
+            logist_B = normalized_eval(netB, real_A)
+            _, target = torch.max(logist_B, 1)
+            logist_B = normalized_eval(netB, adv)
+            _, pre = torch.max(logist_B,1)
+            top1 = torch.sum(torch.eq(target.cpu().data.float(), pre.cpu().data.float()).float()) / input_A.size(0)
+            if not config.targeted:
+                top1 = torch.from_numpy(np.asarray([(1 - top1)*100])).float().cuda()
+            else:
+                top1 = torch.from_numpy(np.asarray([top1*100])).float().cuda()
+            Baccu[i].update(top1[0], input_A.size(0))
+
+        print('[{iter:.2f}%][{name}] '
+                      'ASR(ResNet): {BTOP1.avg:.2f}, '
+                      'ASR(DenseNet): {BTOP2.avg:.2f}, '
+                      'ASR(VGG): {BTOP3.avg:.2f}, '
+                      'L-0 avg: {l0}, '
+                      'L-1 avg: {l1:.1f}, '
+                      'L-2 avg: {l2:.1f}, '
+                      'L-inf avg: {linf:.1f}, '
+                      'M&m(# pixel modified) {mean:.2f}/{median:.2f} '.format(
+                          iter = float(idx*100)/len(test_loader), 
+                          name = image_names[0].split('_')[-1], 
+                          BTOP1 = Baccu[0],
+                          BTOP2 = Baccu[1],
+                          BTOP3 = Baccu[2],
+                          l0 = np.median(L_0_list),
+                          l1 = np.median(L_1_list),
+                          l2 = np.median(L_2_list),
+                          linf = np.median(L_inf_list),
+                          mean = np.mean(num_count),
+                          median = np.median(num_count)))
