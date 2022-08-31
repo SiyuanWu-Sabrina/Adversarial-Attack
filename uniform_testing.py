@@ -97,8 +97,8 @@ def configuration(attack_algorithm, dataset_setting, targeted=False, batch_size=
                        'size_incr': 1}
 
     elif attack_algorithm == 'perturbation_b':
-        config.maxIter_e = 20
-        config.maxIter_g = 20
+        config.maxIter_e = 2000
+        config.maxIter_g = 2000
         if config.batch_size != 1:
             print("Batch size for perturbation-factorization must be 1.\nSet batch_size to 1.")
             config.batch_size = 1
@@ -107,20 +107,22 @@ def configuration(attack_algorithm, dataset_setting, targeted=False, batch_size=
 
 
 def overall():
-    attack_list = ['B3D_b', 'greedyfool_w', 'cornersearch_b', 'PGD_attack_w', 'homotopy_w', 'perturbation_b']
+    attack_list = ['greedyfool_w', 'greedyfool_b', 'perturbation_b']
     data_list = ['Cifar10', 'ImageNet']
+
     for data in data_list:
         for attack in attack_list:
-            print(f"==========Testing on: {data}, attack type: {attack}==========")
-            config = configuration(attack, data)
-            attack_algorithm = Attack(attack)
-            netT = target_net_factory(config.target_model)
-            test_attack_success_rate(config, netT, attack_algorithm.attack)
-            print(f"==========Test on: {data}, attack type: {attack} succeeded.==========")
+            for target in [True, False]:
+                print(f"==========Testing on: {data}, attack type: {attack}==========")
+                config = configuration(attack, data, batch_size=10, targeted=target)
+                attack_algorithm = Attack(attack)
+                netT = target_net_factory(config.target_model)
+                test_attack_success_rate(config, netT, attack_algorithm.attack)
+                print(f"==========Test on: {data}, attack type: {attack} succeeded.==========")
 
 
 def test():
-    attack_algorithm = 'perturbation_b'
+    attack_algorithm = 'greedyfool_w'
     # dataset_setting = 'ImageNet'
     dataset_setting = 'Cifar10'
 
@@ -136,5 +138,5 @@ def test():
 
 
 if __name__ == '__main__':
-    # overall()
-    test()
+    overall()
+    # test()
