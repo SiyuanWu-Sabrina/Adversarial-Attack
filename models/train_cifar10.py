@@ -83,7 +83,6 @@ transform_test = transforms.Compose([
 trainset = torchvision.datasets.CIFAR10(root='../datasets', train=True, download=True, transform=transform_train)
 testset = torchvision.datasets.CIFAR10(root='../datasets', train=False, download=True, transform=transform_test)
 
-
 train_loader = torch.utils.data.DataLoader(trainset, batch_size=args.batch_size, shuffle=True, **kwargs)
 test_loader = torch.utils.data.DataLoader(testset, batch_size=args.test_batch_size, shuffle=False, **kwargs)
 
@@ -131,7 +130,8 @@ def main():
     if args.model_type == 'vgg16':
         model = VGG('VGG16')
     else:
-        model = VGG('VGG16')
+        model = ResNet18()
+    # model = VGG('VGG16')
     model = nn.DataParallel(model).cuda()
     optimizer = optim.SGD(model.parameters(), lr=args.lr, momentum=args.momentum, weight_decay=args.weight_decay)
 
@@ -159,6 +159,11 @@ def main():
             if args.model_type == 'vgg16':
                 torch.save(model.state_dict(),
                            os.path.join(model_dir, 'vgg16_cifar10_{}.pt'.format(epoch)))
+                # torch.save(optimizer.state_dict(),
+                #            os.path.join(model_dir, 'resnet18_cifar10_{}.tar'.format(epoch)))
+            else:
+                torch.save(model.state_dict(),
+                       os.path.join(model_dir, 'resnet18_cifar10_{}.pt'.format(epoch)))
                 # torch.save(optimizer.state_dict(),
                 #            os.path.join(model_dir, 'resnet18_cifar10_{}.tar'.format(epoch)))
 
