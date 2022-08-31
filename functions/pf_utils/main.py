@@ -23,7 +23,7 @@ img_std_cuda = torch.from_numpy(img_std).cuda()
 img_normalized_ops = (img_mean_cuda, img_std_cuda)
 
 
-def batch_train(model, input_image, image_name, args):    
+def batch_train(model, input_image, image_name, args, config):    
     num_success = 0.0
     counter =0.0
     L0 = 0.0
@@ -93,7 +93,7 @@ def batch_train(model, input_image, image_name, args):
     WLi += results['WLi']
    
     # save metaInformation and results to logfile
-    save_results(results, args)
+    save_results(results, config)
     
     print('#'*30)
     print('image=%s, clean-img-prediction=%d, target-attack-class=%d, adversarial-image-prediction=%d' \

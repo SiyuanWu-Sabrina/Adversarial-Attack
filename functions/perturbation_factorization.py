@@ -35,4 +35,4 @@ def perturbation_attack_black(target_model, dataloader, config, **kwargs):
         image = image.cpu().clone()
         image = image.squeeze(0)
         image = transforms.ToPILImage()(image)
-        batch_train(target_model, image, name, args)
+        batch_train(target_model, image, name, args, config)

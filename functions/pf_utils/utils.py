@@ -131,12 +131,12 @@ def parse_dict(input_dict):
 
 
 
-def save_results(results, args):
-    if not os.path.exists(args.res_root):
-        os.mkdir(args.res_root)
-    res_path = os.path.join(args.res_root, results['img_name'].split('.')[0])    
+def save_results(results, config):
+    if not os.path.exists(config.saving_root):
+        os.makedirs(config.saving_root)
+    res_path = os.path.join(config.saving_root, results['img_name'].split('.')[0])    
     if not os.path.exists(res_path):
-        os.mkdir(res_path)
+        os.makedirs(res_path)
     np.save(os.path.join(res_path, str(results['label_target'])+'_noise.npy'), np.array(results['epsilon'], dtype ='float32'))
     np_img = (255 * np.array(results['adv_image'])).astype('uint8')
     im = Image.fromarray(np_img).convert('RGB')
