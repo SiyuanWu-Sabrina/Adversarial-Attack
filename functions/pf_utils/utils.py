@@ -8,17 +8,15 @@ from PIL import Image
 
 
 def CWLoss(logits, target, kappa=0, tar=True, num_label=1000):
-    target = torch.ones(logits.size(0)).type(torch.cuda.FloatTensor).mul(target.float())
-    target_one_hot = Variable(torch.eye(num_label).type(torch.cuda.FloatTensor)[target.long()].cuda())
-    
-    real = torch.sum(target_one_hot*logits, 1)
-    other = torch.max((1-target_one_hot)*logits - (target_one_hot*10000), 1)[0]  ## 这里的10000是什么原理
-    kappa = torch.zeros_like(other).fill_(kappa)
-    
+    label_to_one_hot = torch.tensor([[target.item()]]) #one-hot
+    label_one_hot = torch.zeros(1, num_label).scatter_(1, label_to_one_hot, 1).cuda()
+
+    real = torch.sum(logits*label_one_hot)
+    other_max = torch.max((torch.ones_like(label_one_hot).cuda()-label_one_hot)*logits - (label_one_hot*10000))
     if tar:
-        return torch.sum(torch.max(other - real, kappa))
+        return torch.clamp(other_max - real + kappa, min=0)
     else:
-        return torch.sum(torch.max(real - other, kappa))
+        return torch.clamp(real - other_max + kappa, min=0)
 
 
 def project_shifted_lp_ball(x, shift_vec):
@@ -37,13 +35,13 @@ def Normalization(x, mean_std):
 
     return result
 
-def compute_loss(model, images, target, epsilon, G, args, imgnet_normalized_ops, B, noise_Weight):
+def compute_loss(model, images, target, epsilon, G, args, imgnet_normalized_ops, B, noise_Weight, config):
 
     # compute L2 loss of |e*G|_2^2 (L2 square for easy grad calculation)
     l2_loss = (torch.norm(G*epsilon*noise_Weight, 2).item())**2  
     
     # compute cnn-loss (cross-entropy loss)
-    cnn_loss= compute_cnn_loss(model, images, target, epsilon, G, args, imgnet_normalized_ops)
+    cnn_loss= compute_cnn_loss(model, images, target, epsilon, G, args, imgnet_normalized_ops, config)
 
     # compute group loss (group lasso)
     group_loss= compute_group_loss(G, B)
@@ -67,7 +65,7 @@ def compute_group_loss(G, B):
     
     return  group_norm    
 
-def compute_cnn_loss(model, images, target, epsilon, G, args, imgnet_normalized_ops):
+def compute_cnn_loss(model, images, target, epsilon, G, args, imgnet_normalized_ops, config):
 
     #
     image_s = images + torch.mul(G, epsilon)
@@ -81,12 +79,13 @@ def compute_cnn_loss(model, images, target, epsilon, G, args, imgnet_normalized_
         loss = ce(prediction, target)   #here loss 1*1 is a tensor, we can use loss.item() to obtain the scalar value
 
     elif args.loss == 'cw':
-        label_to_one_hot = torch.tensor([[target.item()]]) #one-hot
-        label_one_hot = torch.zeros(1, args.categories).scatter_(1, label_to_one_hot, 1).cuda()
+        loss = CWLoss(prediction, target, args.confidence, config.targeted, args.categories)
+        # label_to_one_hot = torch.tensor([[target.item()]]) #one-hot
+        # label_one_hot = torch.zeros(1, args.categories).scatter_(1, label_to_one_hot, 1).cuda()
         
-        real = torch.sum(prediction*label_one_hot)
-        other_max = torch.max((torch.ones_like(label_one_hot).cuda()-label_one_hot)*prediction - (label_one_hot*10000))
-        loss = torch.clamp(other_max - real + args.confidence, min=0)
+        # real = torch.sum(prediction*label_one_hot)
+        # other_max = torch.max((torch.ones_like(label_one_hot).cuda()-label_one_hot)*prediction - (label_one_hot*10000))
+        # loss = torch.clamp(other_max - real + args.confidence, min=0)
 
     return loss.item()   # .item() return a scalar , .detach() return a tensor
 
@@ -111,9 +110,9 @@ def compute_statistics(images, epsilon, G, args, B, Weight):
 
     return results
 
-def compute_loss_statistic(model, images, target, epsilon, G, args, imgnet_normalized_ops, B, noise_Weight):
+def compute_loss_statistic(model, images, target, epsilon, G, args, imgnet_normalized_ops, B, noise_Weight, config):
 
-    loss = compute_loss(model, images, target, epsilon, G, args, imgnet_normalized_ops, B, noise_Weight)
+    loss = compute_loss(model, images, target, epsilon, G, args, imgnet_normalized_ops, B, noise_Weight, config)
     statistics = compute_statistics(images, epsilon, G, args, B, noise_Weight)
 
     results = {'loss': loss, 'statistics': statistics}
