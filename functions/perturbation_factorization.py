@@ -87,7 +87,7 @@ def perturbation_attack_black(target_model, dataloader, config, **kwargs):
         image = image.squeeze(0)
         image = transforms.ToPILImage()(image)
         result = batch_train(target_model, image, name, args, config)
-        result_avg.update(result)
+        result_avg.update(*result)
         
         print("//////Overall statistics://////")
         print('statistic information: success-attack-image/total-attack-image= %d/%d, attack-success-rate=%f, L0=%f, L1=%f, L2=%f, L-inf=%f \n' \
