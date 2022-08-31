@@ -107,6 +107,7 @@ def batch_train(model, input_image, image_name, args, config):
     print('statistic information: success-attack-image/total-attack-image= %d/%d, attack-success-rate=%f, L0=%f, L1=%f, L2=%f, L-inf=%f' \
             %(num_success, counter , num_success/counter, L0/counter, L1/counter, L2/counter, Li/counter))
     print('#'*30+'\n'*2)
+    return num_success, L0/counter, L1/counter, L2/counter, Li/counter, counter
 
 def train_adptive(i, model, images, target, B, noise_Weight, args, config):
     args.lambda1 = args.init_lambda1
