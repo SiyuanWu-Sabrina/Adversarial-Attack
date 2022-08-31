@@ -8,21 +8,12 @@ import os
 import torch
 import torch.nn as nn
 
-from functions.pf_utils.flags import parse_handle
-from functions.pf_utils.model import CifarNet
 from functions.pf_utils.utils import *
 
 # set random seed for reproduce
 torch.manual_seed(0)
 torch.cuda.manual_seed_all(0)
 torch.backends.cudnn.deterministic = True
-
-#parsing input parameters
-parser = parse_handle()
-args = parser.parse_args()
-
-#settings
-os.environ["CUDA_VISIBLE_DEVICES"] = args.gpu_id
 
 # mean and std, used for normalization
 img_mean = np.array([0.5, 0.5, 0.5]).reshape((1, 3, 1, 1)).astype('float32')
@@ -31,21 +22,8 @@ img_mean_cuda = torch.from_numpy(img_mean).cuda()
 img_std_cuda = torch.from_numpy(img_std).cuda()
 img_normalized_ops = (img_mean_cuda, img_std_cuda)
 
-def main():
-    # define model and move it cuda
-    model = CifarNet().eval().cuda()
-    model.load_state_dict(torch.load(args.attacked_model))
 
-    # freeze model parameters
-    for param in model.parameters():
-        param.requires_grad = False
-    
-    img_file = args.img_file
-
-    # training
-    batch_train(model, img_file)
-
-def batch_train(model, input_image, image_name):  
+def batch_train(model, input_image, image_name, args, config):    
     num_success = 0.0
     counter =0.0
     L0 = 0.0
@@ -59,13 +37,10 @@ def batch_train(model, input_image, image_name):
     cur_start_time = time.time()
     # load image and preprocessing
     print('Image:{}'.format(image_name))
-    # input_image = Image.open(img_file)
-    # input_image = input_image.resize((args.img_resized_width, args.img_resized_height))
     
     #calculate mask for group sparsity
-    print(input_image)
     image_4_mask = np.array(input_image, dtype=np.uint8)  
-    segments = slic(image_4_mask, n_segments=args.segments, compactness=10)  
+    segments = slic(image_4_mask, n_segments=args.segments, compactness=10)
     
     #axis transpose, rescaled to [0,1] and normalized
     input_image = np.array(input_image, dtype=np.float32)  
@@ -94,7 +69,7 @@ def batch_train(model, input_image, image_name):
     print('target sparse k : {}'.format(args.k))
     
     #train
-    results = train_adptive(int(0), model, scaled_image, label_target, B, noise_Weight)
+    results = train_adptive(int(0), model, scaled_image, label_target, B, noise_Weight, args)
     results['args'] = vars(args)  
     results['img_name'] = image_name
     results['running_time'] = time.time() - cur_start_time
@@ -118,7 +93,7 @@ def batch_train(model, input_image, image_name):
     WLi += results['WLi']
    
     # save metaInformation and results to logfile
-    save_results(results, args)
+    save_results(results, config)
     
     print('#'*30)
     print('image=%s, clean-img-prediction=%d, target-attack-class=%d, adversarial-image-prediction=%d' \
@@ -127,13 +102,13 @@ def batch_train(model, input_image, image_name):
             %(num_success, counter , num_success/counter, L0/counter, L1/counter, L2/counter, Li/counter))
     print('#'*30+'\n'*2)
 
-def train_adptive(i, model, images, target, B, noise_Weight):
+def train_adptive(i, model, images, target, B, noise_Weight, args):
     args.lambda1 = args.init_lambda1
     lambda1_upper_bound = args.lambda1_upper_bound
     lambda1_lower_bound = args.lambda1_lower_bound
     results_success_list=[]
     for search_time in range(1, args.lambda1_search_times+1):
-        results = train_sgd_atom(model, images, target, B, noise_Weight)
+        results = train_sgd_atom(model, images, target, B, noise_Weight, args)
         results['lambda1'] = args.lambda1
 
         if results['status'] == True:
@@ -164,7 +139,7 @@ def train_adptive(i, model, images, target, B, noise_Weight):
         return results
 
         
-def train_sgd_atom(model, images, target_label, B, noise_Weight):
+def train_sgd_atom(model, images, target_label, B, noise_Weight, args):
     target_label_tensor=torch.tensor([target_label]).cuda()
 
     G = torch.ones(images.shape, dtype=torch.float32).cuda()
@@ -175,13 +150,13 @@ def train_sgd_atom(model, images, target_label, B, noise_Weight):
     
     cur_lr_e = args.lr_e
     cur_lr_g = {'cur_step_g': args.lr_g, 'cur_rho1': args.rho1, 'cur_rho2': args.rho2, 'cur_rho3': args.rho3,'cur_rho4': args.rho4}
-    for mm in range(1,args.maxIter_mm+1):   
-        epsilon, cur_lr_e = update_epsilon(model, images, target_label_tensor, epsilon, G, cur_lr_e, B, noise_Weight, mm, False)
+    for mm in range(1,args.maxIter_mm+1):
+        epsilon, cur_lr_e = update_epsilon(model, images, target_label_tensor, epsilon, G, cur_lr_e, B, noise_Weight, mm, False, args)
 
-        G, cur_lr_g = update_G(model, images, target_label_tensor, epsilon, G, cur_lr_g, B, noise_Weight, mm)
+        G, cur_lr_g = update_G(model, images, target_label_tensor, epsilon, G, cur_lr_g, B, noise_Weight, mm, args)
     
     G = (G > 0.5).float()
-    epsilon, cur_lr_e = update_epsilon(model, images, target_label_tensor, epsilon, G, cur_lr_e, B, noise_Weight, mm, True)  
+    epsilon, cur_lr_e = update_epsilon(model, images, target_label_tensor, epsilon, G, cur_lr_e, B, noise_Weight, mm, True, args)  
     
     
     cur_meta = compute_loss_statistic(model, images, target_label_tensor, epsilon, G, args, img_normalized_ops, B, noise_Weight)
@@ -215,11 +190,11 @@ def train_sgd_atom(model, images, target_label, B, noise_Weight):
     }
     return results
 
-def update_epsilon(model, images, target_label, epsilon, G, init_lr, B, noise_Weight, out_iter, finetune):
+def update_epsilon(model, images, target_label, epsilon, G, init_lr, B, noise_Weight, out_iter, finetune, args):
     cur_step = init_lr
     train_epochs = int(args.maxIter_e/2.0) if finetune else args.maxIter_e
  
-    for cur_iter in range(1,train_epochs+1): 
+    for cur_iter in range(1, train_epochs+1):
         epsilon.requires_grad = True  
         G.requires_grad = False
         
@@ -261,7 +236,7 @@ def update_epsilon(model, images, target_label, epsilon, G, init_lr, B, noise_We
         
     return epsilon, cur_step
 
-def update_G(model, images, target_label, epsilon, G, init_params, B, noise_Weight, out_iter):
+def update_G(model, images, target_label, epsilon, G, init_params, B, noise_Weight, out_iter, args):
     # initialize learning rate
     cur_step = init_params['cur_step_g']
     cur_rho1 = init_params['cur_rho1']
