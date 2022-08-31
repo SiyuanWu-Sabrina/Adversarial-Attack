@@ -3,8 +3,23 @@ import torch
 import torch.nn as nn
 import numpy as np
 import os
-import json
+from torch.autograd import Variable
 from PIL import Image
+
+
+def CWLoss(logits, target, kappa=0, tar=True, num_label=1000):
+    target = torch.ones(logits.size(0)).type(torch.cuda.FloatTensor).mul(target.float())
+    target_one_hot = Variable(torch.eye(num_label).type(torch.cuda.FloatTensor)[target.long()].cuda())
+    
+    real = torch.sum(target_one_hot*logits, 1)
+    other = torch.max((1-target_one_hot)*logits - (target_one_hot*10000), 1)[0]  ## 这里的10000是什么原理
+    kappa = torch.zeros_like(other).fill_(kappa)
+    
+    if tar:
+        return torch.sum(torch.max(other - real, kappa))
+    else:
+        return torch.sum(torch.max(real - other, kappa))
+
 
 def project_shifted_lp_ball(x, shift_vec):
     shift_x = x - shift_vec
