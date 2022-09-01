@@ -111,6 +111,8 @@ def greedyfool_attack_white(target_model, test_loader, config):
         boost = True
     print ("Boost:{0}".format(boost))
     for idx, data in enumerate(test_loader):
+        if idx == 100:
+            break
         if config.dataset_type == 'ImageNet':
             input_A, label_A, image_names = data
         elif config.dataset_type == 'Cifar10':
@@ -385,6 +387,8 @@ def greedyfool_attack_black(target_model, test_loader, config):
         boost = True
     print ("Boost:{0}".format(boost))
     for idx, data in enumerate(test_loader):
+        if idx == 100:
+            break
         if config.dataset_type == 'ImageNet':
             input_A, label_A, image_names = data
         elif config.dataset_type == 'Cifar10':

@@ -40,7 +40,7 @@ def batch_train(model, input_image, image_name, args, config):
     
     #calculate mask for group sparsity
     image_4_mask = np.array(input_image, dtype=np.uint8)  
-    segments = slic(image_4_mask, n_segments=args.segments, compactness=10)
+    segments = slic(image_4_mask, n_segments=args.segments, compactness=10, start_label=1)
     
     #axis transpose, rescaled to [0,1] and normalized
     input_image = np.array(input_image, dtype=np.float32)  
@@ -58,18 +58,24 @@ def batch_train(model, input_image, image_name, args, config):
 
     label_gt = int(torch.argmax(model(scaled_image-0.5)).data)
     label_target = args.target
-    assert label_gt != label_target, 'Target label and ground truth label are same, choose another target label.'
-    print('Origin Label:{}, Target Label:{}'.format(label_gt, label_target))
+    # assert label_gt != label_target, 'Target label and ground truth label are same, choose another target label.'
+    if not config.targeted:
+        label_target = label_gt
+        print('Origin Label:{}, Target Label: other than {}'.format(label_gt, label_target))
+    else:
+        label_target = args.target
+        print('Origin Label:{}, Target Label:{}'.format(label_gt, label_target))
+    
 
     for index in range(min(segments.flatten()),max(segments.flatten())+1):
         mask = (segments == index)
-        B[index,:,mask] = 1
+        B[index - 1,:,mask] = 1
     B = torch.from_numpy(B).cuda().float()        
     noise_Weight = compute_sensitive(scaled_image, args.weight_type)      
     print('target sparse k : {}'.format(args.k))
     
     #train
-    results = train_adptive(int(0), model, scaled_image, label_target, B, noise_Weight, args)
+    results = train_adptive(int(0), model, scaled_image, label_target, B, noise_Weight, args, config)
     results['args'] = vars(args)  
     results['img_name'] = image_name
     results['running_time'] = time.time() - cur_start_time
@@ -101,14 +107,15 @@ def batch_train(model, input_image, image_name, args, config):
     print('statistic information: success-attack-image/total-attack-image= %d/%d, attack-success-rate=%f, L0=%f, L1=%f, L2=%f, L-inf=%f' \
             %(num_success, counter , num_success/counter, L0/counter, L1/counter, L2/counter, Li/counter))
     print('#'*30+'\n'*2)
+    return num_success, L0/counter, L1/counter, L2/counter, Li/counter, counter
 
-def train_adptive(i, model, images, target, B, noise_Weight, args):
+def train_adptive(i, model, images, target, B, noise_Weight, args, config):
     args.lambda1 = args.init_lambda1
     lambda1_upper_bound = args.lambda1_upper_bound
     lambda1_lower_bound = args.lambda1_lower_bound
     results_success_list=[]
     for search_time in range(1, args.lambda1_search_times+1):
-        results = train_sgd_atom(model, images, target, B, noise_Weight, args)
+        results = train_sgd_atom(model, images, target, B, noise_Weight, args, config)
         results['lambda1'] = args.lambda1
 
         if results['status'] == True:
@@ -139,31 +146,31 @@ def train_adptive(i, model, images, target, B, noise_Weight, args):
         return results
 
         
-def train_sgd_atom(model, images, target_label, B, noise_Weight, args):
+def train_sgd_atom(model, images, target_label, B, noise_Weight, args, config):
     target_label_tensor=torch.tensor([target_label]).cuda()
 
     G = torch.ones(images.shape, dtype=torch.float32).cuda()
     epsilon = torch.zeros(images.shape, dtype=torch.float32).cuda()
     
-    cur_meta = compute_loss_statistic(model, images, target_label_tensor, epsilon, G, args, img_normalized_ops, B, noise_Weight)
+    cur_meta = compute_loss_statistic(model, images, target_label_tensor, epsilon, G, args, img_normalized_ops, B, noise_Weight, config)
     ori_prediction, _ = compute_predictions_labels(model, images, epsilon, G, args, img_normalized_ops)  
     
     cur_lr_e = args.lr_e
     cur_lr_g = {'cur_step_g': args.lr_g, 'cur_rho1': args.rho1, 'cur_rho2': args.rho2, 'cur_rho3': args.rho3,'cur_rho4': args.rho4}
     for mm in range(1,args.maxIter_mm+1):
-        epsilon, cur_lr_e = update_epsilon(model, images, target_label_tensor, epsilon, G, cur_lr_e, B, noise_Weight, mm, False, args)
+        epsilon, cur_lr_e = update_epsilon(model, images, target_label_tensor, epsilon, G, cur_lr_e, B, noise_Weight, mm, False, args, config)
 
-        G, cur_lr_g = update_G(model, images, target_label_tensor, epsilon, G, cur_lr_g, B, noise_Weight, mm, args)
+        G, cur_lr_g = update_G(model, images, target_label_tensor, epsilon, G, cur_lr_g, B, noise_Weight, mm, args, config)
     
     G = (G > 0.5).float()
-    epsilon, cur_lr_e = update_epsilon(model, images, target_label_tensor, epsilon, G, cur_lr_e, B, noise_Weight, mm, True, args)  
+    epsilon, cur_lr_e = update_epsilon(model, images, target_label_tensor, epsilon, G, cur_lr_e, B, noise_Weight, mm, True, args, config)  
     
     
-    cur_meta = compute_loss_statistic(model, images, target_label_tensor, epsilon, G, args, img_normalized_ops, B, noise_Weight)
+    cur_meta = compute_loss_statistic(model, images, target_label_tensor, epsilon, G, args, img_normalized_ops, B, noise_Weight, config)
     noise_label, adv_image = compute_predictions_labels(model, images, epsilon, G, args, img_normalized_ops)
     
     # recording results per iteration
-    if noise_label[0] == target_label:
+    if (config.targeted and noise_label[0] == target_label) or (not config.targeted and noise_label[0] != target_label):
         results_status=True
     else:
         results_status=False  
@@ -190,7 +197,7 @@ def train_sgd_atom(model, images, target_label, B, noise_Weight, args):
     }
     return results
 
-def update_epsilon(model, images, target_label, epsilon, G, init_lr, B, noise_Weight, out_iter, finetune, args):
+def update_epsilon(model, images, target_label, epsilon, G, init_lr, B, noise_Weight, out_iter, finetune, args, config):
     cur_step = init_lr
     train_epochs = int(args.maxIter_e/2.0) if finetune else args.maxIter_e
  
@@ -207,13 +214,14 @@ def update_epsilon(model, images, target_label, epsilon, G, init_lr, B, noise_We
         if args.loss == 'ce':
             ce = nn.CrossEntropyLoss()
             loss = ce(prediction, target_label)  
-        elif args.loss == 'cw':     
-            label_to_one_hot = torch.tensor([[target_label.item()]])
-            label_one_hot = torch.zeros(1, args.categories).scatter_(1, label_to_one_hot, 1).cuda()
+        elif args.loss == 'cw':
+            loss = CWLoss(prediction, target_label, args.confidence, config.targeted, args.categories)
+            # label_to_one_hot = torch.tensor([[target_label.item()]])
+            # label_one_hot = torch.zeros(1, args.categories).scatter_(1, label_to_one_hot, 1).cuda()
             
-            real = torch.sum(prediction*label_one_hot)
-            other_max = torch.max((torch.ones_like(label_one_hot).cuda()-label_one_hot)*prediction - (label_one_hot*10000))
-            loss = torch.clamp(other_max - real + args.confidence, min=0)
+            # real = torch.sum(prediction*label_one_hot)
+            # other_max = torch.max((torch.ones_like(label_one_hot).cuda()-label_one_hot)*prediction - (label_one_hot*10000))
+            # loss = torch.clamp(other_max - real + args.confidence, min=0)
             
 
         if epsilon.grad is not None:
@@ -231,12 +239,12 @@ def update_epsilon(model, images, target_label, epsilon, G, init_lr, B, noise_We
                    
         # tick print
         if cur_iter % args.tick_loss_e == 0:
-            cur_meta = compute_loss_statistic(model, images, target_label, epsilon, G, args, img_normalized_ops, B, noise_Weight)
+            cur_meta = compute_loss_statistic(model, images, target_label, epsilon, G, args, img_normalized_ops, B, noise_Weight, config)
             noise_label, _ = compute_predictions_labels(model, images, epsilon, G, args, img_normalized_ops)  
         
     return epsilon, cur_step
 
-def update_G(model, images, target_label, epsilon, G, init_params, B, noise_Weight, out_iter, args):
+def update_G(model, images, target_label, epsilon, G, init_params, B, noise_Weight, out_iter, args, config):
     # initialize learning rate
     cur_step = init_params['cur_step_g']
     cur_rho1 = init_params['cur_rho1']
@@ -288,12 +296,13 @@ def update_G(model, images, target_label, epsilon, G, init_params, B, noise_Weig
             loss = ce(prediction, target_label)   
 
         elif args.loss == 'cw':
-            label_to_one_hot = torch.tensor([[target_label.item()]])
-            label_one_hot = torch.zeros(1, args.categories).scatter_(1, label_to_one_hot, 1).cuda()
+            loss = CWLoss(prediction, target_label, args.confidence, config.targeted, args.categories)
+            # label_to_one_hot = torch.tensor([[target_label.item()]])
+            # label_one_hot = torch.zeros(1, args.categories).scatter_(1, label_to_one_hot, 1).cuda()
             
-            real = torch.sum(prediction*label_one_hot)
-            other_max = torch.max((torch.ones_like(label_one_hot).cuda()-label_one_hot)*prediction - (label_one_hot*10000))
-            loss = torch.clamp(other_max - real + args.confidence, min=0)
+            # real = torch.sum(prediction*label_one_hot)
+            # other_max = torch.max((torch.ones_like(label_one_hot).cuda()-label_one_hot)*prediction - (label_one_hot*10000))
+            # loss = torch.clamp(other_max - real + args.confidence, min=0)
         
         
         if G.grad is not None:  #the first time there is no grad
@@ -327,7 +336,7 @@ def update_G(model, images, target_label, epsilon, G, init_params, B, noise_Weig
             cur_step = max(cur_step*args.lr_decay_factor, args.lr_min)
         
         if cur_iter % args.tick_loss_g == 0:
-            cur_meta = compute_loss_statistic(model, images, target_label, epsilon, G, args, img_normalized_ops, B, noise_Weight)
+            cur_meta = compute_loss_statistic(model, images, target_label, epsilon, G, args, img_normalized_ops, B, noise_Weight, config)
             noise_label, _ = compute_predictions_labels(model, images, epsilon, G, args, img_normalized_ops)  
             
         cur_iter = cur_iter + 1

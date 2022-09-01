@@ -86,6 +86,9 @@ def configuration(attack_algorithm, dataset_setting, targeted=False, batch_size=
                        'kappa': -1,
                        'epsilon': -1,
                        'sparsity': 5}
+        config.n_examples = 100
+        if config.n_examples > config.batch_size:
+            print(f"'n_examples' should be no larger than 'batch_size', set batch_size to {config.n_examples}")
 
     elif attack_algorithm == 'cornersearch_b':
         config.args = {'type_attack': 'L0',
@@ -95,10 +98,13 @@ def configuration(attack_algorithm, dataset_setting, targeted=False, batch_size=
                        'epsilon': -1,
                        'sparsity': 10,
                        'size_incr': 1}
+        config.n_examples = 100
+        if config.n_examples > config.batch_size:
+            print(f"'batch_size' should be no smaller than 'n_examples', set batch_size to {config.n_examples}")
 
     elif attack_algorithm == 'perturbation_b':
-        config.maxIter_e = 20
-        config.maxIter_g = 20
+        config.maxIter_e = 2000
+        config.maxIter_g = 2000
         if config.batch_size != 1:
             print("Batch size for perturbation-factorization must be 1.\nSet batch_size to 1.")
             config.batch_size = 1
@@ -107,20 +113,23 @@ def configuration(attack_algorithm, dataset_setting, targeted=False, batch_size=
 
 
 def overall():
-    attack_list = ['B3D_b', 'greedyfool_w', 'cornersearch_b', 'PGD_attack_w', 'homotopy_w', 'perturbation_b']
-    data_list = ['Cifar10', 'ImageNet']
+    attack_list = ['cornersearch_b', 'PGD_attack_w']
+    data_list = ['Cifar10']
+    target_list = [True]
+
     for data in data_list:
         for attack in attack_list:
-            print(f"==========Testing on: {data}, attack type: {attack}==========")
-            config = configuration(attack, data)
-            attack_algorithm = Attack(attack)
-            netT = target_net_factory(config.target_model)
-            test_attack_success_rate(config, netT, attack_algorithm.attack)
-            print(f"==========Test on: {data}, attack type: {attack} succeeded.==========")
+            for target in target_list:
+                print(f"==========Testing on: {data}, attack type: {attack}==========")
+                config = configuration(attack, data, batch_size=10, targeted=target)
+                attack_algorithm = Attack(attack)
+                netT = target_net_factory(config.target_model)
+                test_attack_success_rate(config, netT, attack_algorithm.attack)
+                print(f"==========Test on: {data}, attack type: {attack} succeeded.==========")
 
 
 def test():
-    attack_algorithm = 'perturbation_b'
+    attack_algorithm = 'cornersearch_b'
     # dataset_setting = 'ImageNet'
     dataset_setting = 'Cifar10'
 

@@ -1,7 +1,6 @@
 #import tensorflow as tf
-import scipy.io
-import numpy as np
 import torch
+import numpy as np
 from functions.sia_utils.utils_pt import get_logits, get_predictions
 
 def onepixel_perturbation(attack, orig_x, pos, sigma):
@@ -232,4 +231,29 @@ class CSattack():
     print('Robust accuracy at {} pixels: {:.2f}%'.format(self.k, np.sum(corr_pred)/x_nat.shape[0]*100.0))
     print('Maximum perturbation size: {:.5f}'.format(np.amax(np.abs(adv - x_nat))))
     
-    return adv, pixels_changed, fl_success
+    noise = adv - x_nat
+
+    asr = 100 - np.sum(corr_pred)/x_nat.shape[0]*100.0
+    noise = adv - x_nat
+    L0_list = []
+    L1_list = []
+    L2_list = []
+    Linf_list = []
+    pixel_list = []
+    for i in range(len(corr_pred)):
+      if corr_pred[i]:
+        continue
+      n = noise[i]
+      L0_list.append(torch.norm(torch.Tensor(n), p=0).item())
+      L1_list.append(torch.norm(torch.Tensor(n), p=1).item())
+      L2_list.append(torch.norm(torch.Tensor(n), p=2).item())
+      Linf_list.append(torch.norm(torch.Tensor(n), p=float('inf')).item())
+      pixel_list.append(pixels_changed[i])
+    L0 = np.median(L0_list)
+    L1 = np.median(L1_list)
+    L2 = np.median(L2_list)
+    Linf = np.median(Linf_list)
+    pixel_mean = np.mean(pixel_list)
+    pixel_median = np.median(pixel_list)
+
+    return adv, pixels_changed, fl_success, noise, L0, L1, L2, Linf, asr, pixel_mean, pixel_median

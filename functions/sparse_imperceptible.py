@@ -10,29 +10,45 @@ import functions.sia_utils.cornersearch_attacks_pt as cornersearch_attacks_pt
 
 parser = argparse.ArgumentParser(description='Define hyperparameters.')
 parser.add_argument('--dataset', type=str, default='cifar10', help='cifar10, mnist')
-parser.add_argument('--attack', type=str, default='CS', help='PGD, CS')
-parser.add_argument('--n_examples', type=int, default=50)
 parser.add_argument('--data_dir', type=str, default= './datasets')
-
 hps = parser.parse_args()
-x_test, y_test = load_data(hps.dataset, hps.n_examples, hps.data_dir)
 
 
 def cornersearch_attack_black(target_model, dataloader, config, **kwargs):
     attack = cornersearch_attacks_pt.CSattack(target_model, config.args)
-    x_test, y_test = load_data(hps.dataset, hps.n_examples, hps.data_dir)
+    x_test, y_test = load_data(hps.dataset, config.n_examples, hps.data_dir, config.batch_size)
     
-    adv, pixels_changed, fl_success = attack.perturb(x_test, y_test)
+    adv, pixels_changed, fl_success, noise, L0, L1, L2, Linf, asr, pixel_mean, pixel_median = attack.perturb(x_test, y_test)
     if not os.path.exists(config.saving_root):
         os.makedirs(config.saving_root)
-    if hps.path_results != 'none': np.save(hps.path_results + 'results.npy', adv)
+    np.save(config.saving_root + 'adv.npy', adv)
+    np.save(config.saving_root + 'noise.npy', noise)
+    print('ASR: {asr:.2f}, L-0 avg: {l0}, L-1 avg: {l1:.1f}, L-2 avg: {l2:.1f}, L-inf avg: {linf:.1f}, '
+          'M&m(# pixel modified) {mean:.2f}/{median:.2f} (statistics under successfull attack)'.format(
+                          asr = asr,
+                          l0 = L0,
+                          l1 = L1,
+                          l2 = L2,
+                          linf = Linf,
+                          mean = pixel_mean, 
+                          median = pixel_median))
 
 
 def PGD_attack_white(target_model, dataloader, config, **kwargs):
     attack = pgd_attacks_pt.PGDattack(target_model, config.args)
-    x_test, y_test = load_data(hps.dataset, hps.n_examples, hps.data_dir)
+    x_test, y_test = load_data(hps.dataset, config.n_examples, hps.data_dir, config.batch_size)
 
-    adv, pgd_adv_acc = attack.perturb(x_test, y_test)
+    adv, pgd_adv_acc, noise, L0, L1, L2, Linf, asr, pixel_mean, pixel_median = attack.perturb(x_test, y_test)
     if not os.path.exists(config.saving_root):
         os.makedirs(config.saving_root)
-    np.save(config.saving_root + 'results.npy', adv)
+    np.save(config.saving_root + 'adv.npy', adv)
+    np.save(config.saving_root + 'noise.npy', noise)
+    print('ASR: {asr:.2f}, L-0 avg: {l0}, L-1 avg: {l1:.1f}, L-2 avg: {l2:.1f}, L-inf avg: {linf:.1f}, '
+          'M&m(# pixel modified) {mean:.2f}/{median:.2f} (statistics under successfull attack)'.format(
+                          asr = asr,
+                          l0 = L0,
+                          l1 = L1,
+                          l2 = L2,
+                          linf = Linf,
+                          mean = pixel_mean, 
+                          median = pixel_median))
