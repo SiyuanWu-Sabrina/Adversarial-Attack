@@ -154,10 +154,6 @@ class PGDattack():
     
   def perturb(self, x_nat, y_nat):
     adv = np.copy(x_nat)
-    adv = torch.Tensor(adv)
-    x_nat = torch.Tensor(x_nat)
-    print(adv.size(), x_nat.size())
-    exit()
     
     if self.type_attack == 'L0+sigma': self.sigma = sigma_map(x_nat)
       
@@ -192,11 +188,27 @@ class PGDattack():
     print('Robust accuracy at {} pixels: {:.2f}%'.format(self.k, np.sum(corr_pred)/x_nat.shape[0]*100.0))
     print('Maximum perturbation size: {:.5f}'.format(np.amax(np.abs(adv - x_nat))))
     
-    asr = np.sum(corr_pred)/x_nat.shape[0]*100.0
+    asr = 100 - np.sum(corr_pred)/x_nat.shape[0]*100.0
     noise = adv - x_nat
+    L0_list = []
+    L1_list = []
+    L2_list = []
+    Linf_list = []
+    pixel_list = []
+    for i in range(len(corr_pred)):
+      if corr_pred[i]:
+        continue
+      n = noise[i]
+      L0_list.append(torch.norm(torch.Tensor(n), p=0).item())
+      L1_list.append(torch.norm(torch.Tensor(n), p=1).item())
+      L2_list.append(torch.norm(torch.Tensor(n), p=2).item())
+      Linf_list.append(torch.norm(torch.Tensor(n), p=float('inf')).item())
+      pixel_list.append(pixels_changed[i])
+    L0 = np.median(L0_list)
+    L1 = np.median(L1_list)
+    L2 = np.median(L2_list)
+    Linf = np.median(Linf_list)
+    pixel_mean = np.mean(pixel_list)
+    pixel_median = np.median(pixel_list)
 
-    adv = torch.Tensor(adv)
-    x_nat = torch.Tensor(x_nat)
-    print(adv.size(), x_nat.size())
-    exit()
-    return adv, pgd_adv_acc, noise
+    return adv, pgd_adv_acc, noise, L0, L1, L2, Linf, asr, pixel_mean, pixel_median

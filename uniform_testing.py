@@ -86,6 +86,9 @@ def configuration(attack_algorithm, dataset_setting, targeted=False, batch_size=
                        'kappa': -1,
                        'epsilon': -1,
                        'sparsity': 5}
+        config.n_examples = 100
+        if config.n_examples > config.batch_size:
+            print(f"'n_examples' should be no larger than 'batch_size', set batch_size to {config.n_examples}")
 
     elif attack_algorithm == 'cornersearch_b':
         config.args = {'type_attack': 'L0',
@@ -95,6 +98,9 @@ def configuration(attack_algorithm, dataset_setting, targeted=False, batch_size=
                        'epsilon': -1,
                        'sparsity': 10,
                        'size_incr': 1}
+        config.n_examples = 100
+        if config.n_examples > config.batch_size:
+            print(f"'batch_size' should be no smaller than 'n_examples', set batch_size to {config.n_examples}")
 
     elif attack_algorithm == 'perturbation_b':
         config.maxIter_e = 2000
@@ -123,7 +129,7 @@ def overall():
 
 
 def test():
-    attack_algorithm = 'PGD_attack_w'
+    attack_algorithm = 'cornersearch_b'
     # dataset_setting = 'ImageNet'
     dataset_setting = 'Cifar10'
 

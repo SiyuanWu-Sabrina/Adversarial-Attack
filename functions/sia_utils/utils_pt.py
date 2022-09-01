@@ -37,16 +37,16 @@ def get_predictions_and_gradients(model, x_nat, y_nat):
 
     return pred, grad
 
-def load_data(dataset, n_examples, data_dir='./data'):
+def load_data(dataset, n_examples, data_dir='./data', batch_size=1000):
     if dataset == 'cifar10':
         transform_chain = transforms.Compose([transforms.ToTensor()])
         item = datasets.CIFAR10(root=data_dir, train=False, transform=transform_chain, download=True)
-        test_loader = data.DataLoader(item, batch_size=1000, shuffle=False, num_workers=0)
+        test_loader = data.DataLoader(item, batch_size=batch_size, shuffle=False, num_workers=0)
     
     elif dataset == 'mnist':
         transform_chain = transforms.Compose([transforms.ToTensor()])
         image_dataset = datasets.MNIST(root=data_dir, train=False, transform=transform_chain, download=True)
-        test_loader = data.DataLoader(image_dataset, batch_size=1000, shuffle=False, num_workers=0)
+        test_loader = data.DataLoader(image_dataset, batch_size=batch_size, shuffle=False, num_workers=0)
     
     x_test = torch.cat([x for (x, y) in test_loader], 0)[:n_examples].permute(0, 2, 3, 1)
     y_test = torch.cat([y for (x, y) in test_loader], 0)[:n_examples]
