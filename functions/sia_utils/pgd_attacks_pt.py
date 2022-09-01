@@ -1,5 +1,6 @@
 #import tensorflow as tf
 #import scipy.io
+import torch
 import numpy as np
 
 from functions.sia_utils.utils_pt import get_predictions, get_predictions_and_gradients
@@ -153,6 +154,10 @@ class PGDattack():
     
   def perturb(self, x_nat, y_nat):
     adv = np.copy(x_nat)
+    adv = torch.Tensor(adv)
+    x_nat = torch.Tensor(x_nat)
+    print(adv.size(), x_nat.size())
+    exit()
     
     if self.type_attack == 'L0+sigma': self.sigma = sigma_map(x_nat)
       
@@ -187,4 +192,11 @@ class PGDattack():
     print('Robust accuracy at {} pixels: {:.2f}%'.format(self.k, np.sum(corr_pred)/x_nat.shape[0]*100.0))
     print('Maximum perturbation size: {:.5f}'.format(np.amax(np.abs(adv - x_nat))))
     
-    return adv, pgd_adv_acc
+    asr = np.sum(corr_pred)/x_nat.shape[0]*100.0
+    noise = adv - x_nat
+
+    adv = torch.Tensor(adv)
+    x_nat = torch.Tensor(x_nat)
+    print(adv.size(), x_nat.size())
+    exit()
+    return adv, pgd_adv_acc, noise

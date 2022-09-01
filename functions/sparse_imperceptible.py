@@ -22,17 +22,19 @@ def cornersearch_attack_black(target_model, dataloader, config, **kwargs):
     attack = cornersearch_attacks_pt.CSattack(target_model, config.args)
     x_test, y_test = load_data(hps.dataset, hps.n_examples, hps.data_dir)
     
-    adv, pixels_changed, fl_success = attack.perturb(x_test, y_test)
+    adv, pixels_changed, fl_success, noise = attack.perturb(x_test, y_test)
     if not os.path.exists(config.saving_root):
         os.makedirs(config.saving_root)
-    if hps.path_results != 'none': np.save(hps.path_results + 'results.npy', adv)
+    np.save(config.saving_root + 'adv.npy', adv)
+    np.save(config.saving_root + 'noise.npy', noise)
 
 
 def PGD_attack_white(target_model, dataloader, config, **kwargs):
     attack = pgd_attacks_pt.PGDattack(target_model, config.args)
     x_test, y_test = load_data(hps.dataset, hps.n_examples, hps.data_dir)
 
-    adv, pgd_adv_acc = attack.perturb(x_test, y_test)
+    adv, pgd_adv_acc, noise = attack.perturb(x_test, y_test)
     if not os.path.exists(config.saving_root):
         os.makedirs(config.saving_root)
-    np.save(config.saving_root + 'results.npy', adv)
+    np.save(config.saving_root + 'adv.npy', adv)
+    np.save(config.saving_root + 'noise.npy', noise)

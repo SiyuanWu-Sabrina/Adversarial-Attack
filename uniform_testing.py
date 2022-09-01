@@ -107,12 +107,13 @@ def configuration(attack_algorithm, dataset_setting, targeted=False, batch_size=
 
 
 def overall():
-    attack_list = ['greedyfool_w', 'greedyfool_b', 'perturbation_b']
-    data_list = ['Cifar10', 'ImageNet']
+    attack_list = ['cornersearch_b', 'PGD_attack_w']
+    data_list = ['Cifar10']
+    target_list = [True]
 
     for data in data_list:
         for attack in attack_list:
-            for target in [True, False]:
+            for target in target_list:
                 print(f"==========Testing on: {data}, attack type: {attack}==========")
                 config = configuration(attack, data, batch_size=10, targeted=target)
                 attack_algorithm = Attack(attack)
@@ -122,7 +123,7 @@ def overall():
 
 
 def test():
-    attack_algorithm = 'greedyfool_w'
+    attack_algorithm = 'PGD_attack_w'
     # dataset_setting = 'ImageNet'
     dataset_setting = 'Cifar10'
 
@@ -138,5 +139,5 @@ def test():
 
 
 if __name__ == '__main__':
-    overall()
-    # test()
+    # overall()
+    test()

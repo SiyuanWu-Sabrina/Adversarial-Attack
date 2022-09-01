@@ -93,7 +93,7 @@ def compute_statistics(images, epsilon, G, args, B, Weight):
     
     
     epsilon_G = torch.mul(epsilon, G)                                     #1*3*224*224
-    noise_images = torch.clamp(images+epsilon_G, args.min_pix_value, args.max_pix_value)   
+    noise_images = torch.clamp(images+epsilon_G, args.min_pix_value, args.max_pix_value)
     noise = noise_images - images
     w_noise = noise*Weight
     

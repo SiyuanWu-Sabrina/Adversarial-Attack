@@ -77,6 +77,8 @@ def perturbation_attack_black(target_model, dataloader, config, **kwargs):
         param.requires_grad = False
     
     for idx, data in enumerate(dataloader):
+        if idx == 100:
+            break
         if config.dataset_type == 'ImageNet':
             image, label, name = data
             name = name[0]
