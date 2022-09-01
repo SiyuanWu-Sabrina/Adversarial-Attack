@@ -94,3 +94,6 @@ def perturbation_attack_black(target_model, dataloader, config, **kwargs):
         print("//////Overall statistics://////")
         print('statistic information: success-attack-image/total-attack-image= %d/%d, attack-success-rate=%f, L0=%f, L1=%f, L2=%f, L-inf=%f \n' \
             %(result_avg.suc_sum, result_avg.count, result_avg.asr, result_avg.l0_avg, result_avg.l1_avg, result_avg.l2_avg, result_avg.linf_avg))
+        
+        if idx == 99:
+            break

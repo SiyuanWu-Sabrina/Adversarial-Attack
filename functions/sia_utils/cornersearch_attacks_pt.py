@@ -1,7 +1,5 @@
 #import tensorflow as tf
-import scipy.io
 import numpy as np
-import torch
 from functions.sia_utils.utils_pt import get_logits, get_predictions
 
 def onepixel_perturbation(attack, orig_x, pos, sigma):
