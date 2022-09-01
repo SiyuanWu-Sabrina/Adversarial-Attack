@@ -231,9 +231,7 @@ class CSattack():
     print('Robust accuracy at {} pixels: {:.2f}%'.format(self.k, np.sum(corr_pred)/x_nat.shape[0]*100.0))
     print('Maximum perturbation size: {:.5f}'.format(np.amax(np.abs(adv - x_nat))))
     
-    noise = adv - x_nat
-
-    asr = 100 - np.sum(corr_pred)/x_nat.shape[0]*100.0
+    asr = np.mean(fl_success)*100.0
     noise = adv - x_nat
     L0_list = []
     L1_list = []
@@ -241,7 +239,7 @@ class CSattack():
     Linf_list = []
     pixel_list = []
     for i in range(len(corr_pred)):
-      if corr_pred[i]:
+      if not corr_pred[i]:
         continue
       n = noise[i]
       L0_list.append(torch.norm(torch.Tensor(n), p=0).item())
